@@ -1,0 +1,1082 @@
+[
+  {
+    "id": "q1",
+    "num": 1,
+    "questionEn": "Tell me about yourself.",
+    "questionZh": "跟我介绍一下你自己",
+    "similarQuestions": "Could you briefly introduce yourself ?（你能简要介绍一下自己吗？）\n\nLet's start with you introducing yourself.（我们先从你自我介绍开始吧）",
+    "questionIntent": "面试官通过这个问题，希望了解你的背景、核心能力和职业发展路径，同时评估你的沟通能力、逻辑思维以及与岗位的匹配度。这个问题是面试的开场，也是你展示自己的第一印象，因此需要简明扼要地突出你的优势。",
+    "answerStrategy": "礼貌开场：用一句话表达对面试机会的感谢或问候，展现礼貌和专业。\n\n个人背景：简要介绍你的教育背景或职业起点，突出与岗位相关的核心能力。\n\n工作经历：详细描述你的工作职责和成就，用数据或具体实例支持你的能力。\n\n岗位匹配：结合岗位需求，说明你的技能和经验如何与职位要求匹配。\n\n总结致谢：用一句话总结你的优势，并表达对面试机会的感谢。",
+    "notes": "✘ 避免冗长：不要事无巨细地描述每一段经历，聚焦于与岗位相关的部分。\n\n✘ 避免空洞：用具体实例/数据支持你的能力，而不是泛泛而谈。\n\n✘ 避免跑题：不要过多谈论个人生活，保持职业化。\n\n✘ 避免绝对化：慎用“always”“never”等绝对化表达，保持语言的自然和灵活性。"
+  },
+  {
+    "id": "q2",
+    "num": 2,
+    "questionEn": "How would you describe yourself in 3 words?",
+    "questionZh": "你会用哪三个词来描述你自己？",
+    "similarQuestions": "What three words would best describe your personality?（哪三个词最能描述你的性格？）\n\nIf you had to use three words to summarize yourself, what would they be?（如果你必须用三个词来总结自己，会是哪三个词？）",
+    "questionIntent": "面试官通过这个问题，希望了解你对自己的认知是否清晰，以及你是否能够用简洁的语言概括自己的核心特质。同时，他们也在考察你的自我表达能力、逻辑思维能力和与岗位的契合度。",
+    "answerStrategy": "采用“特质+解释+实例”结构回答：\n\n特质：用三个词概括自己的核心特质。\n\n解释：简要说明每个词的含义，为什么选择这个词。\n\n实例：用一个具体的例子或经历来支持每个特质，展现你的实际能力。",
+    "notes": "✘ 避免选择过于普通或空洞的词汇，如“nice”或“hardworking”，除非你能用独特的例子来支撑。\n\n✘ 不要选择与岗位无关的特质，例如“creative”, 如果应聘的是财务岗位，可能会显得不匹配。\n\n✘ 避免过度自夸，用事实和例子来证明你的特质，而不是单纯地自我吹捧。\n\n✘ 不要选择负面或中性的词汇，例如“stubborn”或“average”，即使你试图展现真实，也要保持积极。"
+  },
+  {
+    "id": "q3",
+    "num": 3,
+    "questionEn": "What are your key strengths?",
+    "questionZh": "你的优点是什么？",
+    "similarQuestions": "What are the strengths that you bring to this position?（你能为这个职位带来哪些优势？）\n\nWhat’s your greatest strength?（你最大的优势是什么？）",
+    "questionIntent": "面试官希望通过这个问题了解你的核心优势，以及这些优势如何与工作需求相匹配。他们不仅想听到你对自己的评价，还想看到你如何通过具体实例证明这些优势，并展示你对自己的认知和职业发展的思考。",
+    "answerStrategy": "优势：明确说出你的核心优势（如沟通能力、团队合作、创新思维等）。\n\n实例：用具体的工作或生活实例证明这一优势。\n\n价值：说明这一优势如何为团队或公司带来价值。",
+    "notes": "✘ 避免空泛：不要只说“我擅长沟通”，要结合具体场景和成果。\n\n✘ 避免过度夸大：用事实支撑，不要用绝对化表达（如“我从未失败过”）。\n\n✘ 避免与岗位无关：虽然不提及具体岗位，但要确保优势与职场需求相关。"
+  },
+  {
+    "id": "q4",
+    "num": 4,
+    "questionEn": "What’s your biggest weakness?",
+    "questionZh": "你最大的缺点是什么？",
+    "similarQuestions": "Are there any aspects of your work or personal skills that you feel need development?（你觉得你在工作或个人技能的哪些方面需要提升？）\n\nWhat do you consider to be your main areas for improvement?（你觉得自己主要在哪些方面是有待提升的？）",
+    "questionIntent": "这个问题主要是想了解你是否能够客观地认识自己，并且是否有改进缺点的意识和行动。面试官希望通过你的回答，判断你是否具备自我反思的能力，以及你是否能够在工作中不断成长和进步。",
+    "answerStrategy": "问题：具体说1个有待提升的点（如时间管理、公众演讲等）\n\n行动：展示已采取的改进措施（培训/工具使用/刻意练习等）\n\n成果：用具体案例证明改善效果",
+    "notes": "✘ 不要说：涉及核心岗位能力的弱点（应聘销售岗说\"不擅长沟通\"）\n\n✘ 不要说：未经处理的原始缺陷（\"我经常迟到\"）\n\n✘ 不要说：虚伪的自夸式回答（\"我太追求完美\"）"
+  },
+  {
+    "id": "q5",
+    "num": 5,
+    "questionEn": "What's your work style?",
+    "questionZh": "你的工作风格是怎样的？",
+    "similarQuestions": "How would you describe your approach to work?（你会如何描述自己的工作方式？）\n\nCould you tell me about your typical work style?（你能告诉我你典型的工作风格是怎样的吗？）",
+    "questionIntent": "此问题旨在探究你的工作习惯和团队协作能力。面试官希望了解你如何组织任务、处理压力、与同事沟通以及解决问题，从而判断你是否适合他们的工作环境和团队文化。",
+    "answerStrategy": "用1-2个关键词概括工作风格（如注重计划性、强协作导向）\n\n具体说明如何落实这些特质（如使用时间管理工具、定期同步进度）\n\n用工作场景案例证明真实性（重点描述行为过程）\n\n关联到团队/公司层面的价值（如促进跨部门协作、提升决策质量）",
+    "notes": "✘ 忌说空话：避免只讲\"I'm hardworking\"等无效描述\n\n✘ 忌贪多求全：聚焦2个核心特质并深入说明\n\n✘ 忌自我中心：强调对团队的价值而非自我标榜\n\n✘ 忌绝对化：用\"I tend to...\"替代\"I always...\""
+  },
+  {
+    "id": "q6",
+    "num": 6,
+    "questionEn": "Would you rather work independently or collaborate with others in a team?",
+    "questionZh": "你更倾向独立工作还是团队协作？",
+    "similarQuestions": "Are you more comfortable working independently or as a member of a team?（你更倾向于独立工作，还是作为团队一员工作？ ）\n\nDo you prefer the autonomy of working alone or the interaction of working in a team?（你更喜欢独自工作的自主性，还是团队工作的互动性？ ）",
+    "questionIntent": "面试官想了解你的工作风格是否与团队需求匹配，同时考察你的自我认知和灵活性。核心在于判断你能否根据任务性质调整协作方式，以及是否具备平衡独立思考和团队贡献的能力。",
+    "answerStrategy": "采用PRER结构回答：\n\n观点（Point）：明确偏好（或根据情境选择）\n\n原因（Reason）：说明背后的理由或价值观\n\n例子（Example）：用具体经历进一步解释\n\n结果（Result）：强调积极影响和适应能力",
+    "notes": "✘ 避免绝对化，如\"我只喜欢...\"，改用\"我更倾向于...但能灵活调整\"\n\n✘ 不要忽略文化差异：外企重视团队协作，但独立解决问题能力同样关键\n\n✘ 忌空谈概念，必须用实例佐证（如\"曾主导项目\"或\"推动跨部门协作\"）\n\n✘ 警惕中式直译，如\"teamwork spirit\"应替换为\"collaboration skills\""
+  },
+  {
+    "id": "q7",
+    "num": 7,
+    "questionEn": "What is your typical role in a team environment?",
+    "questionZh": "你在团队环境中一般担任什么角色？",
+    "similarQuestions": "In a team setting, what kind of role do you usually take on?（在团队环境中，你通常会担任什么样的角色？ ）\n\nWhat role do you typically play when working in a team?（你在团队合作中通常扮演什么角色？ ）",
+    "questionIntent": "面试官希望了解候选人的团队协作风格、自我认知能力以及在不同团队中的适应性。重点考察三个维度：1）能否清晰定位自己在团队中的价值 2）是否具备角色调整的灵活性 3）是否懂得通过团队配合达成目标",
+    "answerStrategy": "首先用一句话说明你担任的角色\n\n然后说明因为自身具备什么能力而担任该角色\n\n接着举例子，用具体工作场景佐证\n\n最后展现对角色关系的认知",
+    "notes": "✘ 避免说\"我什么角色都能做\"（显得缺乏主见）✘ 忌用\"I'm always the leader\"（暴露控制欲）"
+  },
+  {
+    "id": "q8",
+    "num": 8,
+    "questionEn": "Could you briefly introduce your educational background?",
+    "questionZh": "你能简单介绍一下你的教育背景吗？",
+    "similarQuestions": "Would you mind elaborating on your educational background?（你介意详细说说你的教育背景吗？）\n\nCan you tell me about your educational background?（你能告诉我你的教育背景吗？）",
+    "questionIntent": "面试官希望通过这个问题了解你的教育背景是否与职位要求相关，以及你如何将所学知识应用到实际工作中。同时，他们也希望看到你对自己教育经历的理解和总结能力，以及你是否能够清晰、简洁地表达信息。",
+    "answerStrategy": "简要概述你的最高学历和专业，突出与目标职位相关的核心信息。\n\n描述你的教育经历，重点强调与职位相关的课程、项目或成就。\n\n总结教育背景对你职业发展的影响，并表明你如何将这些经验应用到未来的工作中。",
+    "notes": "✘ 避免罗列所有学历，重点突出与职位相关的部分。\n\n✘ 不要只描述课程名称，要结合实际应用或成果。\n\n✘ 避免使用过于复杂的术语或长句，保持简洁明了。\n\n✘ 不要忽略总结部分，要体现教育背景对职业发展的价值。"
+  },
+  {
+    "id": "q9",
+    "num": 9,
+    "questionEn": "Can you tell me about your English language abilities?",
+    "questionZh": "你能跟我讲讲你的英语能力吗？",
+    "similarQuestions": "How would you describe your English proficiency?（你的英语水平怎么样？）\n\nHow do you stay updated and improve your English?（你如何提升和保持英语水平？）",
+    "questionIntent": "面试官需要确认你的英语能力能否支持日常工作沟通，同时评估你在跨文化环境中的适应能力。他们更关注实际应用经历而非单纯考试分数，并会通过回答判断你的自我认知是否客观。",
+    "answerStrategy": "场景分类：明确说明英语应用场景（如日常交流/专业写作/跨文化沟通）\n\n行为举证：每个场景用具体经历+他人反馈佐证\n\n持续精进：展示持续提升语言能力的行动",
+    "notes": "✘ 错误示范：\"我的英语很好，雅思7分\"\n\n✘ 错误示范：\"我能用英语工作\"（过于笼统缺乏细节）✔ 正确做法：用\"主持过英文会议\"、\"处理过海外客户投诉\"等场景化描述，搭配具体成果如\"促成项目推进\""
+  },
+  {
+    "id": "q10",
+    "num": 10,
+    "questionEn": "Tell me about your project experience.",
+    "questionZh": "说说你的项目经验",
+    "similarQuestions": "Can you give us an overview of your project experience?（你能给我们讲一下你的项目经验吗？）\n\nCould you share with us your project experience?（你能和我们分享一下你的项目经验吗？）",
+    "questionIntent": "面试官通过这个问题，主要想了解你是否具备与岗位相关的项目经验，以及你在项目中的角色、贡献和解决问题的能力。同时，他们也希望看到你如何描述项目经验，包括你的沟通能力、逻辑思维和团队合作能力。",
+    "answerStrategy": "采用“背景-行动-结果”结构回答：\n\n背景（Background）：简要描述项目背景和目标，说明项目的规模和重要性。\n\n行动（Action）：详细说明你在项目中的具体职责和采取的行动，突出你的技能和贡献。\n\n结果（Result）：总结项目的成果，量化结果（如提高了效率、节省了成本等），并说明你从中学到了什么。",
+    "notes": "✘ 避免过于笼统：不要只说“我参与了一个项目”，要具体描述你的角色和贡献。\n\n✘ 避免夸大其词：不要夸大自己的作用，保持诚实和客观。\n\n✘ 避免忽略团队合作：即使你是项目负责人，也要提到团队合作的重要性。\n\n✘ 避免缺乏数据支持：尽量用数据或具体成果来证明你的贡献。"
+  },
+  {
+    "id": "q11",
+    "num": 11,
+    "questionEn": "What were your key responsibilities and accomplishments in your past job?",
+    "questionZh": "你过去工作中的主要职责和成就有哪些？",
+    "similarQuestions": "Could you tell us about your main job responsibilities and the achievements you've made in your previous position?（你能讲讲你上份工作的主要职责和取得的成就吗？）\n\nWhat were your main responsibilities in your previous job, and what achievements did you make?（你上一份工作的主要职责是什么，取得了哪些成就？）",
+    "questionIntent": "面试官想了解：1）你过去的核心能力是否与新岗位匹配 2）你能否用具体事例展现价值 3）你的逻辑表达是否清晰。这个问题是验证履历真实性的重要环节。",
+    "answerStrategy": "采用CARL结构回答：\n\nContext（场景）：用1句话说明岗位核心职责\n\nAchievement（成就）：选取2-3个典型工作场景说明取得的成就\n\nRelevance（关联）：说明这些经历对目标岗位的价值\n\nLearning（收获）：提炼可迁移的能力/经验",
+    "notes": "✘ 忌流水账：不要按时间顺序罗列所有工作内容\n\n✘ 忌假大空：避免\"提升了效率\"这类模糊表述，要说明具体做了什么动作\n\n✘ 忌自我否定：不要说\"只是个小项目\"这类弱化成就的表达"
+  },
+  {
+    "id": "q12",
+    "num": 12,
+    "questionEn": "What did you learn from your previous job?",
+    "questionZh": "你从上一份工作中学到了什么？",
+    "similarQuestions": "Could you highlight the major learnings from your last job?（说说上份工作的主要收获？）\n\nWhat key lessons did you take away from your previous job?（你从上一份工作中获得了哪些经验教训？）",
+    "questionIntent": "面试官想了解你是否具备自我反思能力，能否从过往经历中提取有价值的经验，并转化为未来工作的改进方案。同时考察你是否能识别核心问题、避免重复错误，并展现成长型思维。",
+    "answerStrategy": "明确总结一个关键教训（避免泛泛而谈）。\n\n用简洁的情境说明该教训的背景。\n\n描述你如何改变行为或策略。\n\n强调未来如何应用这一经验。",
+    "notes": "✘ 避免抱怨前公司：聚焦自身成长而非外部问题。\n\n✘ 忌抽象空话：如“学会了团队合作”，需具体化场景。\n\n✘ 不要罗列多个教训：选一个核心点深入展开，体现深度思考。\n\n✘ 回避被动学习：如“公司培训让我学会…”，需突出主动改进。"
+  },
+  {
+    "id": "q13",
+    "num": 13,
+    "questionEn": "What were your favorite and least favorite parts of your previous job?",
+    "questionZh": "你上份工作最喜欢和最不喜欢的是什么？",
+    "similarQuestions": "What did you like and dislike most about your last job?（上份工作最喜欢和讨厌什么？）\n\nCan you summarize the parts you liked and disliked about your last job?（总结上份工作喜恶？）",
+    "questionIntent": "面试官想通过这个问题了解：1）你的职业价值观（什么能真正激励你）2）自我认知能力（是否能客观评估环境）3）与应聘岗位的匹配度（不喜欢的部分是否与新岗位核心要求冲突）4）成熟度（能否用建设性视角看待负面经历）",
+    "answerStrategy": "明确偏好：用具体案例说明最喜欢的工作场景/任务类型\n\n建设性反思：将\"最不喜欢\"转化为\"主动应对的经历\"\n\n成长视角：强调从负面经历中获得的技能/认知\n\n未来连接：暗示这些经验对新岗位的适配性",
+    "notes": "✘ 忌情绪化抱怨（如\"领导无能\"），要展现问题解决思维\n\n✘ 忌说与应聘岗位核心职能相冲突的内容（如应聘销售岗却说讨厌与人打交道）\n\n✘ 忌空泛陈述（如\"不喜欢加班\"），要用具体工作场景说明\n\n✘ 忌过度美化（如\"完全没有不喜欢的部分\"），会显得不真诚"
+  },
+  {
+    "id": "q14",
+    "num": 14,
+    "questionEn": "Could you talk about the gaps in your employment history?",
+    "questionZh": "能讲讲你工作经历中的空白期吗？",
+    "similarQuestions": "Can you explain the gaps in your employment history?（你能解释下工作履历中的空白期吗？）\n\nCould you elaborate on the gaps in your work history? （你能讲讲你工作经历中的空白期吗？）",
+    "questionIntent": "面试官想了解你在工作经历中的空白期是否合理，是否有积极利用这段时间提升自己或处理个人事务。同时，他们也在评估你是否能坦诚面对这段经历，并展示出你对职业发展的持续关注和规划。",
+    "answerStrategy": "首先简要说明空档期的客观原因\n\n然后强调主动采取的措施（学习/实践/解决问题）\n\n接着展示能力提升或认知迭代\n\n最后说明与当前岗位的匹配价值",
+    "notes": "✘ 不编造虚假理由（背调可能拆穿）\n\n✘ 不强调被动受害（如\"被裁员后找不到工作\"）\n\n✘ 不暴露负面情绪（抱怨前雇主或同事）\n\n✘ 不过度修饰（如将3个月说成\"系统性职业转型\"）"
+  },
+  {
+    "id": "q15",
+    "num": 15,
+    "questionEn": "Why are you leaving your current job?",
+    "questionZh": "你为什么要离开现在的工作？",
+    "similarQuestions": "Could you tell me why you are planning to leave your current job?（你能告诉我为什么打算离职吗？）\n\nWhy are you looking to leave your current employment? （你为什么想辞去现在的工作呢？）",
+    "questionIntent": "面试官想了解你的离职动机是否合理，判断你职业决策的稳定性、价值观匹配度，以及是否具备清晰的自我认知。同时观察你是否会负面评价前雇主，这对判断你的职业成熟度很重要。",
+    "answerStrategy": "现状肯定：用1-2句话客观肯定当前工作收获\n\n寻求方向：说明职业发展的新诉求/目标\n\n匹配新机：解释新机会如何满足你的发展需求\n\n积极总结：强调对未来的积极态度",
+    "notes": "✘ 切忌抱怨现公司/领导/同事✘ 避免\"想要更高薪资\"等物质化表述✘ 不要用\"无聊/没发展\"等笼统负面评价✔ 聚焦个人成长诉求与企业发展的契合点✔ 用\"seek/aspire to\"等积极动词引导回答方向"
+  },
+  {
+    "id": "q16",
+    "num": 16,
+    "questionEn": "What motivated you to change careers?",
+    "questionZh": "是什么促使你转行？",
+    "similarQuestions": "What led you to make a career change? （是什么让你做出职业改变？）\n\nCould you share the factors that influenced your career transition? （你能讲讲促使你转行的原因吗？）",
+    "questionIntent": "面试官想了解你转行的真实原因，是否经过深思熟虑，以及你对新领域的兴趣和适应能力。他们希望看到你对职业发展的清晰规划，以及你如何将过去的经验转化为新岗位的优势。",
+    "answerStrategy": "挑战：说明原行业遇到的瓶颈或触发点（非负面表达）\n\n应对：描述主动采取的学习/探索行动（展示适应力）\n\n收获：展示新领域带来的职业成长（技能/视野/价值观）\n\n契合：强调与新方向的长期契合度",
+    "notes": "✘ 避免抱怨原行业（如\"薪资太低/领导太差\"）\n\n✘ 避免模糊动机（如\"想尝试新事物\"需具体化）\n\n✘ 慎用专业术语（如\"ROI优化\"改为\"提升资源使用效率\"）\n\n✘ 避免过度强调短期利益（培训/福利）"
+  },
+  {
+    "id": "q17",
+    "num": 17,
+    "questionEn": "I noticed you've changed jobs several times. What led to these decisions?",
+    "questionZh": "我注意到你换了几次工作，是什么促使你做这些决定的呢？",
+    "similarQuestions": "What prompted you to move between jobs frequently? （是什么促使你频繁跳槽呢？）\n\nCould you share the factors contributing to your frequent career transitions? （你能说说频繁职业变动的原因吗？）",
+    "questionIntent": "面试官希望了解频繁跳槽背后的动机，判断你是否具备清晰的职业规划、稳定性以及从经历中成长的能力。重点在于确认换工作是否源于被动逃避，还是主动寻求发展，并验证这些经历如何让你更适合当前岗位。",
+    "answerStrategy": "重塑印象：正面回应换工作的事实，将其转化为主动的职业管理行为。\n\n分点说明原因：用2-3个具体原因解释每次选择，强调成长需求而非外部压力。\n\n总结收获与联系：说明积累的技能如何与当前职位匹配，并表达长期发展的意愿。",
+    "notes": "✘ 避免抱怨前公司（如“领导不行”“薪资太低”），保持客观积极。\n\n✘ 不要模糊回应（如“想尝试不同领域”），需具体说明职业逻辑。\n\n✔ 突出每次选择的连贯性（如“从执行到管理”“技能叠加”）。\n\n✔ 用实例证明能力提升，而非单纯描述职位变化。"
+  },
+  {
+    "id": "q18",
+    "num": 18,
+    "questionEn": "Why are you interested in working for our company?",
+    "questionZh": "你为什么对我们公司的工作感兴趣呢？",
+    "similarQuestions": "What attracts you to our company?（是什么吸引你到我们公司？）\n\nWhy do you think our company is the right fit for you?（你为什么认为我们公司适合你？）",
+    "questionIntent": "面试官想了解你是否真正了解公司及其文化，以及你的职业目标是否与公司的发展方向契合。他们希望看到你对公司的热情，以及你如何能为公司带来价值，而不是仅仅为了找一份工作。",
+    "answerStrategy": "首先用1句话说明感兴趣的理由（如文化/技术/社会影响）\n\n然后解释这个因素对你职业发展的影响\n\n接着列举公司具体项目/政策/成果佐证\n\n最后说明这种匹配带来的双赢价值",
+    "notes": "✘ 错误：\"I want a higher salary/Your company is famous\"（暴露功利心）✘ 错误：空谈价值观（如\"innovation创新\"）却不解释具体实践✔ 正确：提前研究公司年报/员工评价/社会责任报告✔ 正确：用\"我看到...\"代替\"我觉得...\"，展示客观认知"
+  },
+  {
+    "id": "q19",
+    "num": 19,
+    "questionEn": "What do you know about our company?",
+    "questionZh": "你对我们公司了解多少？",
+    "similarQuestions": "Could you tell me what you have learned about our company?（你能告诉我你对我们公司有哪些了解吗？）\n\nTell me what you know about our business.（告诉我你对我们业务的了解）",
+    "questionIntent": "面试官想确认你是否真正了解公司，判断你的求职动机是否强烈，并观察你是否能将自身优势与公司需求匹配。通过这个问题，他们也在评估你的信息搜集能力和对公司文化的理解。",
+    "answerStrategy": "核心观点：提炼对公司最关键的认知（如行业地位/创新文化/社会责任）\n\n具体原因：说明为什么这个认知让你印象深刻\n\n实际例证：用公司具体行为/项目/成果佐证\n\n个人联结：自然过渡到你能如何贡献价值",
+    "notes": "✘ 忌说\"规模很大/很有名\"等官网套话，要展示深度思考\n\n✘ 忌背诵财报数据，改用\"行业报告指出/客户反馈显示\"等自然表达\n\n✘ 忌过度吹捧，保持客观（如\"I notice the recent shift in...\"比\"perfect strategy\"更专业）\n\n✘ 忌脱离自身，结尾可关联价值观（如\"这与我的工作理念一致，因为...\"）"
+  },
+  {
+    "id": "q20",
+    "num": 20,
+    "questionEn": "How does our company stand out from the competition in your opinion?",
+    "questionZh": "你认为我们公司如何在竞争中脱颖而出？",
+    "similarQuestions": "What makes our company different from its rivals in the market?（我们公司与竞争对手相比有何不同？）\n\nWhat are the key differences you've noticed between our company and other players in the industry?（你觉得我们公司与业内其他企业的关键区别是什么？）",
+    "questionIntent": "面试官希望通过这个问题了解你对行业的洞察力，以及你如何通过分析市场现状和竞争格局，提出帮助公司脱颖而出的策略。同时，他们也希望看到你的创新思维和解决问题的能力。",
+    "answerStrategy": "首先描述当前行业或竞争中的主要挑战或痛点。\n\n然后提出公司可以采取的具体策略或行动。\n\n接着分析这些策略如何帮助公司在竞争中脱颖而出，并带来积极影响。",
+    "notes": "✘ 避免空泛的建议，要结合行业特点和公司实际情况。\n\n✘ 不要过度批评公司或行业，保持建设性和积极的态度。\n\n✘ 避免使用绝对化表达，如“must”或“only”，用“could”或“might”更合适。\n\n✘ 不要只谈理论，要结合实际案例或行业趋势进行分析。"
+  },
+  {
+    "id": "q21",
+    "num": 21,
+    "questionEn": "What aspects of this industry appeal to you the most?",
+    "questionZh": "这个行业的哪些方面最吸引你？",
+    "similarQuestions": "What makes you particularly interested in this industry? （是什么让你对这个行业特别感兴趣？）\n\nWhat interests you most about this industry? （这个行业最让你感兴趣的是什么？）",
+    "questionIntent": "面试官想了解：1.你对行业的认知深度 2.职业兴趣与岗位匹配度 3.价值观是否与行业特性契合。比如医疗行业看重伦理意识，科技行业强调创新精神。",
+    "answerStrategy": "首先说明核心吸引点（如社会影响/技术迭代/协作生态）\n\n然后解释该要素有哪些特别之处\n\n接着举例子，用经历/观察说明具体吸引力\n\n最后结合自身优势说明匹配性",
+    "notes": "✘ 忌空谈情怀：\"这个行业很有意义\" → 要说明意义的具体表现\n\n✘ 忌忽视行业挑战：可提\"动态变化的监管环境需要持续学习\"展现客观认知\n\n✘ 忌过度技术化：用\"用户行为数字化\"代替\"ML算法优化\"等专业术语\n\n✘ 慎用绝对词：避免\"所有公司都在...\"，改用\"越来越多企业开始...\""
+  },
+  {
+    "id": "q22",
+    "num": 22,
+    "questionEn": "What are the key challenges in this industry as you see it?",
+    "questionZh": "在你看来，这个行业的主要挑战是什么？",
+    "similarQuestions": "What obstacles do you anticipate this industry will face in the near future?（你预计这个行业近期会面临什么障碍？）\n\nWhat potential challenges do you foresee for this industry?（你预见到这个行业会有哪些潜在挑战？）",
+    "questionIntent": "面试官想了解你对行业的理解深度，是否能够洞察行业趋势和潜在问题。同时，他们也在评估你是否具备应对挑战的思维能力和战略眼光，以及你如何将这些挑战转化为个人或公司发展的机会。",
+    "answerStrategy": "首先用1句话明确核心挑战\n\n然后说明该挑战对行业/企业的具体影响\n\n接着提出可行的应对方法（避免空谈理论）\n\n最后用行业案例佐证方法的有效性",
+    "notes": "✘ 罗列3个以上挑战（显得思考零散）\n\n✘ 用「技术迭代快」等泛泛而谈的表述（需具体到细分领域）\n\n✘ 过度负面表述（如\"这个行业快完蛋了\"）"
+  },
+  {
+    "id": "q23",
+    "num": 23,
+    "questionEn": "What's your understanding of this position?",
+    "questionZh": "你对这个职位有什么理解？",
+    "similarQuestions": "In your view, what does this position entail?（在你看来，这个职位需要承担些什么？）\n\n What do you think are the key aspects of this position?（你认为这个职位的关键方面有哪些？）",
+    "questionIntent": "面试官主要想确认三点：1. 你是否真的理解岗位的核心职责挑战；2. 你是否有意识地将自身能力与岗位要求匹配；3. 你是否提前做了功课，了解公司业务和团队目标。",
+    "answerStrategy": "岗位理解：用1-2句话总结该岗位。\n\n原因与优先级：说明岗位对公司业务的关键作用，并列出2-3个重点职责。\n\n举例关联：用过往经历说明你如何满足这些职责需求。\n\n结果与契合：强调你的能力如何帮助团队/公司实现目标。",
+    "notes": "✘ 忌笼统：避免说“这个职位需要沟通能力”等泛泛而谈，要具体到业务场景。\n\n✘ 忌过度脑补：不要编造不存在的职责，抓取招聘信息（JD）中的关键词展开。\n\n✘ 忌自我中心：少用“我想学习”，多用“我能贡献”——企业招人是解决问题，不是培养新人。"
+  },
+  {
+    "id": "q24",
+    "num": 24,
+    "questionEn": "What interests you most about this position?",
+    "questionZh": "这个职位最吸引你的地方是什么？",
+    "similarQuestions": "What aspects of this position appeal to you the most?（这个职位的哪些方面最吸引你？）\n\nWhich elements of this position are the most appealing to you?（这个职位的哪些要素最吸引你？）",
+    "questionIntent": "面试官希望通过这个问题了解你对职位的兴趣点是否与公司需求匹配，同时考察你对岗位的理解深度以及你的职业动机。他们想确认你是否真正对这个职位感兴趣，而不是随便投递简历。",
+    "answerStrategy": "兴趣点：明确说明这个职位最吸引你的地方，比如工作内容、团队氛围、公司文化等。\n\n匹配度：结合自己的技能、经验或兴趣，说明为什么你适合这个职位。\n\n职业发展：阐述这个职位如何帮助你实现职业目标或提升个人能力。",
+    "notes": "✘ 避免空泛回答，比如“这个职位很有挑战性”或“我对这个职位很感兴趣”，要具体说明原因。\n\n✘ 不要只谈个人利益，比如“这个职位薪资高”或“公司名气大”，要结合公司和职位的需求。\n\n✘ 避免过度夸大或虚假陈述，确保你的回答真实可信。"
+  },
+  {
+    "id": "q25",
+    "num": 25,
+    "questionEn": "What are your greatest expectations for what this job can provide?",
+    "questionZh": "你最期待这份工作给你带来什么？",
+    "similarQuestions": "What do you most look forward to getting from this job?（你最期待从这份工作中获得什么？）\n\nWhat would you most like this job to provide for you?（你最希望这份工作能给你带来什么？）",
+    "questionIntent": "面试官通过这个问题，主要想了解你对这份工作的期望是否与公司能提供的资源和发展机会相匹配。同时，他们也希望看到你对职业发展的清晰规划，以及你是否能通过这份工作实现个人价值。",
+    "answerStrategy": "明确你希望通过这份工作实现的核心目标（如技能提升、职业发展等）。\n\n描述你计划如何通过这份工作实现这些目标（如学习新技能、参与项目等）。\n\n说明这些目标实现后对你个人和公司的积极影响（如提升效率、推动创新等）",
+    "notes": "✘ 避免过于空泛的期望，如“我想学习很多东西”，要具体化。\n\n✘ 不要只谈个人利益，要结合公司目标，体现双赢思维。\n\n✘ 避免绝对化表达，如“我一定能在短期内实现目标”，用更灵活的语言。\n\n✘ 不要忽视公司文化和发展方向，确保你的期望与公司价值观一致。"
+  },
+  {
+    "id": "q26",
+    "num": 26,
+    "questionEn": "What relevant experience do you have for this position?",
+    "questionZh": "对于这个职位，你有哪些相关经验呢？",
+    "similarQuestions": "What experience do you possess that makes you a good fit for this role?（你有哪些使你适合这个角色的经验？）\n\nCan you share your experience that is relevant to the requirements of this position?（你能分享一下与这个职位要求相关的经验吗？）",
+    "questionIntent": "面试官希望通过这个问题了解你是否具备与职位要求相匹配的经验，以及你如何将这些经验应用到新岗位中。他们想确认你是否能快速上手，并为团队带来价值。",
+    "answerStrategy": "先简要说明你在哪些领域有相关经验，与职位要求直接挂钩。\n\n分点列举你具备的相关经验，每一点都要清晰明确。\n\n为每一点经验提供一个具体的实例，说明你如何应用这些经验并取得成果。\n\n最后总结这些经验如何使你胜任该职位。",
+    "notes": "✘ 避免笼统描述：不要只说“我有相关经验”，要具体说明是什么经验。\n\n✘ 避免脱离职位需求：确保你的经验与职位要求直接相关，不要跑题。\n\n✘ 避免堆砌细节：实例要简洁有力，不要陷入过多无关细节。\n\n✘ 避免过度夸大：保持真实可信，不要虚构或夸大成果。"
+  },
+  {
+    "id": "q27",
+    "num": 27,
+    "questionEn": "What key qualities are essential for this role?",
+    "questionZh": "这个职位需要哪些关键素质？",
+    "similarQuestions": "What do you think is the most important quality for this position?（你认为这个岗位最重要的素质是什么？）\n\nWhich qualities do you believe are crucial for success in this position?（你认为这个岗位成功需要什么素质？ ）",
+    "questionIntent": "面试官希望通过这个问题了解你对职位的理解程度，以及你是否具备胜任该职位所需的素质和能力。同时，他们也在评估你是否能够清晰地表达自己的优势，并将其与职位要求相匹配。",
+    "answerStrategy": "首先用1句话概括关键素质\n\n然后说明该素质为何重要\n\n接着举例子佐证，同时说明自己具备该素质\n\n强调该素质对目标岗位的价值",
+    "notes": "✘ 要沟通能力和团队精神（90%候选人都会说的无效答案）✘ 必须具备领导力和创新思维（未结合具体场景的绝对化表达）"
+  },
+  {
+    "id": "q28",
+    "num": 28,
+    "questionEn": "What unique value can you bring to our company?",
+    "questionZh": "你能为我们公司带来什么独特价值？",
+    "similarQuestions": "From your perspective, what unique value can you bring to our team?（在你看来，你能为我们团队带来什么独特价值？）\n\nIn your view, what unique value would you bring to our company’s success?（在你看来，你会为我们公司的成功带来什么独特的价值？）",
+    "questionIntent": "面试官希望通过这个问题了解你对自己的定位，以及你是否能清晰地认识到自己的优势如何与公司需求匹配。他们想确认你是否能为公司带来独特的贡献，而不仅仅是泛泛而谈的能力。",
+    "answerStrategy": "明确说明你的核心优势或独特能力。\n\n用一个具体的例子展示你如何运用这种优势解决问题或取得成果。\n\n总结这种优势如何为公司带来实际价值，比如提升效率、创新或团队协作。",
+    "notes": "✘ 避免空泛描述，比如“我很努力”或“我学习能力强”，要具体化。\n\n✘ 不要只谈自己，要结合公司需求，展示你的价值如何与公司目标一致。\n\n✘ 避免过度夸大或使用绝对化表达，比如“我是最好的”。\n\n✘ 不要只谈过去的成就，要强调这些成就如何对未来工作有帮助。"
+  },
+  {
+    "id": "q29",
+    "num": 29,
+    "questionEn": "What sets you apart from other candidates?",
+    "questionZh": "你和其他候选人有什么不同？",
+    "similarQuestions": "How do you differentiate yourself from other people applying for this position?（你与其他应聘者相比有什么不同）\n\nWhat special qualities or experiences do you have that others might not?（你有哪些别人可能没有的特质或经历？）",
+    "questionIntent": "面试官希望通过这个问题了解你的独特优势，以及你如何为团队或公司带来价值。他们想确认你是否具备与众不同的能力、经验或特质，是否能够脱颖而出，成为最佳候选人。",
+    "answerStrategy": "先明确你与众不同的核心特质或能力。\n\n用具体的经历或行为证明你具备这种特质。\n\n说明这种特质或行为带来的积极影响或结果。",
+    "notes": "✘ 避免空泛描述，如“我很努力”或“我很有团队精神”，要结合具体实例。\n\n✘ 不要贬低其他候选人，保持自信但不自负。\n\n✘ 避免使用绝对化表达，如“我比所有人都优秀”，而是强调你的独特之处。\n\n✘ 不要过度使用专业术语，确保表达清晰易懂。"
+  },
+  {
+    "id": "q30",
+    "num": 30,
+    "questionEn": "Why should we hire you?",
+    "questionZh": "我们为什么应该雇佣你？",
+    "similarQuestions": "Why are you the best fit for this position?（为什么你最适合这个职位？）\n\nCould you tell us the key reasons we should bring you on board?（你能告诉我们录用你的关键理由吗？）",
+    "questionIntent": "面试官想知道你如何将自己的技能、经验和个性与职位要求相匹配，以及你能为公司带来什么独特的价值。通过你的回答，他们可以判断你是否真正理解岗位需求，并确认你是否具备胜任该职位的能力。",
+    "answerStrategy": "指出目标岗位常见的业务痛点\n\n说明你解决这类问题的具体方法\n\n强调你过往带来的积极影响",
+    "notes": "✘ 避免空泛形容词：不说\"I'm hardworking\"，而是\"I reduced project delivery time by...\"\n\n✘ 不要贬低竞争者：用\"my approach\"替代\"others can't...\"\n\n✘ 慎用绝对化表达：用\"often/most cases\"替代\"always/never\"\n\n✘ 拒绝过度承诺：用\"I'm confident in...\"替代\"I guarantee...\""
+  },
+  {
+    "id": "q31",
+    "num": 31,
+    "questionEn": "When you're seeking a job, what factors matter most to you?",
+    "questionZh": "当你找工作时，哪些因素对你来说最重要？",
+    "similarQuestions": "What factors do you evaluate when searching for a job opportunity?（找工作时，你会评估哪些因素？）\n\nWhat is important to you when you're on the hunt for a job?（当你找工作时，什么对你是重要的？）",
+    "questionIntent": "面试官想了解候选人的职业价值观与公司文化/岗位的匹配度，考察对自我需求的认知深度和优先级排序能力，同时评估求职动机是否成熟理性。",
+    "answerStrategy": "采用PRER结构回答：\n\nPoint（观点）：明确2-3个核心因素\n\nReason（原因）：说明该因素对职业发展的意义\n\nExample（举例）：用过往经历或观察结果佐证\n\nResult（总结）：强调该因素与目标岗位的适配性",
+    "notes": "✘ 切忌罗列超过3个因素（显得缺乏重点）✘ 避免只谈薪资福利（暴露短视倾向）✘ 不要与JD（Job Description职位描述）脱节（例：应聘传统制造业却大谈扁平化管理）✔ 举例时要体现\"场景+行为+收获\"的完整逻辑✔ 可以适当结合应聘公司的公开信息（如官网价值观）"
+  },
+  {
+    "id": "q32",
+    "num": 32,
+    "questionEn": "What matters most to you in your future job?",
+    "questionZh": "在未来的工作中，什么对你最重要？",
+    "similarQuestions": "What do you value most in your next job?（在接下来的工作中，你最看重的是什么？）\n\nWhen thinking about your next job, what do you cherish the most?（考虑下一份工作时，你最看重的是什么？）",
+    "questionIntent": "面试官希望通过这个问题了解你的职业价值观、工作动机以及与公司文化的契合度。他们想确认你是否真正理解自己追求什么，以及这些追求是否与公司的发展方向一致。",
+    "answerStrategy": "采用PRER结构回答：\n\nPoint（观点）：明确说出对你最重要的因素。\n\nReason（原因）：解释为什么这个因素对你重要。\n\nExample（实例）：用过去的经历或行为说明你如何体现这一价值观。\n\nResult（结果）：描述这一因素对你的职业发展或工作成果的积极影响。",
+    "notes": "✘ 避免泛泛而谈，如“我想学到更多”或“我想赚钱”，这些回答缺乏深度和独特性。\n\n✘ 避免过于理想化或不切实际的表达，如“我只想做有意义的工作”，要结合实际情况。\n\n✘ 不要忽略与公司文化的关联，尽量让回答与目标公司的价值观相契合。"
+  },
+  {
+    "id": "q33",
+    "num": 33,
+    "questionEn": "What makes you feel fulfilled in a job?",
+    "questionZh": "什么能让你在工作中感到满足呢？",
+    "similarQuestions": "When do you feel most fulfilled in your professional life?（在职业生涯中，什么时候你觉得最有成就感？）\n\nIn what aspects of your job do you feel most accomplished?（在工作的哪些方面你觉得最有成就感？）",
+    "questionIntent": "面试官希望通过这个问题了解你的职业动机和价值观，判断你是否与公司文化和工作内容契合。他们想确认你是否能从工作中获得持续的动力和满足感，以及你是否能长期投入并做出贡献。",
+    "answerStrategy": "采用PRER结构回答：\n\nPoint（观点）：明确表达你在工作中感到满足的核心因素。\n\nReason（原因）：解释为什么这个因素对你重要。\n\nExample（举例）：用具体的例子说明你如何在工作中体现这一点。\n\nResult（结果）：描述这个因素如何帮助你取得成果或产生积极影响。",
+    "notes": "✘ 避免泛泛而谈，如“我喜欢帮助别人”或“我喜欢挑战”，需具体化。\n\n✘ 不要只谈个人利益，如“高薪”或“升职”，需体现对工作的热情和贡献。\n\n✘ 避免绝对化表达，如“只有……才能让我满足”，需展现灵活性和开放性。\n\n✘ 不要忽略团队合作和外部反馈，需体现与他人协作的能力和影响。"
+  },
+  {
+    "id": "q34",
+    "num": 34,
+    "questionEn": "What strategies do you use to stay motivated at work?",
+    "questionZh": "你用什么方法保持工作动力？",
+    "similarQuestions": "Can you share your approaches to sustaining work motivation?（你能分享下保持工作动力的方法？）\n\nHow do you ensure you remain motivated throughout your work?（你如何如何确保工作时一直有动力？）",
+    "questionIntent": "面试官希望通过这个问题了解你是否具备自我激励的能力，以及你是否能够持续保持高效的工作状态。他们想看到你是否有明确的目标、积极的心态和有效的策略来应对工作中的挑战和压力。",
+    "answerStrategy": "方法：先明确你保持工作动力的具体方法或策略（例如，设定目标、寻找意义、学习新技能等）。\n\n原因：解释为什么这些方法对你有效（例如，它们如何帮助你克服挑战或提升效率）。\n\n结果：说明这些方法带来的积极影响（例如，提高工作质量、增强成就感或促进个人成长）。",
+    "notes": "✘ 避免空泛的回答，如“我天生就很积极”。\n\n✘ 不要只谈理论，要结合具体实例说明你的策略如何奏效。\n\n✘ 避免过于绝对化的表达，如“我从不感到疲惫”。\n\n✘ 不要只强调外部激励（如奖金），要更多展现内在驱动力。"
+  },
+  {
+    "id": "q35",
+    "num": 35,
+    "questionEn": "How significant are advancement prospects for you in a job?",
+    "questionZh": "工作中的晋升前景对你有多重要？",
+    "similarQuestions": "How vital are promotion chances for your career development?（晋升机会对你的职业发展有多重要？）\n\nAre the chances of getting promoted something you highly value?（晋升机会是你非常看重的东西吗？）",
+    "questionIntent": "面试官想了解候选人是否将晋升视为核心驱动力，同时评估其职业规划的合理性——是否能平衡个人发展与团队贡献，以及是否具备持续成长的韧性而非急功近利。",
+    "answerStrategy": "首先用1句话说明晋升对你的意义（不是终极目标，而是能力证明/价值体现）\n\n然后举例子，用真实的工作经历进一步解释\n\n最后强调你看重的是持续成长环境，而不是单纯升职",
+    "notes": "✘ 警惕过度强调晋升速度（如\"3年必须升主管\"），易显浮躁\n\n✘ 避免空谈抱负，要用具体行动案例证明能力提升\n\n✘ 切忌贬低基础工作（如\"重复性工作没价值\"），展示各阶段价值认知\n\n✘ 慎用比较句式（如\"比同行更快晋升\"），避免隐含不稳定倾向"
+  },
+  {
+    "id": "q36",
+    "num": 36,
+    "questionEn": "Are you willing to take on challenging tasks?",
+    "questionZh": "你愿意承担有挑战性的任务吗？",
+    "similarQuestions": "Are you open to take on challenging tasks?（你愿意承担有挑战性的任务吗）\n\nWould you be prepared to take on tasks that are challenging?（你会愿意承担具有挑战性的任务吗？）",
+    "questionIntent": "面试官主要想了解两点：一是你面对困难时的态度是否积极主动，二是你是否有拆解复杂问题的方法论。他们想招的不是只会按部就班的人，而是能主动创造价值并推动事情发展的员工。",
+    "answerStrategy": "首先明确表达愿意接受挑战\n\n然后说明愿意接受挑战的内在驱动力\n\n接着用具体工作场景举例\n\n最后展现从挑战中获得的成长",
+    "notes": "✘ 避免说\"我特别喜欢挑战\"这种空话，要给出具体证据✘ 不要用\"I always...\"这类绝对化表达，改用\"consistently\"等✘ 避免提及超出能力范围的挑战，保持可信度\n\n✔ 举例时突出思考过程而不仅是结果"
+  },
+  {
+    "id": "q37",
+    "num": 37,
+    "questionEn": "What is your ideal working environment like?",
+    "questionZh": "你理想的工作环境是什么样的？",
+    "similarQuestions": "Describe the working environment that would make you most productive.（描述一下能让你工作效率最高的工作环境。）\n\nIn your opinion, what makes a great working environment?（你认为怎样才算好的工作环境？）",
+    "questionIntent": "面试官通过这个问题，想了解你是否能适应公司文化，以及你对工作环境的偏好是否与团队的实际环境匹配。同时，他们也希望看到你对工作环境的理解是否成熟，是否能在不同环境中灵活调整。",
+    "answerStrategy": "偏好：描述你理想的工作环境的核心特点。\n\n原因：解释为什么这些特点对你重要。\n\n实例：用过去的经历或观察来支持你的观点。\n\n结果：说明这种环境如何帮助你更好地工作或成长。",
+    "notes": "✘ 避免过于具体或绝对化的描述，比如“必须要有独立办公室”或“绝对不能加班”。\n\n✘ 不要只谈硬件环境（如办公室大小、设备），要更多关注软性环境（如团队合作、沟通方式）。\n\n✘ 避免与公司文化明显冲突的描述，比如公司强调效率，你却说慢工出细活"
+  },
+  {
+    "id": "q38",
+    "num": 38,
+    "questionEn": "What do you think of our company's core values?",
+    "questionZh": "你对我们公司的核心价值观怎么看？",
+    "similarQuestions": "Could you share your thoughts on our company's core values?（能说说你对我司核心价值观的看法？）\n\nHow do you view our core values?（你如何看待我们的核心价值观？）",
+    "questionIntent": "面试官问这个问题主要想确认三点：1. 你是否提前研究过公司文化 2. 你是否真正认同这些价值观 3. 你的个人经历/思维方式能否与公司价值观产生共鸣。本质上是在筛选文化适配度高的候选人。",
+    "answerStrategy": "采用 PRER结构回答：\n\nPoint（观点）：明确表达对公司价值观的理解与认同\n\nReason（原因）：结合行业特性/社会趋势说明价值观的合理性\n\nExample（例子）：用自己经历/外部案例证明价值观的实践价值\n\nResult（结果）：阐述价值观对公司发展的积极影响",
+    "notes": "✘ 不要照搬官网原话（显得没思考）\n\n✘ 避免说\"所有价值观都很棒\"（听起来像敷衍）\n\n✔ 重点选1-2个最能引发共鸣的价值观深入谈\n\n✔ 用\"我注意到贵司特别强调...\"代替模糊的\"你们公司\"\n\n✔ 最后一定回归到\"这些价值观如何与我的工作方式契合\""
+  },
+  {
+    "id": "q39",
+    "num": 39,
+    "questionEn": "Can you share your approach to dealing with cultural differences in a global team?",
+    "questionZh": "你能分享下处理跨国团队文化差异的方法吗？",
+    "similarQuestions": "What strategies do you use to navigate cultural differences in a diverse team?（你用什么策略应对多元团队的文化差异？）\n\nWhat methods do you employ to bridge cultural differences in a multinational team?（在跨国团队中，你会用什么方法来弥合文化差异？）",
+    "questionIntent": "面试官主要想考察：1）你是否能意识到文化差异对团队协作的影响；2）你是否有具体的策略解决文化冲突；3）你是否具备跨文化沟通的敏感度；相当于通过这个问题检验你\"是否真的在国际化团队工作过\"以及\"是否具备全球化思维\"",
+    "answerStrategy": "先用1句话总结你处理文化差异的方法；\n\n然后说明文化差异带来的具体挑战；\n\n接着用实际经历证明方法的有效性；\n\n最后强调行为带来的积极变化。",
+    "notes": "✘ 我尊重所有文化\"（空洞口号）✘ \"亚洲同事更勤奋\"（刻板印象）✘ \"我让团队都说英语\"（文化霸权）"
+  },
+  {
+    "id": "q40",
+    "num": 40,
+    "questionEn": "How do you adapt your communication style when working with global teams?",
+    "questionZh": "与跨国团队合作时你会如何调整沟通风格？",
+    "similarQuestions": "Can you share how you modify your communication approach in a global team setting?（能分享下在跨国团队中如何调整沟通方式吗？）\n\nHow have you tailored your communication style while collaborating with global teams?（在与全球团队协作时，你是如何调整沟通风格的？）",
+    "questionIntent": "面试官希望通过这个问题了解你是否具备跨文化沟通的敏感性和灵活性，以及你是否能够在不同文化背景下有效传递信息、避免误解，并促进团队协作。",
+    "answerStrategy": "采用SAR结构回答：\n\n情境（Situation）：描述一个与跨国团队合作的具体场景。\n\n行动（Action）：说明你如何调整沟通风格以适应不同文化背景。\n\n结果（Result）：阐述你的调整带来的积极影响或成果。",
+    "notes": "✘ 避免泛泛而谈，要结合具体场景和行动。\n\n✘ 不要只强调文化差异，要突出你的适应能力和解决方案。\n\n✘ 避免使用绝对化表达，如“always”或“never”，保持语言灵活。\n\n✘ 不要忽视结果部分，要展示你的调整对团队或项目的实际贡献。"
+  },
+  {
+    "id": "q41",
+    "num": 41,
+    "questionEn": "Describe an instance in which you successfully adapted to a new corporate culture.",
+    "questionZh": "描述一次你成功适应新企业文化的经历",
+    "similarQuestions": "Could you walk me through a time when you adapted to a new corporate culture?（你能讲讲一次适应新企业文化的经历吗？）\n\nCan you share an example of a time when you adapted to a new corporate culture?（你能分享一个你适应新企业文化的例子吗？）",
+    "questionIntent": "面试官想了解你是否有快速适应不同企业文化的能力，以及你如何处理文化冲突。他们希望确认：1）你具备观察和尊重文化差异的敏感度；2）你能主动调整行为模式；3）你最终能通过适应产生积极成果。这反映开放心态和问题解决能力。",
+    "answerStrategy": "采用CAR结构回答：\n\nChallenge（挑战）：简述遇到的\"文化冲突点\"（如决策方式、沟通风格、协作习惯）\n\nAction（行动）：分步骤说明如何观察、学习和调整（关键要体现主动性）\n\nResult（结果）：用外部反馈/行为变化/成果影响证明成功适应",
+    "notes": "✘ 避免只说\"我学习很快\"这类空话，要具体到行为\n\n✘ 不要抱怨前公司文化不好，始终保持积极语气\n\n✘ 不要虚构故事，面试官会追问细节\n\n✔ 强调从中学到的通用方法论（如观察、提问、试验）"
+  },
+  {
+    "id": "q42",
+    "num": 42,
+    "questionEn": "Describe a situation where you faced an ethical challenge.",
+    "questionZh": "描述一次你面临道德挑战的情况",
+    "similarQuestions": "Can you walk me through an ethical dilemma you faced?（你能给我讲讲你曾面临的道德困境吗？）\n\nTell me about a time when you had to deal with an ethical issue.（跟我讲讲你曾处理道德问题的经历。）",
+    "questionIntent": "面试官希望通过这个问题了解你在面对道德困境时的判断力、价值观和解决问题的能力。他们想确认你是否能在复杂情况下坚持原则，同时兼顾团队和组织的利益。",
+    "answerStrategy": "采用SAR结构回答：\n\n情境（Situation）：简要描述你面临的道德挑战，明确背景和矛盾点。\n\n行动（Action）：详细说明你如何分析问题、权衡利弊，并采取的具体行动。\n\n结果（Result）：总结你的行动带来的积极影响，以及你从中学到的经验。",
+    "notes": "✘ 避免选择过于极端或涉及法律问题的例子，以免引起负面联想。\n\n✘ 不要只强调自己的道德高尚，要展现你如何平衡多方利益。\n\n✘ 避免模糊描述，确保情境和行动具体清晰。\n\n✘ 不要忽视结果部分，这是体现你解决问题能力的关键。"
+  },
+  {
+    "id": "q43",
+    "num": 43,
+    "questionEn": "Can you share your approach to handling sensitive and confidential data?",
+    "questionZh": "你是如何处理机密信息的？",
+    "similarQuestions": "What strategies do you use to safeguard confidential information?（你通常采用什么策略保护机密信息？）\n\nCould you explain your process for dealing with confidential data?（你能说一下你是如何处理机密数据的吗？）",
+    "questionIntent": "面试官通过这个问题，考察你对敏感和机密信息的处理能力，包括你的责任感、合规意识以及实际操作经验。他们希望了解你是否具备保护公司核心信息的能力，以及你是否能在日常工作中严格遵守相关政策和流程。",
+    "answerStrategy": "采用 STAR 结构回答：\n\nSituation（情境）：描述你曾经处理敏感信息的背景或场景。\n\nTask（任务）：说明你在该情境中需要完成的具体任务或目标。\n\nAction（行动）：详细解释你采取了哪些措施来确保信息的安全性和机密性。\n\nResult（结果）：总结你的行动带来的积极影响或成果。",
+    "notes": "✘ 避免空泛回答，如“我很小心”或“我遵守规定”，要提供具体实例。\n\n✘ 不要提及具体的公司名称或项目细节，保持回答的通用性。\n\n✘ 避免使用绝对化表达，如“从不”或“总是”，用更灵活的语言。\n\n✘ 不要忽视合规性，强调你对政策和流程的严格遵守。"
+  },
+  {
+    "id": "q44",
+    "num": 44,
+    "questionEn": "How do you prioritize tasks under tight deadlines?",
+    "questionZh": "时间紧迫时你如何安排任务优先级？",
+    "similarQuestions": "How do you manage your workload when you have multiple tasks with tight deadlines?（当多项任务期限紧张时，你是如何管理工作量的？）\n\nCan you share your approach to setting priorities when working under pressure?（你能分享一下在压力下确定工作优先级的方法吗？）",
+    "questionIntent": "面试官想了解你的时间管理能力和应对压力的策略。通过这个问题，他们希望看到你如何区分任务的紧急性和重要性，是否具备高效组织工作的能力，以及能否在压力下保持冷静并做出合理决策。这有助于判断你是否能适应快节奏的工作环境。",
+    "answerStrategy": "采用PRER结构回答：\n\nPoint（观点）：用1句话总结方法论\n\nReason（原因）：说明判断标准（如业务影响/客户价值）\n\nExample（例子）：描述实际应用场景\n\nResult（结果）：总结积极影响",
+    "notes": "✘ 不要说\"我习惯先做容易的\"（暴露逃避复杂问题）✘ 避免堆砌专业术语（如\"用艾森豪威尔矩阵\"而不解释）✘ 忌用绝对化表述（如\"always绝对按XX顺序\"）"
+  },
+  {
+    "id": "q45",
+    "num": 45,
+    "questionEn": "How did you improve your work efficiency in your previous jobs?",
+    "questionZh": "你在之前的工作中是如何提高工作效率的？",
+    "similarQuestions": "Could you give an example of how you’ve enhanced efficiency in a past role?（能举例说下你在之前的工作是如何提升效率的吗？）\n\nCould you share some specific ways you enhanced work efficiency in your past roles?（你能分享些过往提升效率的具体方法吗？）",
+    "questionIntent": "面试官面试官希望通过这个问题了解你是否具备自我反思和持续改进的能力，以及你是否能够主动寻找并实施有效的方法来提升工作效率。同时，他们也希望看到你如何在实践中解决问题，并将这些经验应用到未来的工作中。",
+    "answerStrategy": "问题：描述你在工作中遇到的具体效率问题或挑战。\n\n行动：详细说明你采取了哪些措施来解决这个问题。\n\n结果：阐述这些行动带来的积极影响或成果。",
+    "notes": "✘ 避免泛泛而谈，如“我努力提高效率”，要具体说明你做了什么。\n\n✘ 不要只强调结果而忽略过程，行动部分需要详细描述。\n\n✘ 避免夸大或虚构经历，确保回答真实可信。\n\n✘ 不要只谈个人努力，可以提到团队协作或外部资源的支持。"
+  },
+  {
+    "id": "q46",
+    "num": 46,
+    "questionEn": "What tools do you use to improve efficiency?",
+    "questionZh": "你会用哪些工具来提高工作效率？",
+    "similarQuestions": "What software or applications do you rely on to enhance productivity?（你用哪些软件或应用来提高工作效率？）\n\nWhat kind of productivity tools do you incorporate into your daily work routine?（你在日常工作中会使用哪些提高效率的工具？）",
+    "questionIntent": "面试官想了解你是否熟悉并善于利用工具来优化工作流程。通过你的回答，他们可以判断你是否具备现代职场中常用的技术技能，以及你是否主动寻找方法来提升效率。这反映了你的学习能力和对高效工作的重视程度。",
+    "answerStrategy": "场景定位：说明需要提升效率的具体场景（如任务管理/信息处理/团队协作）\n\n工具选择：匹配该场景的1-2个工具类型（不强制说具体软件）\n\n价值证明：用\"before-after对比\"说明工具带来的改变",
+    "notes": "✘ 避免列举过多工具，选择最常用且效果显著的2-3个。✓ 说明工具的具体用途，而不是简单罗列名称。✓ 结合实际案例，展示工具如何提升你的工作效率。"
+  },
+  {
+    "id": "q47",
+    "num": 47,
+    "questionEn": "What strategies do you use to maintain high-quality work?",
+    "questionZh": "你用什么方法来保持高质量的工作？",
+    "similarQuestions": "How do you ensure quality in your work?（你如何确保自己工作的质量？）\n\nCould you share how you ensure that your work meets high - quality standards?（你能分享一下你是如何确保高质量工作的吗？）",
+    "questionIntent": "面试官希望通过这个问题了解你是否具备系统化的方法来确保工作质量，以及你是否能够持续高效地输出成果。他们想考察你的自我管理能力、对细节的关注度以及如何应对挑战。",
+    "answerStrategy": "问题：描述你在工作中可能遇到的质量挑战或目标。\n\n行动：详细说明你采取的具体策略或方法。\n\n结果：阐述这些策略如何帮助你保持高质量的工作，并带来积极影响。",
+    "notes": "✘ 避免空泛回答，如“我很注重细节”或“我会认真工作”。\n\n✘ 不要只提理论，要结合具体行动和实例。\n\n✘ 避免过度夸大，保持真实和可信。\n\n✘ 不要忽视团队合作或外部反馈的作用。"
+  },
+  {
+    "id": "q48",
+    "num": 48,
+    "questionEn": "Can you share an example of a suggestion you made that was successfully implemented?",
+    "questionZh": "你能分享一个你提出建议并得到实施的例子吗？",
+    "similarQuestions": "Can you walk me through an example of a suggestion you presented that was implemented?（你能给我讲讲你提出建议并被实施的例子吗？）\n\nPlease describe a situation where you proposed a suggestion and it was implemented.（请描述一个你提出建议并得到实施的场景。）",
+    "questionIntent": "面试官想了解你是否具备主动发现问题并提出解决方案的能力，同时考察建议的可行性、实施过程的影响力及结果对团队的贡献。核心评估点包括：分析能力、沟通推动力、结果导向思维。",
+    "answerStrategy": "采用CAR结构回答：\n\nChallenge（挑战）：明确说明当时的问题或痛点，用1-2句话交代场景。\n\nAction（行动）：描述你提出的具体建议、推动落地的关键动作（如沟通、协调资源、试点测试等）。\n\nResult（结果）：强调建议带来的积极变化，可补充他人反馈或长期价值。",
+    "notes": "✘ 避免笼统描述（如“我优化了流程”），需具体到问题场景和解决方案的独特性。\n\n✘ 不要过度夸大个人作用，适当体现团队协作（如“I collaborated with...”）。"
+  },
+  {
+    "id": "q49",
+    "num": 49,
+    "questionEn": "What steps do you take to handle stress and bounce back from burnout?",
+    "questionZh": "你采取哪些方法应对压力、摆脱倦怠？",
+    "similarQuestions": "Can you describe the approaches you take when facing high - stress situations and burnout risks?（你能说说应对高压力和倦怠的方法吗？）\n\nHow do you navigate through stressful periods and avoid burnout in your career?（你在职业生涯中如何度过压力期并避免倦怠？）",
+    "questionIntent": "面试官希望通过这个问题了解你如何管理压力、恢复精力，以及你是否具备自我调节的能力。他们想确认你在高压环境下能否保持高效，同时避免长期倦怠影响工作表现。",
+    "answerStrategy": "问题：描述你曾经遇到的压力或倦怠情况。\n\n行动：详细说明你采取的具体步骤和方法。\n\n结果：分享这些行动带来的积极效果，以及你从中学到的经验。",
+    "notes": "✘ 避免只说“我会休息”或“我会放松”，要具体化你的方法。\n\n✘ 不要过度强调压力对你的负面影响，而是聚焦于你如何积极应对。\n\n✘ 避免使用绝对化表达，如“我从不感到压力”，这显得不真实。\n\n✘ 不要只谈理论，要结合实际经历，展现你的行动力和反思能力。"
+  },
+  {
+    "id": "q50",
+    "num": 50,
+    "questionEn": "Could you tell me about a time when you worked under intense pressure?",
+    "questionZh": "你能给我讲讲你曾在巨大压力下工作的经历吗？",
+    "similarQuestions": "Can you walk me through a difficult work situation with significant pressure?（你能给我讲讲一个压力很大的工作场景吗？）\n\nPlease describe a challenging work scenario with high pressure.（请描述一个高压下的挑战性工作场景。）",
+    "questionIntent": "面试官想了解你在高压环境中的应对能力，判断你是否能保持冷静、高效解决问题，同时观察你的自我调节能力和团队协作意识。",
+    "answerStrategy": "采用 CAR结构回答：\n\nChallenge（挑战）：用1-2句话说明压力来源（时间紧迫/突发问题/多方需求冲突）\n\nAction（行动）：聚焦具体行为（如何分析问题、调整策略、沟通协调）\n\nResult（结果）：强调积极影响（项目成果/能力提升/他人反馈）",
+    "notes": "✘ 避免只说\"我很努力\"：要具体描述动作（例如\"重新排优先级，每小时同步进展\"）\n\n✘ 不要负面抱怨：重点展示解决方案而非压力本身\n\n✓ 体现成长思维：可补充\"这件事让我学会了...\""
+  },
+  {
+    "id": "q51",
+    "num": 51,
+    "questionEn": "How do you address unrealistic deadlines?",
+    "questionZh": "当面临不现实的截止期限时，你会如何应对？",
+    "similarQuestions": "Can you share your approach to dealing with deadlines that seem impossible to meet?（你能分享一下，当遇到不可能按时完成的任务期限时，你的应对方法吗？）\n\nHow do you navigate through projects with unrealistic time constraints?（在截止日期不切实际的项目中，你如何推进工作呢？）",
+    "questionIntent": "面试官通过这个问题，主要想了解你在面对不合理的工作要求时，是否具备有效沟通、问题解决和优先级管理的能力。同时，他们也希望看到你如何在压力下保持冷静，并找到可行的解决方案，而不是盲目接受或直接拒绝任务。",
+    "answerStrategy": "采用 SAR 结构回答：\n\nSituation（情境）：简要描述你遇到的具体情况，说明为什么截止日期不可行。\n\nAction（行动）：详细说明你采取的具体行动，包括如何与相关方沟通、调整计划或重新分配资源。\n\nResult（结果）：总结最终的结果，强调你的行动如何解决问题并带来积极影响。",
+    "notes": "✘ 避免直接抱怨或指责他人，保持积极和建设性的态度。\n\n✘ 不要简单地说“我拒绝了任务”，而是要展示你如何主动解决问题。\n\n✘ 避免使用绝对化表达，如“完全不可能”或“绝对做不到”，而是用“更具挑战性”或“需要调整”等更柔和的措辞。\n\n✘ 不要忽略沟通的重要性，强调你如何与团队或上级协作。"
+  },
+  {
+    "id": "q52",
+    "num": 52,
+    "questionEn": "Describe a time you failed and learned from it.",
+    "questionZh": "描述一次你失败并从中吸取教训的经历。",
+    "similarQuestions": "Can you share an experience where you faced failure and what you learned from it?（能分享下你曾面对失败的经历及教训吗？）\n\nCan you walk me through a time when things didn't go as planned and what you learned from that setback?（你能给我讲一次事情没按计划进行，以及从中汲取教训的经历吗？）",
+    "questionIntent": "面试官希望通过这个问题了解你如何面对失败，是否具备从失败中学习和成长的能力。他们想看到你如何分析问题、总结经验，并将其应用到未来的工作中。同时，他们也希望了解你的自我反思能力和抗压能力。",
+    "answerStrategy": "采用STAR结构回答：\n\nSituation（情境）：简要描述失败发生的背景和情境。\n\nTask（任务）：说明你在当时承担的任务或目标。\n\nAction（行动）：描述你为完成任务采取的行动，以及失败的原因。\n\nResult（结果）：总结失败带来的结果，以及你从中学到的教训和如何改进。",
+    "notes": "✘ 避免推卸责任：不要将失败归咎于他人或外部因素，要展现自己的反思和成长。\n\n✘ 避免过度负面：不要过分强调失败的负面影响，而是聚焦于如何从中学习和改进。\n\n✘ 避免空洞总结：不要只说“我学到了很多”，要具体说明你学到了什么以及如何应用。\n\n✘ 避免选择重大失败：选择一个小而具体的失败案例，避免让面试官对你的能力产生质疑。"
+  },
+  {
+    "id": "q53",
+    "num": 53,
+    "questionEn": "How did you sustain excellence under prolonged pressure?",
+    "questionZh": "你是如何在长期高压下保持卓越表现？",
+    "similarQuestions": "Tell me about a long-term project under high pressure and how you managed to keep up your performance.（跟我讲讲一个长期高压力的项目。以及你是如何一直保持良好表现的？）\n\nCan you share a long, high-pressure project and how you maintained performance?（你能分享一个长期高压项目，以及你是如何保持工作表现吗？）",
+    "questionIntent": "面试官希望通过这个问题了解你在高压环境下的工作能力和应对策略。他们想考察你是否具备时间管理、压力管理、团队协作以及持续高效工作的能力。同时，他们也希望看到你如何通过具体行动和策略来保持工作表现。",
+    "answerStrategy": "采用STAR结构回答：\n\nSituation（情景）：描述项目的背景，包括时间跨度、复杂性和高压来源。\n\nTask（任务）：说明你在项目中的具体职责和目标。\n\nAction（行动）：详细阐述你采取的具体行动，尤其是如何管理压力、保持高效和应对挑战。\n\nResult（结果）：总结项目的成果，以及你的表现如何对项目成功产生了积极影响。",
+    "notes": "✘ 避免泛泛而谈，要提供具体细节和实例。\n\n✘ 不要只强调压力本身，重点要放在你如何应对和保持表现。\n\n✘ 避免夸大成果，用客观事实和外部反馈来支持你的回答。\n\n✘ 不要忽视团队协作，即使你是独立完成任务，也要提到如何与团队配合。"
+  },
+  {
+    "id": "q54",
+    "num": 54,
+    "questionEn": "When faced with harsh criticism under pressure, how do you process feedback while staying productive?",
+    "questionZh": "在高压环境下遭遇严厉批评时，你如何处理反馈并保持高效？",
+    "similarQuestions": "How do you handle harsh criticism under pressure and stay productive?（你如何在压力下应对严厉的批评并保持高效工作？）\n\nWhen facing harsh feedback in a stressful environment, how do you stay productive?（当在充满压力的环境中面对严厉的批评时，你是如何保持高效工作的呢？）",
+    "questionIntent": "面试官想了解你在高压环境下如何管理情绪、理性处理负面反馈，同时维持工作效率。重点考察你的情绪韧性、自我反思能力，以及将批评转化为行动力的策略。",
+    "answerStrategy": "首先描述面对批评时采取的具体步骤（如暂停情绪反应、信息提取）\n\n然后说明这些行动如何帮助维持工作效率\n\n最后将经验转化为可复用的工作方法",
+    "notes": "✘ 避免强调\"忍受\"批评，要突出主动管理过程\n\n✔ 用具体行为动词（如categorize分类、document记录）代替模糊描述\n\n✔ 展示对批评提供者的尊重（即使对方态度严厉）"
+  },
+  {
+    "id": "q55",
+    "num": 55,
+    "questionEn": "Describe a time you solved a complex problem.",
+    "questionZh": "描述一次你解决复杂问题的经历。",
+    "similarQuestions": "Tell me about a time you solved a complex problem.（跟我说说你解决复杂问题的一次经历。）\n\nWalk me through a complex problem you solved.（讲讲你解决过的复杂问题）",
+    "questionIntent": "面试官希望通过这个问题了解你的问题解决能力、逻辑思维、以及面对复杂挑战时的应对方式。他们想看到你如何分析问题、制定解决方案、并最终取得成果，同时考察你的沟通能力和团队协作意识。",
+    "answerStrategy": "采用STAR结构回答：\n\nSituation（背景）：简要描述问题的背景和复杂性。\n\nTask（任务）：明确你当时需要完成的任务或目标。\n\nAction（行动）：详细说明你采取了哪些具体步骤来解决问题。\n\nResult（结果）：总结最终的结果和影响，突出你的贡献。",
+    "notes": "✘ 避免过于笼统的描述，要具体说明问题的复杂性和你的行动细节。\n\n✘ 不要只强调结果，忽略过程，面试官更看重你如何解决问题。\n\n✘ 避免夸大个人贡献，适当提及团队合作，展现你的协作能力。\n\n✘ 不要使用过于复杂的语言或专业术语，确保表达清晰易懂。"
+  },
+  {
+    "id": "q56",
+    "num": 56,
+    "questionEn": "What is the most difficult problem you have solved in your career?",
+    "questionZh": "你职业生涯中解决过最难的问题是什么？",
+    "similarQuestions": "Walk me through the most complex problem you've overcome in your career.（给我详细讲讲你职业生涯中克服过的最复杂问题。）\n\nDescribe the hardest problem you've solved professionally and its outcome.（描述你解决过的最难问题及结果。）",
+    "questionIntent": "面试官希望通过这个问题了解你的问题解决能力、抗压能力以及面对挑战时的应对策略。他们想确认你是否具备分析复杂问题、制定解决方案并有效执行的能力，同时考察你在困难情境下的心态和成长。",
+    "answerStrategy": "采用STAR结构回答：\n\nSituation（情境）：简要描述你遇到的困难或挑战的背景。\n\nTask（任务）：明确你当时需要完成的任务或目标。\n\nAction（行动）：详细说明你采取了哪些具体步骤来解决问题。\n\nResult（结果）：总结你的行动带来的积极影响或成果。",
+    "notes": "✘ 避免泛泛而谈：不要只说“我解决了一个很难的问题”，而是要用具体事例支撑。\n\n✘ 不要夸大困难：描述真实的挑战，但不要让人觉得你无法应对。\n\n✘ 避免负面情绪：不要抱怨问题或指责他人，而是聚焦于你的积极行动和成果。\n\n✘ 不要忽略结果：结果部分非常重要，要展示你的解决方案带来的实际价值。"
+  },
+  {
+    "id": "q57",
+    "num": 57,
+    "questionEn": "How do you handle ambiguity in projects?",
+    "questionZh": "你如何应对项目中遇到的不确定性？",
+    "similarQuestions": "Can you share your approach to handling ambiguity during projects?（你能分享一下在项目中处理不确定问题的方法吗？）\n\nHow have you navigated uncertainty in past projects?（在过去的项目中，你是如何应对不确定性的？）",
+    "questionIntent": "面试官希望通过这个问题了解你在面对不确定性和模糊性时的应对能力。他们想知道你是否能够保持冷静、灵活调整计划，并推动项目向前发展。同时，他们也希望看到你如何处理压力、沟通问题以及寻找解决方案的能力。",
+    "answerStrategy": "采用STAR结构回答：\n\nSituation（情境）：描述一个具体的项目或工作场景，其中存在不确定性或模糊性。\n\nTask（任务）：说明你在这个情境中需要完成的任务或目标。\n\nAction（行动）：详细描述你采取的具体行动来应对不确定性。\n\nResult（结果）：总结你的行动带来的积极结果或影响。",
+    "notes": "✘ 避免泛泛而谈，要提供具体的例子。\n\n✘ 不要只强调问题，重点在于你如何解决问题。\n\n✘ 避免使用过于复杂的语言，保持简洁明了。\n\n✘ 不要忽视团队合作和沟通的重要性。"
+  },
+  {
+    "id": "q58",
+    "num": 58,
+    "questionEn": "How do you make decisions with incomplete information?",
+    "questionZh": "你如何在信息不完整时做决策？",
+    "similarQuestions": "Walk me through your process of making decisions with incomplete information.（给我讲讲你信息不全时的决策过程。）\n\nDescribe your strategy for reaching decisions when faced with limited information.（描述一下你信息有限时的决策策略。）",
+    "questionIntent": "面试官希望通过这个问题了解你在面对不确定性时的决策能力，包括你的思维方式、风险评估能力、以及如何利用有限的信息做出合理判断。同时，他们也希望看到你是否能在压力下保持冷静，并采取有效的行动。",
+    "answerStrategy": "情境 (Situation)：描述一个你需要在信息不完整时做决策的具体场景。\n\n行动 (Action)：详细说明你采取了哪些步骤来应对这种情况。\n\n结果 (Result)：解释你的决策带来了什么结果或影响。\n\n反思 (Reflection)：总结你从中学到了什么，以及未来会如何改进。",
+    "notes": "✘ 避免过于笼统的描述，比如“我通常会分析情况然后做决定”，这缺乏具体性和说服力。\n\n✘ 不要强调“凭直觉”或“猜测”，这会让面试官觉得你的决策缺乏依据。\n\n✘ 避免过度夸大结果，保持真实和客观。"
+  },
+  {
+    "id": "q59",
+    "num": 59,
+    "questionEn": "What would you do if you found a critical error in a project just one day before the deadline?",
+    "questionZh": "若项目截止日前一天发现严重错误，你会怎么做？",
+    "similarQuestions": "If you discovered a major error in a project one day before the deadline, how would you handle it?（截止前一日发现重大错误，如何处理？）\n\nHow would you handle it when a crucial error is identified one day prior to the project's due date?（在项目截止日期前一天发现重大错误，你会如何应对？）",
+    "questionIntent": "面试官希望通过这个问题考察你的问题解决能力、抗压能力、时间管理能力以及团队协作能力。他们想知道你在面对紧急情况时是否能冷静分析、快速行动，并且有效沟通，确保项目顺利完成。",
+    "answerStrategy": "采用STAR结构回答：\n\nSituation（情境）：描述你遇到的紧急情况。\n\nTask（任务）：说明你需要完成的目标或任务。\n\nAction（行动）：详细阐述你采取的具体措施。\n\nResult（结果）：总结行动的结果和影响。",
+    "notes": "✘ 避免只说“我会加班完成”，这显得缺乏策略性和团队协作意识。\n\n✘ 不要推卸责任或抱怨他人，要展现积极解决问题的态度。\n\n✘ 避免过于笼统，要具体说明你的行动步骤和逻辑。\n\n✘ 慎用绝对化表达，如“一定会成功”，而是用“努力确保”等更实际的措辞。"
+  },
+  {
+    "id": "q60",
+    "num": 60,
+    "questionEn": "Describe a decision you made based on data analysis.",
+    "questionZh": "描述一次你基于数据分析做出的决策。",
+    "similarQuestions": "Describe a data-driven decision you made.（描述一个你基于数据做出的决策）\n\nTell me about a time when you used data to make a decision.（跟我讲讲你之前利用数据做决策的经历。）",
+    "questionIntent": "面试官希望通过这个问题了解你是否具备数据分析能力，以及你如何将数据转化为实际决策。同时，他们也想考察你的逻辑思维、问题解决能力以及决策的影响力。",
+    "answerStrategy": "采用 STAR结构回答：\n\nSituation（背景）：描述你面临的场景或问题。\n\nTask（任务）：说明你需要完成的目标或任务。\n\nAction（行动）：详细解释你如何通过数据分析采取行动。\n\nResult（结果）：阐述你的决策带来的影响或成果。",
+    "notes": "✘ 避免过于笼统：不要只说“我分析了数据”，要具体说明分析的内容和过程。\n\n✘ 避免夸大结果：不要过度强调数据的作用，而是客观描述决策的实际影响。\n\n✘ 避免脱离实际：确保你的回答与真实工作场景相关，不要编造不切实际的例子。"
+  },
+  {
+    "id": "q61",
+    "num": 61,
+    "questionEn": "Tell me about a situation where you persuaded a resistant team to accept your proposal.",
+    "questionZh": "讲一下你如何说服持抵触态度的团队采纳你方案的经历",
+    "similarQuestions": "Describe a time you had to convince a reluctant team to adopt your idea.（跟我讲讲你说服持抵触态度的团队接受你方案的经历。）\n\nTalk about the process of getting a hesitant team to buy into your idea.（谈谈让一个犹豫不决的团队认可你想法的经历。）",
+    "questionIntent": "面试官希望通过这个问题了解你的说服能力、沟通技巧以及团队合作能力。他们想知道你如何在面对阻力时，通过有效的方式让团队接受你的方案，并最终达成共识。这也能反映出你的领导力、问题解决能力以及对团队动态的把握。",
+    "answerStrategy": "采用SAR结构回答：\n\nSituation（情景）：简要描述背景，说明团队为什么对你的方案持抵触态度。\n\nAction（行动）：详细描述你采取的具体行动，如何与团队沟通、解决疑虑。\n\nResult（结果）：说明最终结果，团队如何接受你的方案，以及带来的积极影响。",
+    "notes": "✘ 避免过于主观：不要只强调自己是对的，而是展示你如何理解团队的需求并找到共同点。\n\n✘ 避免缺乏细节：不要只说“我成功说服了团队”，要具体描述你的行动和过程。\n\n✘ 避免负面评价：不要批评团队成员的抵触情绪，而是展示你如何化解矛盾。\n\n✘ 避免夸大结果：不要过度渲染成果，保持真实和可信。"
+  },
+  {
+    "id": "q62",
+    "num": 62,
+    "questionEn": "Describe a successful project you took part in and detail your role and tasks within it.",
+    "questionZh": "描述一个你参与的成功项目，并说明你在其中的角色和任务。",
+    "similarQuestions": "Talk about a project that achieved success and your specific role and work during the process.（谈谈在一个成功的项目中，你所担任的具体角色和工作）\n\nCan you give an example of a successful project you were a part of and explain what you did in it?（你能举个你曾参与的成功项目的例子，并讲讲你在其中做了什么吗？）",
+    "questionIntent": "面试官想通过这个问题了解：1）你的实际项目经验是否与岗位需求匹配；2）你在团队中的角色和贡献是否符合协作要求；3）你是否能清晰展示解决问题的逻辑；4）你是否能通过具体事例证明能力，而非空谈。",
+    "answerStrategy": "用1-2句话概括项目背景和核心目标；\n\n描述你的职位和核心职责，突出与他人的分工差异；\n\n分点说明关键任务和解决问题的具体方法；\n\n强调项目成果、个人成长和外部反馈。",
+    "notes": "✘ 避免流水账式描述，用动词（如\"led主导\"\"designed设计\"）强化行动力；\n\n✘ 不要用\"we\"模糊个人贡献，用\"I\"明确自身角色；\n\n✔ 用\"cross-functional collaboration跨部门协作\"等术语体现职场专业性；\n\n✔ 成果描述避免绝对化（如\"the best\"），改用\"significantly improved显著提升\"等客观表达。"
+  },
+  {
+    "id": "q63",
+    "num": 63,
+    "questionEn": "How would you describe your leadership style?",
+    "questionZh": "你的领导风格是怎么样的？",
+    "similarQuestions": "How do you lead a team?（你如何带领团队？）\n\nWhat's your philosophy when it comes to leading others?（在领导他人方面，你的理念是什么？）",
+    "questionIntent": "面试官想了解三个关键点：①你是否清楚自己的管理特点与公司文化匹配度；②是否具备自我认知和反思能力；③能否根据不同情境调整风格。本质上是在考察你的管理适配性与灵活性。",
+    "answerStrategy": "定义风格：用1个精准形容词概括（如collaborative协作型）\n\n说明要素：拆解2-3个核心行为特征\n\n实例支撑：每个特征匹配具体工作场景案例\n\n动态适配：强调根据任务/团队差异调整方法",
+    "notes": "✘ 空谈理论（\"我注重团队合作\"后无下文）✘ 极端表述（\"我从不做决策\"显得缺乏担当）✘ 忽视他人反馈（只强调自己做了什么）✘ 中式直译（如把\"民主\"直译为democratic leadership易引发歧义）"
+  },
+  {
+    "id": "q64",
+    "num": 64,
+    "questionEn": "How do you delegate tasks effectively?",
+    "questionZh": "你如何有效地分配任务？",
+    "similarQuestions": "Describe your process for delegating tasks successfully.（描述一下你分配任务的流程。）\n\nWhat's your approach to effective task delegation?（你采取什么方法有效分配任务？）",
+    "questionIntent": "面试官想考察候选人是否具备团队管理的基本逻辑，能否根据任务特性匹配成员能力，是否重视沟通与反馈机制，并验证实际项目管理经验是否扎实。更深层考察候选人是否具备结果导向思维，而非单纯分配任务的机械动作。",
+    "answerStrategy": "目标拆解：说明如何将大目标拆解为可执行的小任务\n\n能力匹配：根据任务要求与成员专长进行匹配\n\n过程控制：建立进度追踪机制并给予支持\n\n闭环反馈：复盘任务完成质量与团队成长",
+    "notes": "✘ 空谈理论：\"我会先分析再分配\"等套话✘ 忽略个性化：不考虑成员技能差异与发展需求✘ 缺乏闭环：未说明跟进机制与结果验证方法✘ 过度控制：强调监督而非赋能（empowerment）"
+  },
+  {
+    "id": "q65",
+    "num": 65,
+    "questionEn": "How would you go about improving team work efficiency?",
+    "questionZh": "你会如何提高团队的工作效率？",
+    "similarQuestions": "What strategies would you recommend to enhance team work efficiency?（你会推荐哪些策略来提升团队工作效率？）\n\nCould you share your ideas on improving team work efficiency?（你能分享一下提高团队工作效率的方法吗？）",
+    "questionIntent": "面试官希望通过这个问题了解你如何分析和解决团队效率问题，以及你是否具备改善团队协作的实际经验和策略。他们关注的是你的逻辑思维、问题解决能力以及领导力。",
+    "answerStrategy": "问题 (Problem)：描述团队效率低下的具体表现或原因。\n\n行动 (Action)：详细说明你采取的具体措施或策略。\n\n结果 (Result)：总结行动带来的积极影响或改进。",
+    "notes": "✘ 避免空泛的回答，如“加强沟通”或“提高积极性”，要具体化。\n\n✘ 不要只谈理论，结合实际案例或经验更有说服力。\n\n✘ 避免过度强调个人作用，体现团队协作精神。\n\n✘ 慎用绝对化表达，如“完全解决”或“彻底改变”，保持客观。"
+  },
+  {
+    "id": "q66",
+    "num": 66,
+    "questionEn": "Tell me about your previous management experiences.",
+    "questionZh": "跟我讲讲你之前的管理经验。",
+    "similarQuestions": "Could you share some of your past management experiences?（你能分享一些你过去的管理经验吗？）\n\nCould you elaborate on your past management experiences?（你能详细阐述一下你过去的管理经验吗？）",
+    "questionIntent": "面试官想了解你是否具备有效管理团队的核心能力，包括目标设定、决策能力、冲突解决和团队激励。同时考察你如何将管理理论转化为实际成果，以及是否具备复盘反思的成长型思维。",
+    "answerStrategy": "简述管理场景中的关键挑战（例如跨部门协作困难、团队士气低落）\n\n具体说明你采取的管理行动（如沟通策略、流程改进、赋能方式）\n\n描述行动带来的积极影响（团队效率提升、目标达成、成员成长）\n\n总结从中学到的管理经验，强调可复用的方法论",
+    "notes": "✘ 避免罗列职责（如“我负责5人团队”），聚焦具体案例\n\n✘ 忌用模糊描述（如“提升了团队效率”），用行为过程替代数据\n\n✘ 不要过度强调个人权威，体现团队协作与员工发展\n\n✔ 多用“we”而非“I”，展现领导力的包容性"
+  },
+  {
+    "id": "q67",
+    "num": 67,
+    "questionEn": "Describe a situation where you collaborated with other teams.",
+    "questionZh": "描述一个你和其他团队合作的情景。",
+    "similarQuestions": "Tell me about a cross-functional team project you participated in.（讲讲你参与过的跨职能团队项目。）\n\nCould you share an example of your cross-team collaboration experience?（你能分享一次跨团队协作经历吗？）",
+    "questionIntent": "考察候选人是否具备跨团队协作的核心能力：沟通协调能力（能否清晰传递信息）、目标对齐能力（能否整合多方利益）、问题解决能力（如何处理合作中的冲突）、结果导向意识（能否推动项目落地）。同时验证过往经历的细节真实性。",
+    "answerStrategy": "背景：用1句话说明合作必要性（如项目复杂度/资源限制/突发问题）\n\n行动：聚焦3个具体动作（如建立沟通机制/协调利益冲突/制定共同标准）\n\n结果：强调可量化的业务影响（如效率提升/成本降低/客户满意度）",
+    "notes": "✘ 忌流水账：避免堆砌流程（每周开会/写邮件），要突出关键决策点\n\n✘ 忌模糊处理：不说\"通过沟通解决问题\"，要说具体沟通策略（如创建决策矩阵）\n\n✘ 忌自我中心：需体现对其他团队诉求的尊重（如调整交付节点适应对方节奏）\n\n✘ 忌虚假成果：避免\"完美解决所有问题\"这类绝对化表达"
+  },
+  {
+    "id": "q68",
+    "num": 68,
+    "questionEn": "Tell me about a time when you handled conflict within a team.",
+    "questionZh": "讲讲你曾如何处理团队内的冲突。",
+    "similarQuestions": "Describe a scenario where you managed conflict among team members.（描述一个你处理团队成员矛盾的场景。）\n\nCan you describe an experience where you resolved a conflict within a team?（你能描述一次解决团队内冲突的经历吗？）",
+    "questionIntent": "面试官希望通过这个问题了解你如何处理团队内部的冲突，考察你的沟通能力、问题解决能力以及团队合作精神。他们想知道你是否能在压力下保持冷静，是否能找到有效的解决方案，以及是否能维护团队的和谐与效率。",
+    "answerStrategy": "采用STAR结构回答：\n\nSituation（情景）：描述冲突发生的背景和情境。\n\nTask（任务）：说明你在冲突中需要完成的任务或目标。\n\nAction（行动）：详细阐述你采取的具体行动来解决冲突。\n\nResult（结果）：总结冲突解决后的结果和影响，突出你的贡献。",
+    "notes": "✘ 避免只描述冲突本身，而忽略你的具体行动和结果。\n\n✘ 不要指责他人或推卸责任，保持积极和建设性的态度。\n\n✘ 避免使用模糊的语言，确保你的回答具体且有实例支持。\n\n✘ 不要夸大或虚构故事，保持真实性和可信度。"
+  },
+  {
+    "id": "q69",
+    "num": 69,
+    "questionEn": "How would you handle disagreements with your coworkers?",
+    "questionZh": "你会如何处理与同事之间的分歧？",
+    "similarQuestions": "Can you describe your approach to addressing conflicts with colleagues?（能否讲讲你处理与同事矛盾的方法？）\n\nTell me about how you manage interpersonal conflicts at work.（跟我说说你如何处理工作中的人际冲突。）",
+    "questionIntent": "面试官希望通过这个问题了解你在团队合作中的沟通能力、解决问题的思维方式以及处理冲突的成熟度。他们想确认你是否能够在分歧中保持冷静、理性，并通过有效的方式达成共识，同时维护良好的工作关系。",
+    "answerStrategy": "简要描述一个与同事产生分歧的具体场景。\n\n详细描述你如何采取行动来处理分歧，包括沟通方式和具体步骤。\n\n总结你采取行动后的积极成果，以及对团队和工作的影响。",
+    "notes": "✘ 避免指责同事或表现出负面情绪，保持中立和客观。\n\n✘ 不要过于简单化问题，例如只说“我们沟通后解决了”，缺乏具体细节。\n\n✘ 避免使用绝对化表达，例如“我总是对的”或“我从不妥协”，这会让面试官觉得你缺乏灵活性。\n\n✘ 不要忽视团队合作的重要性，强调共识和协作，而不是个人主义。"
+  },
+  {
+    "id": "q70",
+    "num": 70,
+    "questionEn": "Tell me about a time when you built trust among team members.",
+    "questionZh": "讲讲你在团队中建立信任的经历。",
+    "similarQuestions": "Describe a scenario where you took steps to build trust within a team.（讲述你在团队中建立信任的经历。）\n\nShare an instance where you successfully fostered trust within your team.（分享你成功在团队中建立信任的例子。）",
+    "questionIntent": "面试官希望通过这个问题了解你在团队中的信任建立能力，包括你是否具备良好的沟通技巧、是否能够通过行动赢得他人的信任，以及你是否能够在团队中营造积极的合作氛围。",
+    "answerStrategy": "采用STAR结构回答：\n\nSituation（情景）：简要描述背景，说明团队面临的挑战或需要建立信任的原因。\n\nTask（任务）：明确你在其中的角色和需要完成的任务。\n\nAction（行动）：详细描述你采取的具体行动，重点突出你如何通过沟通、协作或其他方式建立信任。\n\nResult（结果）：说明你的行动带来的积极影响，例如团队效率提升、成员关系改善等。",
+    "notes": "✘ 避免空泛描述，如“我通过沟通建立了信任”，要具体说明沟通的方式和内容。\n\n✘ 不要只强调结果，忽略过程，面试官更关注你如何行动。\n\n✘ 避免过度夸大自己的作用，要体现团队合作精神。\n\n✘ 不要使用过于复杂的语言，保持表达清晰自然。"
+  },
+  {
+    "id": "q71",
+    "num": 71,
+    "questionEn": "Could you share an experience of collaborating with a difficult person?",
+    "questionZh": "你能分享与很难相处之人合作的经历吗？",
+    "similarQuestions": "Please describe a time when you worked with someone who was hard to get along with.（请描述一次与不好相处的人共事的经历。 ）\n\nCan you tell me about an instance where you had to cooperate with a challenging individual?（你能讲讲与难搞之人合作的经历吗？）",
+    "questionIntent": "面试官想考察你的冲突管理能力、团队协作意识以及情商水平。他们希望看到：面对人际矛盾时，你是否能保持专业态度，通过主动沟通化解分歧，最终达成目标（而非单纯抱怨对方）。",
+    "answerStrategy": "情境：用1句话说明遇到的困难类型（如沟通障碍/性格冲突）\n\n行为：分三点说明你采取的具体行动（体现主动性和策略性）\n\n结果：说明团队成果和个人成长（避免单纯说\"成功\"）",
+    "notes": "✘ 不要描述同事的负面特质（如\"他特别自私\"）\n\n✘ 避免模糊描述（如\"我们后来解决了问题\"）\n\n✔ 重点展示你的解决思路（如\"我主动安排1v1沟通发现根本诉求\"）\n\n✔ 用第三方评价强化说服力（如\"客户特别表扬了我们的协作效率\"）"
+  },
+  {
+    "id": "q72",
+    "num": 72,
+    "questionEn": "Tell me about a time when you had to adapt to a major change.",
+    "questionZh": "跟我讲讲你不得不适应重大变化的经历。",
+    "similarQuestions": "Could you share an experience of how you adapted to a significant change?（你能分享下适应重大变化的经历吗？）\n\nDescribe a scenario where you navigated through a significant change.（描述一个你应对重大变化的场景。）",
+    "questionIntent": "面试官想考察：1. 你的适应能力是否足够应对职场变化 2. 面对变化的思维方式和解决问题的方法 3. 是否具备积极心态看待变化中的机会。就像试金石一样，看你是被动接受还是主动拥抱变化。",
+    "answerStrategy": "采用STAR结构回答：\n\n情境：用1句话说明变化的具体场景（如公司并购/政策调整/技术升级）\n\n任务：说明你需要承担的新职责或面临的挑战\n\n行动：分步骤描述你为适应变化采取的具体措施\n\n结果：强调变化带来的积极影响和个人成长",
+    "notes": "✘ 抱怨变化带来的不便（例：\"当时政策改得很不合理...\"）\n\n✘ 只描述被动接受过程（例：\"公司让怎么做我就照办\"）\n\n✘ 用抽象词汇堆砌（例：\"我积极调整心态...\"）要用具体行为证明"
+  },
+  {
+    "id": "q73",
+    "num": 73,
+    "questionEn": "How would you adapt to sudden shifts in corporate strategy?",
+    "questionZh": "你会如何适应公司战略的突然转变？",
+    "similarQuestions": "What steps do you take when the company's strategy changes rapidly?（当公司战略快速变化时，你会采取哪些行动？）\n\nHow do you respond to unexpected changes in organizational strategy?（面对组织战略的意外变动你会怎么做？）",
+    "questionIntent": "面试官希望通过这个问题了解你面对变化时的适应能力和灵活性。他们想知道你是否能快速理解新战略，调整自己的工作方式，并为团队和组织贡献价值。同时，他们也希望看到你如何应对不确定性，并保持积极的态度。",
+    "answerStrategy": "描述你曾经遇到的战略转变或类似的变化情境。\n\n说明你采取了哪些具体行动来适应这种变化。\n\n总结你的行动带来的积极影响或成果。",
+    "notes": "✘ 避免泛泛而谈，比如只说“我适应能力很强”，而没有具体例子。\n\n✘ 不要抱怨变化带来的困难，而是强调你如何积极应对。\n\n✘ 避免使用绝对化表达，比如“我总能适应所有变化”，这显得不真实。\n\n✘ 不要忽视团队合作的重要性，可以提到你如何与同事协作应对变化。"
+  },
+  {
+    "id": "q74",
+    "num": 74,
+    "questionEn": "Could you talk about your adaptability?",
+    "questionZh": "你能谈谈你的应变能力吗？",
+    "similarQuestions": "How would you describe your ability to adapt?（你会如何描述自己的应变能力？）\n\nCan you share some examples that demonstrate your adaptability?（你能分享一些体现你应变能力的例子吗？）",
+    "questionIntent": "面试官希望通过这个问题了解你在面对变化或挑战时的应对能力，以及你是否能够快速适应新环境、新任务或新团队。应变能力是职场中非常重要的软技能，尤其是在快速变化的行业中。",
+    "answerStrategy": "采用CAR结构回答：\n\nChallenge（挑战）：描述你遇到的挑战或变化，突出其复杂性和对你的影响。\n\nAction（行动）：详细说明你采取了哪些具体的行动来应对挑战。\n\nResult（结果）：总结你的行动带来的积极结果或影响。",
+    "notes": "✘ 避免空泛描述：不要只说“我适应能力很强”，要用具体事例证明。\n\n✘ 不要夸大其词：避免使用“完美解决”等绝对化表达，保持真实可信。\n\n✘ 避免脱离主题：始终围绕“应变能力”展开，不要偏离到其他技能上。"
+  },
+  {
+    "id": "q75",
+    "num": 75,
+    "questionEn": "Tell me about a time when you applied technology to address a business challenge.",
+    "questionZh": "讲讲你使用技术手段解决业务难题的经历。",
+    "similarQuestions": "Can you describe an experience where you used technology to solve a business problem?（你能描述下用技术解决业务问题的经历吗？）\n\nShare an instance where you leveraged technology to resolve a business issue.（分享一次你借助技术解决业务问题的经历。）",
+    "questionIntent": "面试官想了解你如何将技术能力与业务需求结合，考察三点：1）问题分析与技术选型能力；2）落地执行与协作能力；3）技术方案的实际业务影响。他们希望看到你解决真实问题的逻辑和结果，而非单纯的技术炫耀。",
+    "answerStrategy": "挑战：用1-2句话说明业务痛点（避免技术术语）\n\n行动：分步骤描述技术方案的设计与实施（突出关键决策点）\n\n影响：说明业务结果及后续改进（避免绝对化词汇如\"完全解决\"）\n\n反思：提炼通用经验（体现成长性思维）",
+    "notes": "✘ 不要陷入技术细节：避免代码、算法等专业术语，用\"自动化工具\"\"数据分析模型\"等通俗表达\n\n✘ 避免假大空结果：用\"缩短处理时间\"\"提升客户满意度\"等具体描述，而非\"极大优化\"\n\n✘ 弱化个人英雄主义：适当提及团队协作（如\"与运营部门密切配合\"）"
+  },
+  {
+    "id": "q76",
+    "num": 76,
+    "questionEn": "What strategies do you use to maintain focus while working remotely?",
+    "questionZh": "远程工作时，你用什么方法保持专注？",
+    "similarQuestions": "Can you describe your approach to staying motivated in a remote work setting?（你能描述一下在远程办公时保持动力的方法吗？）\n\nWhat steps do you take to ensure focus and engagement while working remotely?（远程工作时，你会采取哪些措施确保专注和投入？）",
+    "questionIntent": "面试官想确认你是否有成熟的自我管理能力，能否在远程环境下高效工作。他们会评估你的时间管理技巧、应对干扰的方法，以及是否具备将工作与生活合理分隔的意识，避免因环境松散而影响产出质量。",
+    "answerStrategy": "总述方法论：用1句话概括核心策略方向（如环境管理/任务拆分/外部监督）；\n\n分步执行方案：列举2-3个具体可操作的方法，每个方法搭配实际案例；\n\n持续优化机制：说明如何根据反馈调整策略；\n\n成果具象化：用行为结果或他人反馈证明有效性。",
+    "notes": "✘ 只讲空泛理论（如\"我会严格要求自己\"）✘ 过度强调硬件条件（如依赖昂贵设备）✔ 重点展示主观能动性：如何主动设计系统化解決方案✔ 用动词描述动作（block/segment/leverage）代替名词堆砌✔ 提及平衡性：避免让面试官担心你过度工作"
+  },
+  {
+    "id": "q77",
+    "num": 77,
+    "questionEn": "How do you stay creative in your work?",
+    "questionZh": "你如何在工作中保持创造力？",
+    "similarQuestions": "How do you foster creativity in your role?（如何在岗位上培养创造力？）\n\nHow do you maintain creativity in your daily work?（如何在日常工作中保持创造力？）",
+    "questionIntent": "面试官希望通过这个问题了解你如何在日常工作中保持创新思维，以及你是否具备持续提升创造力的方法和习惯。他们想确认你是否有能力在快速变化的环境中提出新想法，并推动工作进展。",
+    "answerStrategy": "方法：直接说明你保持创造力的具体方法或习惯。\n\n原因：解释为什么这些方法对你有效，或者为什么你选择这些方法。\n\n结果：分享这些方法带来的实际成果或积极影响。",
+    "notes": "✘ 避免空泛回答，如“我天生就有创造力”，要提供具体方法和实例。\n\n✘ 不要只强调个人努力，可以提到团队协作或外部资源的作用。\n\n✘ 避免过于绝对化的表达，如“我总是能想出最好的方案”，保持谦逊和客观。\n\n✘ 不要忽视结果部分，面试官希望看到你的创造力如何转化为实际价值。"
+  },
+  {
+    "id": "q78",
+    "num": 78,
+    "questionEn": "What steps would you take to improve inefficient company processes?",
+    "questionZh": "你会采取哪些行动改善低效流程？",
+    "similarQuestions": "Could you share how you address process inefficiencies at work?（你能分享下如何处理工作中的流程低效问题吗？）\n\nCan you describe your approach to resolving inefficient workflows in a company?（你能描述下解决公司低效工作流程的方法吗？）",
+    "questionIntent": "面试官希望通过这个问题了解你是否具备分析和解决问题的能力，以及你是否能够提出切实可行的改进方案。同时，他们也想考察你是否能够从全局角度思考问题，并展现出对流程优化的理解和执行力。",
+    "answerStrategy": "问题分析：简要描述低效流程的表现及其影响。\n\n解决方案：提出具体的改进方法或策略。\n\n实施步骤：详细说明如何落实这些改进措施。\n\n预期结果：阐述改进后可能带来的积极影响。",
+    "notes": "✘ 避免空泛描述，如“我会优化流程”，要具体说明如何优化。\n\n✘ 不要过度批评现有流程，保持建设性态度。\n\n✘ 避免使用绝对化表达，如“一定能解决所有问题”，要展现理性和务实。\n\n✘ 不要忽略团队协作的重要性，强调与他人合作的价值。"
+  },
+  {
+    "id": "q79",
+    "num": 79,
+    "questionEn": "Please describe how you break down professional terms for non-specialists.",
+    "questionZh": "请说说如何向非专业人士解释专业术语。",
+    "similarQuestions": "Tell me about the strategies you use to simplify professional terms for laypeople.（跟我讲讲你为外行简化专业术语的方法。）\n\nCould you share your approach to making professional jargon accessible to non-experts?（能分享下让外行懂行话的方法吗？）",
+    "questionIntent": "面试官希望通过这个问题了解你是否具备将复杂信息简化的能力，以及你是否能够有效沟通，尤其是在跨部门或与非专业人士合作时。这反映了你的沟通技巧、同理心以及适应不同受众的能力。",
+    "answerStrategy": "首先说明你向非专业人士解释专业术语的核心策略是什么。\n\n详细描述你如何实施这一策略，包括具体步骤或工具。\n\n阐述这一策略如何帮助对方理解，并取得了什么积极效果。",
+    "notes": "✘ 避免使用过于复杂的语言或专业术语来回答这个问题，否则会显得自相矛盾。\n\n✘ 不要只谈理论，要结合具体实例，展示你的实际能力。\n\n✘ 避免绝对化表达，例如“always”或“never”，而是用“often”或“usually”来体现灵活性。\n\n✘ 不要忽略效果部分，否则会显得回答不完整。"
+  },
+  {
+    "id": "q80",
+    "num": 80,
+    "questionEn": "Could you share an instance where you successfully convinced others?",
+    "questionZh": "能分享你成功说服他人的例子吗？",
+    "similarQuestions": "Can you describe a situation in which you influenced others to adopt your idea?（能描述下你说服他人的经历吗？）\n\nPlease tell us about a time when you managed to persuade someone.（请讲讲你成功说服他人的经历。）",
+    "questionIntent": "面试官主要想考察你的说服力、沟通技巧和影响力。他们希望了解你如何通过逻辑、证据和情感共鸣推动他人行动，以及你是否能在团队协作中有效化解阻力、达成共识。同时，这一问题也能体现你处理复杂问题的思路和结果导向意识。",
+    "answerStrategy": "挑战：说明对方的初始立场或阻力，突出说服的难度。\n\n行动：分步骤描述说服策略（如数据支撑、换位思考、利益绑定等），结合具体行为。\n\n结果：强调达成的共识及后续积极影响，体现长期价值而非短期成果。",
+    "notes": "✘ 避免笼统描述（如“我说服同事支持我”），需突出具体策略和细节。\n\n✘ 忌过度自我夸耀，需体现对他人观点的尊重与合作心态。-\n\n✘ 慎用绝对化词汇（如completely/100%），可用clearly aligned/mutually beneficial等中性表达。\n\n✘ 不要忽略后续影响（如关系维护或流程优化），体现系统性思维。"
+  },
+  {
+    "id": "q81",
+    "num": 81,
+    "questionEn": "What's your process for accepting and acting on constructive feedback?",
+    "questionZh": "你如何接受并落实别人提出的建议？",
+    "similarQuestions": "Could you share your approach to dealing with constructive criticism?（能分享下应对建设性意见的方法吗？）\n\nHow do you turn constructive feedback into actionable steps?（你如何将建设性反馈转化为具体行动？ ）",
+    "questionIntent": "面试官通过这个问题，想了解你如何对待他人的反馈，尤其是建设性意见。他们希望看到你具备开放的心态、自我反思的能力，以及将反馈转化为实际行动的执行力。同时，他们也想知道你如何在团队中与他人合作，是否能够通过反馈不断改进自己。",
+    "answerStrategy": "Problem（问题）：描述一个你收到建设性反馈的场景，说明反馈的内容和背景。\n\nAction（行动）：详细说明你如何接受反馈并采取具体行动。\n\nResult（结果）：展示你通过行动取得的积极成果，以及这些成果对你或团队的影响。",
+    "notes": "✘ 避免泛泛而谈：不要只说“我会接受反馈并改进”，要具体描述你的行动和结果。\n\n✘ 不要否定反馈：即使反馈不完全正确，也要表现出你愿意倾听和反思的态度。\n\n✘ 避免过度谦虚或自夸：既要展现你的改进能力，也要保持客观和真实。"
+  },
+  {
+    "id": "q82",
+    "num": 82,
+    "questionEn": "How do you maintain professionalism when faced with criticism?",
+    "questionZh": "面对批评时，你如何保持专业态度？",
+    "similarQuestions": "How would you respond to negative feedback?（你会如何回应负面反馈？）\n\nHow do you turn criticism into an opportunity for growth?（你如何将批评转化为成长的机会？）",
+    "questionIntent": "面试官想考察三点：1. 情绪管理能力（能否冷静处理负面反馈） 2. 学习改进意识（是否把批评转化为成长机会）3. 团队协作态度（能否保持建设性工作关系）。本质上是要确认候选人具备成熟职场人的核心素质。",
+    "answerStrategy": "控制情绪：简要说明处理情绪的方式\n\n处理步骤：分步骤展示具体应对方式\n\n结果强化：用实例证明方法的有效性",
+    "notes": "✘ 避免说\"从不生气\"（不真实）→ 要承认情绪存在但强调控制\n\n✘ 不要只谈理论 → 必须结合具体工作场景举例\n\n✘ 忌推卸责任 → 即使批评不公也要先展现反思态度\n\n✘ 防止结论空泛 → 需明确说明批评带来的具体提升"
+  },
+  {
+    "id": "q83",
+    "num": 83,
+    "questionEn": "Could you share your method of giving constructive feedback?",
+    "questionZh": "你能分享一下你给别人提反馈意见的方法吗？",
+    "similarQuestions": "What strategies do you use when providing constructive feedback?（你在提供建设性反馈时会采用什么方法？）\n\nCan you talk about your techniques for presenting constructive feedback?（你能谈谈给出建设性反馈的技巧吗？）",
+    "questionIntent": "面试官希望了解你是否具备有效沟通的能力，能否在提出意见时既保持专业性又顾及对方感受，同时激发积极改进。重点考察：反馈框架是否系统、能否平衡真诚与尊重、是否有推动改变的实际案例。",
+    "answerStrategy": "用一句话总结核心反馈理念（如「目标导向」或「成长思维」）；\n\n分点说明具体操作步骤（例如准备/表达/跟进阶段）；\n\n用工作场景中的实例佐证；\n\n强调该方法带来的积极影响，避免抽象描述",
+    "notes": "✘ 错误1：只说「我会先表扬再提建议」——过于笼统，缺乏具体操作细节✘ 错误2：用假设性案例（If I were...）——缺乏说服力✘ 错误3：负面表述（如\"You didn’t...\"）——暗示指责✔ 正确：用过去时态描述真实场景，动词强调合作（align/collaborate），名词侧重结果（impact/outcome）"
+  },
+  {
+    "id": "q84",
+    "num": 84,
+    "questionEn": "Can you describe your approach to tracking industry tech developments?",
+    "questionZh": "你能描述一下追踪行业最新动态的方法吗？",
+    "similarQuestions": "What methods do you use to keep abreast of the latest industry tech trends?（你用什么方法跟上最新的行业技术趋势？）\n\nCould you share how you stay informed about emerging tech in your field?（你能分享下如何了解领域内的新兴技术吗？）",
+    "questionIntent": "面试官希望通过这个问题了解你是否具备主动学习和适应行业变化的能力，以及你是否有一套系统的方法来获取和整合行业最新信息。同时，他们也希望看到你如何将获取的信息应用到实际工作中，以提升个人和团队的表现。",
+    "answerStrategy": "方法：描述你追踪行业动态的具体方法或工具。\n\n行动：说明你如何将这些信息应用到实际工作中。\n\n结果：展示这些行动带来的积极影响或成果。",
+    "notes": "✘ 避免泛泛而谈，如“我经常看新闻”，要具体说明使用的工具或平台。\n\n✘ 不要只提获取信息，要强调如何将信息转化为实际行动。\n\n✘ 避免夸大其词，如“我掌握了所有最新技术”，保持真实和谦虚。\n\n✘ 不要忽视团队合作，可以提到如何与同事分享信息或共同学习。"
+  },
+  {
+    "id": "q85",
+    "num": 85,
+    "questionEn": "Tell me about a skill you learned quickly.",
+    "questionZh": "跟我讲讲你快速学会的一项技能。",
+    "similarQuestions": "Could you share a skill that you picked up rapidly?（你能分享下快速学会的技能吗？）\n\nCan you talk about a skill that you acquired quickly?（你能谈谈快速掌握的一项技能吗？）",
+    "questionIntent": "面试官希望通过这个问题了解你的学习能力、适应能力以及面对新挑战时的应对方式。他们想确认你是否能够快速掌握新技能，并将其应用到实际工作中，同时考察你的自我反思能力和成长潜力。",
+    "answerStrategy": "开门见山，先明确你快速学会的技能是什么。\n\n简要描述你学习这项技能的场景或原因。\n\n详细描述你如何快速学习这项技能，包括采取的具体步骤和方法。\n\n总结你学习这项技能后的成果，以及它对你或团队的影响。",
+    "notes": "✘ 避免选择过于简单或与工作无关的技能，例如“学会了煮咖啡”。\n\n✘ 不要夸大学习速度或成果，保持真实和具体。\n\n✘ 避免只描述学习过程而忽略结果，要体现技能的实际应用价值。\n\n✘ 慎用绝对化表达，例如“我完全掌握了”，可以用“我能够熟练运用”代替。"
+  },
+  {
+    "id": "q86",
+    "num": 86,
+    "questionEn": "Can you describe a time when you used new technologies to address a problem?",
+    "questionZh": "你能描述下用新技术解决问题的经历吗？",
+    "similarQuestions": "Could you share your approach to applying new technologies for problem-solving?（你能分享一下运用新技术解决问题的方法吗？）\n\nHow would you integrate new technologies into your problem-solving process?（你将如何把新技术融入到解决问题当中？）",
+    "questionIntent": "面试官想确认你是否能主动学习并应用新技术解决实际问题，考察你的学习能力、问题解决思维、创新意识，以及能否清晰说明技术应用带来的具体价值。",
+    "answerStrategy": "情境：用1-2句话说明遇到的痛点或挑战\n\n行动：分步骤描述技术选型、学习过程、实施关键动作\n\n结果：聚焦技术带来的效率/质量/用户体验提升\n\n成长：总结方法论或可复用的经验",
+    "notes": "✘ 不要说\"我用了AI/大数据\"等空泛词汇，需具体说明技术工具（例如\"Python自动化脚本\"）\n\n✘ 避免过度强调技术本身而忽略业务目标，始终关联问题解决\n\n✘ 忌用\"完全解决/彻底改变\"等绝对化表达，改用\"显著改善/提升xx%\""
+  },
+  {
+    "id": "q87",
+    "num": 87,
+    "questionEn": "When facing limited resources for a project, what's your approach?",
+    "questionZh": "当项目资源有限时，你会怎么办？",
+    "similarQuestions": "What strategies would you employ when project resources are limited?（当项目资源有限时，你会采用什么策略？）\n\nHow would you manage a project with restricted resources?（你会如何管理资源受限的项目？）",
+    "questionIntent": "面试官希望通过这个问题了解你在资源有限的情况下如何应对挑战，考察你的资源管理能力、解决问题的思维方式以及是否具备创新和灵活应对的能力。同时，他们也希望看到你能否在压力下保持冷静并找到有效的解决方案。",
+    "answerStrategy": "先表明你的总体思路或原则。\n\n详细描述你采取了哪些具体行动来应对资源不足的问题。\n\n总结你的行动带来的积极结果或影响。",
+    "notes": "✘ 避免空泛回答，如“我会尽力而为”，要提供具体的行动和实例。\n\n✘ 不要抱怨资源不足，而是展现你如何积极解决问题。\n\n✘ 避免过度强调个人贡献，要体现团队合作和沟通的重要性。\n\n✘ 不要忽视结果部分，要清晰地说明你的行动如何对项目产生了积极影响。"
+  },
+  {
+    "id": "q88",
+    "num": 88,
+    "questionEn": "How would you handle it if a project's priority decreases?",
+    "questionZh": "假如项目优先级下降，你会怎么处理？",
+    "similarQuestions": "When a project becomes less of a priority, what's your approach?（项目优先级变低，你会怎么办？）\n\nWhat's your strategy when a project's priority shifts downward?（项目优先级下移，你的应对策略是什么？）",
+    "questionIntent": "面试官想了解你在面对项目优先级降低时的应对能力，包括如何重新分配资源、调整计划以及保持团队士气。同时，他们希望看到你是否有清晰的思路和灵活的管理策略。",
+    "answerStrategy": "用一句话概括你的应对策略（例如：重新分配资源、调整计划、保持沟通）。\n\n详细描述你采取的具体措施，包括资源调整、沟通方式和计划优化。\n\n总结行动带来的积极效果，如团队效率提升或项目目标达成。",
+    "notes": "✘ 避免抱怨或指责，保持积极态度。\n\n✘ 不要只谈理论，要结合具体行动和结果。\n\n✘ 避免过于复杂的表达，确保逻辑清晰易懂。"
+  },
+  {
+    "id": "q89",
+    "num": 89,
+    "questionEn": "How do you manage client requests that don't align with company policies?",
+    "questionZh": "如何处理不符合公司政策的客户请求？",
+    "similarQuestions": "What strategies do you use to resolve situations where client needs conflict with company rules?（你会采用什么策略解决客户需求与公司规则冲突的情况？）\n\nCould you share your approach to dealing with client demands that conflict with company regulations?（你能分享一下如何处理与公司规定冲突的客户需求吗？ ）",
+    "questionIntent": "面试官希望通过这个问题了解你在面对客户需求与公司政策冲突时的处理方式，包括你的沟通能力、问题解决能力、以及如何在维护公司利益的同时满足客户需求。他们希望看到你能够灵活应对，同时保持专业性和客户满意度。",
+    "answerStrategy": "澄清：明确客户的需求以及公司政策的具体内容。\n\n沟通：与客户和内部团队进行有效沟通，解释政策的原因并寻找解决方案。\n\n协作：与客户和团队合作，找到折中方案或替代方案。",
+    "notes": "✘ 避免直接拒绝客户，显得缺乏灵活性。\n\n✘ 不要忽视公司政策的重要性，显得不够专业。\n\n✘ 避免使用过于复杂的语言，保持清晰简洁。\n\n✘ 不要只强调自己的观点，要体现对客户需求的理解和尊重。"
+  },
+  {
+    "id": "q90",
+    "num": 90,
+    "questionEn": "How would you handle a situation where your manager's and client's priorities clash?",
+    "questionZh": "当经理和客户的优先级冲突时，你会如何应对？",
+    "similarQuestions": "What steps would you take when your client’s and manager’s priorities don’t align?（当客户和经理的优先级不一致时，你会采取哪些步骤？）\n\nHow do you resolve a conflict when your manager and client have different priorities?（当经理和客户有不同的优先级时，你会如何解决？）",
+    "questionIntent": "面试官想了解你的沟通技巧、问题解决能力以及在面对利益冲突时的处理方式。通过这个问题，他们希望看到你是否能在复杂情况下平衡多方需求，找到合理的解决方案，同时维护良好的职业关系。这反映了你的情商和协调能力。",
+    "answerStrategy": "明确核心原则（如公司利益/客户满意度）\n\n描述具体协调动作（信息收集/方案设计/沟通方式）\n\n强调可量化成效（关系维护/业务推进/风险规避）",
+    "notes": "✘ 不要说\"我会完全服从领导\"或\"必须满足客户\"这种绝对立场✘ 避免空谈理论（如\"沟通很重要\"），必须配具体行动案例✘ 忌用模糊表述（如\"想办法解决\"），要展示系统性思考✘ 不要暴露处理失败案例，重点呈现成功方法论"
+  },
+  {
+    "id": "q91",
+    "num": 91,
+    "questionEn": "How would you react if a colleague took the credit for something you accomplished?",
+    "questionZh": "如果同事抢了你的功劳，你会怎么做？",
+    "similarQuestions": "How would you handle a situation where a colleague claimed your work as their own?（如果有同事把你的工作成果据为己有，你会如何处理？）\n\nHow do you respond when a colleague appropriates your work achievements?（当同事盗用你的工作成果时，你会如何回应？）",
+    "questionIntent": "面试官主要考察三点：1. 情绪管理能力（能否冷静处理冲突） 2. 团队协作意识（是否优先维护团队和谐） 3. 解决问题的方法（是否有成熟的应对策略）。这类问题本质上测试候选人是否具备\"professional maturity\"（职业成熟度）。",
+    "answerStrategy": "客观描述事件经过，避免主观情绪。\n\n说明如何解决问题。\n\n展现从中学到的经验及后续预防措施。",
+    "notes": "✘ 切忌直接指责同事（如：\"He’s a liar\"），用事实代替情绪\n\n✘ 避免过度强调个人得失（如：\"This promotion should be mine!\"），展现团队视角\n\n✘ 不要被动等待（如：\"I did nothing\"），需体现主动性\n\n✘ 拒绝公开冲突（如：\"I will confront him in the meeting\"），强调私下沟通"
+  },
+  {
+    "id": "q92",
+    "num": 92,
+    "questionEn": "How would you respond if your perspective differs from your superior's?",
+    "questionZh": "如果你的观点和上级的不同，你会怎么做？",
+    "similarQuestions": "When facing a disparity in views with your manager, how do you resolve it?（当与经理意见不一致时，你如何解决？）\n\nWhen in disagreement with your boss, how do you proceed?（和老板意见不合时，你会怎么办）",
+    "questionIntent": "面试官通过这个问题，考察候选人在面对意见分歧时的沟通能力、情商（EQ）以及解决问题的能力。他们希望了解你是否能够以专业的方式处理冲突，同时保持对上级的尊重，并推动团队目标的实现。此外，他们也在评估你是否具备独立思考的能力，以及是否能够在必要时提出建设性的意见。",
+    "answerStrategy": "Situation（情境）：简要描述一个与上级意见分歧的场景，突出问题的背景和重要性。\n\nBehavior（行为）：详细说明你如何处理这种分歧，包括你的沟通方式和具体行动。\n\nImpact（影响）：总结你的行为带来的积极结果，例如改善了决策质量、加强了团队合作等。",
+    "notes": "✘ 避免直接批评上级：不要表现出对上级的不满或质疑其能力，而是强调你如何通过沟通和协作解决问题。\n\n✘ 不要过于强调个人观点：虽然要展现独立思考能力，但也要体现团队合作精神，避免让人觉得你固执己见。\n\n✘ 避免空泛的回答：用具体的例子来支持你的回答，而不是只说“我会沟通”或“我会尊重上级”。"
+  },
+  {
+    "id": "q93",
+    "num": 93,
+    "questionEn": "How do you plan to set us apart from the competition?",
+    "questionZh": "你打算如何让我们公司脱颖而出？",
+    "similarQuestions": "What steps would you take to give us an edge over competitors?（你会采取哪些措施让我们胜过竞争对手？）\n\nHow can we differentiate ourselves from competitors?（我们如何与竞争对手区分开来？）",
+    "questionIntent": "面试官想判断：1.你是否具备战略思维，能提出有效的差异化策略；2.你是否真正理解公司核心竞争力和行业痛点；3.你是否有落地解决方案的经验而非空谈概念。例如，他们希望听到具体可执行的方案，而不是\"提高服务质量\"这类泛泛之谈。",
+    "answerStrategy": "首先明确差异化方向（如技术创新/客户体验/流程效率）；\n\n然后用3个具体层面支撑锚点（如产品设计、服务模式、人才体系）；\n\n接着每个层面用行为过程+结果影响论证可行性；\n\n最后说明如何形成持续竞争优势。",
+    "notes": "✘ 忌撒网式列举：如同时说\"提升产品+优化价格+加强营销\"，显得缺乏重点；\n\n✘ 忌静态方案：需体现动态调整机制，例如加入\"通过客户反馈迭代\"；\n\n✘ 忌闭门造车：要结合行业趋势（如AI应用）而非仅内部视角；\n\n✘ 忌过度承诺：用\"aim to\"替代\"will guarantee\"这类绝对化表达。"
+  },
+  {
+    "id": "q94",
+    "num": 94,
+    "questionEn": "Could you share your short-term objectives for this role?",
+    "questionZh": "对于这个职位，你的短期目标是什么？",
+    "similarQuestions": "Can you outline your short-term targets for this position?（你能说一下你在这个职位上的短期目标吗？）\n\nWhat do you hope to achieve in the first month of this job?（你希望在这份工作的第一个月里达成什么目标？）",
+    "questionIntent": "面试官希望通过这个问题了解你对职位的理解、你的职业规划是否与公司发展一致，以及你是否具备清晰的短期目标来快速融入团队并为公司创造价值。同时，他们也希望看到你对自我提升的重视和对工作成果的明确期望。",
+    "answerStrategy": "目标：明确说明你的短期目标，确保与职位要求相关。\n\n行动：描述你为实现目标计划采取的具体行动。\n\n结果：说明这些行动将如何帮助你在短期内取得成果，并为公司带来价值。",
+    "notes": "✘ 避免目标过于模糊或与职位无关，例如“我想学习新技能”而没有具体说明如何应用。\n\n✘ 不要只谈个人成长，忽略对团队或公司的贡献。\n\n✘ 避免目标过于宏大或不切实际，例如“我想在三个月内成为团队领导”。\n\n✘ 慎用绝对化表达，例如“我一定会在短期内完成所有任务”。"
+  },
+  {
+    "id": "q95",
+    "num": 95,
+    "questionEn": "What's your plan for the first 90 days in this role?",
+    "questionZh": "在这个岗位上，你前90天的计划是什么？",
+    "similarQuestions": "How would you approach your first 90 days here?（你将如何规划你在这儿的前90天？）\n\nCan you outline your priorities for the first 90 days of employment?（你能概述一下入职前90天的工作重点吗？）",
+    "questionIntent": "面试官主要想考察三方面：1）你是否有清晰的岗位认知和目标规划能力 2）你能否快速适应新环境并创造价值 3）你的工作计划是否贴合团队实际需求。这相当于在测试你的战略思维和执行力的平衡能力。",
+    "answerStrategy": "学习阶段（前30天）：系统了解业务/流程/团队\n\n信任阶段（30-60天）：与关键干系人建立信任关系\n\n贡献阶段（60-90天）：输出初步成果并验证方案\n\n调整阶段（90天节点）：根据反馈优化长期计划",
+    "notes": "✘ 避免空泛承诺：\"我会快速学习\"要具体说明学什么/怎么学✘ 忌单打独斗：必须体现跨团队协作的具体方式✘ 时间分配要合理：前30天不宜设定产出指标✘ 避免绝对化措辞：用\"aim to争取\"代替\"will一定能\"✘ 警惕完美主义：要预留调整空间而非僵化计划"
+  },
+  {
+    "id": "q96",
+    "num": 96,
+    "questionEn": "Could you share your career vision for the next five years?",
+    "questionZh": "你能分享下未来五年的职业规划吗？",
+    "similarQuestions": "What do you aim to achieve in your career over the next five years?（未来五年你的职业目标是什么？）\n\nCan you talk about your long-term career aspirations in the next five years?（你能谈谈未来五年的职业抱负吗？）",
+    "questionIntent": "面试官想了解你的职业目标、自我规划能力以及是否与公司的发展方向契合。通过你的回答，他们可以判断你是否有清晰的职业发展路径，是否具备长期投入的意愿，以及你的目标是否与公司提供的成长机会相匹配。这有助于评估你的稳定性和潜力。",
+    "answerStrategy": "目标定位：用行业趋势+核心价值提炼五年后的理想状态\n\n路径规划：分2-3个阶段说明成长路线，强调能力升级而非职位头衔\n\n支撑要素：结合目标岗位需要的关键能力，说明当前准备与未来行动",
+    "notes": "✘ 忌说\"做到管理层\"等空话✘ 忌用\"精通所有技能\"等绝对化表述✔ 要展现学习弹性：\"计划获得XX认证\"比\"必须成为专家\"更可信✔ 要体现双向思维：\"希望与公司共同成长\"比单方面要求更好"
+  },
+  {
+    "id": "q97",
+    "num": 97,
+    "questionEn": "How does this role align with your long-term career vision?",
+    "questionZh": "这个岗位与你长期职业规划相符吗？",
+    "similarQuestions": "How does this position fit into your long-term career goals?（这个职位与你长期职业目标契合吗？）\n\nHow does this role support your long-term professional development?（这个职位如何支持你长期的职业发展？）",
+    "questionIntent": "面试官想确认你的职业规划是否与岗位发展路径一致，考察岗位对你是否具备可持续吸引力，同时评估你是否有清晰的自我认知。核心是判断匹配度和稳定性，避免\"用岗位当跳板\"或\"盲目应聘\"的情况。",
+    "answerStrategy": "建立岗位与职业愿景的关联点（如核心能力/业务领域）\n\n说明岗位对关键职业能力（如技术/管理/创新）的培育作用\n\n描述岗位提供的成长资源（如培训/项目机会/导师制度）\n\n展现未来三年通过岗位积累实现的具体职业里程碑",
+    "notes": "✘ 不要空谈\"成为管理者/专家\"等标签，要说明能力建设路径\n\n✘ 避免将公司仅当作跳板（例：\"这个经历能帮我申请MBA\"）\n\n✘ 拒绝模糊表述（例：\"想在这个领域发展\"），要具体到能力维度\n\n✘ 谨慎使用时间节点（例：\"五年做到总监\"），改为阶段目标"
+  },
+  {
+    "id": "q98",
+    "num": 98,
+    "questionEn": "Which skills are you looking to develop in this role?",
+    "questionZh": "在这个岗位你想提升哪些技能？",
+    "similarQuestions": "What capabilities do you aim to build during your time here?（在这里你想培养哪些能力？）\n\nWhat abilities do you want to cultivate during your tenure here?（在此任职期间你想培养什么能力？）",
+    "questionIntent": "面试官想确认：1）你对自身短板是否有清晰的认知；2）你的成长意愿是否与岗位需求匹配；3）你是否能将个人发展融入团队目标。本质上是在测试你的职业规划成熟度。",
+    "answerStrategy": "发展目标：明确与岗位强相关的1-2个成长方向（如技术/沟通/领导力）\n\n技能拆解：具体说明要提升的细分能力（避免空泛的\"沟通能力\"这类表述）\n\n执行计划：用可落地的行动步骤展示主动性（如项目实践/跨部门协作/培训认证）\n\n双赢视角：强调能力提升对团队/业务的实际价值（证明你不是单纯利己）",
+    "notes": "✘ 忌说\"想全面提升\"或罗列3项以上技能（显得缺乏重点）✘ 忌脱离岗位谈兴趣（如应聘财务却说要学UI设计）✔ 用\"我希望在xx场景下强化xx能力，通过xx方法...\"句式增加可信度✔ 用\"这将帮助我更好地...\"自然衔接个人成长与工作价值"
+  },
+  {
+    "id": "q99",
+    "num": 99,
+    "questionEn": "What approaches will you take to bridge the gap between your current capabilities and the requirements of this role?",
+    "questionZh": "你会采取什么方法来缩小你现有能力与岗位要求的差距？",
+    "similarQuestions": "What strategies will you use to close the gap between your existing abilities and what this role demands?（你会采用什么策略来缩小你现有能力与该职位要求的差距？）\n\nHow will you work to close the gap between your existing competencies and the needs of this job?（你将如何努力弥合你现有能力与这份工作需求之间的差距？）",
+    "questionIntent": "面试官希望通过这个问题了解你是否有清晰的自我认知，以及你是否具备主动学习和适应新岗位的能力。他们想确认你能否快速填补现有能力与岗位需求之间的差距，并采取具体行动来实现这一目标。",
+    "answerStrategy": "现状分析：简要说明自己当前的能力优势以及与岗位需求的差距。\n\n行动规划：详细描述你将采取的具体措施，包括学习、实践和寻求支持等。\n\n结果预期：展望通过这些行动后，你将如何更好地胜任岗位，并为企业带来价值。",
+    "notes": "✘ 避免泛泛而谈，如“我会努力学习”，要具体说明学习什么、如何学习。\n\n✘ 不要忽视现有能力的优势，既要承认差距，也要展示自信。\n\n✘ 避免过度承诺，如“我一定能完全胜任”，要展现务实的态度。\n\n✘ 不要忽略团队合作和外部支持的重要性，展现你善于利用资源。"
+  },
+  {
+    "id": "q100",
+    "num": 100,
+    "questionEn": "How will you contribute to our team?",
+    "questionZh": "你将如何为团队做出贡献？",
+    "similarQuestions": "What value can you bring to our team?（你能为我们团队带来什么价值？）\n\nHow do you intend to add value to our team?（你打算如何为我们团队增值）",
+    "questionIntent": "面试官希望通过这个问题了解你是否清楚自己的优势，以及你是否能够将这些优势与团队的需求结合起来。他们想知道你是否具备团队合作意识，是否能够为团队带来积极的影响，以及你是否能够适应团队文化并为其做出贡献。",
+    "answerStrategy": "先明确自己的核心优势或技能，展示你能够为团队带来的独特价值。\n\n具体说明你计划如何运用这些优势来支持团队的工作或解决团队可能面临的问题。\n\n描述你的行动将如何为团队带来积极的影响或成果，强调团队整体受益。",
+    "notes": "✘ 避免空泛的陈述，如“我会努力工作”或“我会带来正能量”，这些缺乏具体性和说服力。\n\n✘ 不要只关注个人成就，要突出你对团队的贡献。\n\n✘ 避免过度承诺或使用绝对化表达，如“我一定会让团队成功”，保持谦逊和实际。\n\n✘ 不要忽视团队文化，要展示你能够融入并支持团队的整体目标。"
+  },
+  {
+    "id": "q101",
+    "num": 101,
+    "questionEn": "When the team requires you to take on a different role, what's your approach?",
+    "questionZh": "团队要求你换岗，你怎么做？",
+    "similarQuestions": "How would you handle a role change within the team?（你在团队中的角色发生改变时，你会怎么做？）\n\nHow do you plan to adapt if your team role changes?（团队角色改变，你如何适应？）",
+    "questionIntent": "面试官通过这个问题，主要考察候选人的适应性、团队合作意识以及问题解决能力。他们希望了解你是否能够灵活应对变化，是否愿意为团队目标做出调整，以及如何在新角色中快速上手并做出贡献。",
+    "answerStrategy": "表明你对换岗的积极态度，强调你愿意接受新挑战。\n\n描述你会如何与团队沟通，确保理解新角色的职责和目标。\n\n说明你会采取哪些具体行动来快速适应新角色，并确保团队目标不受影响。",
+    "notes": "✘ 避免消极态度：不要说“我不愿意换岗”或“我不擅长新角色”，这会让面试官觉得你缺乏灵活性。\n\n✘ 避免空泛承诺：不要只说“我会努力”，要具体说明你会如何行动。\n\n✘ 避免忽视团队目标：不要只关注个人发展，要强调你如何为团队整体利益做出贡献。"
+  },
+  {
+    "id": "q102",
+    "num": 102,
+    "questionEn": "How do you measure success in your work?",
+    "questionZh": "你如何衡量自己工作的成功？",
+    "similarQuestions": "How do you define success in your professional role?（你如何定义自己在工作上的成功？）\n\nWhat criteria do you use to evaluate your work success?（你用什么标准来评估自己工作的成功？）",
+    "questionIntent": "面试官希望通过这个问题了解你的工作价值观、自我评估标准以及你是否能够从结果导向的角度看待工作。他们想确认你是否具备清晰的目标设定能力，以及你是否能够通过合理的指标来衡量自己的表现，从而判断你是否适合团队文化和工作要求。",
+    "answerStrategy": "定义标准：首先明确你衡量成功的核心标准，例如目标达成、团队贡献或个人成长。\n\n具体行动：描述你为实现这些标准采取了哪些具体行动或方法。\n\n结果影响：说明这些行动带来的实际影响，例如对团队、项目或个人的积极效果。",
+    "notes": "✘ 避免空泛回答，如“我觉得成功就是做好工作”，缺乏具体标准和实例。\n\n✘ 不要只强调个人成就，忽略团队合作和整体目标。\n\n✘ 避免使用绝对化表达，如“我总是成功”，显得不够真实和谦虚。\n\n✘ 不要忽视外部反馈，成功往往需要结合他人评价和客观结果。"
+  },
+  {
+    "id": "q103",
+    "num": 103,
+    "questionEn": "How do you define success criteria for yourself and your team when starting a new project?",
+    "questionZh": "在启动新项目时，你会如何设置成功标准？",
+    "similarQuestions": "When embarking on a new project, what are the success metrics you set for yourself and your team?（开始新项目时，你会设置哪些成功指标？）\n\nHow do you establish success benchmarks for yourself and your team at the beginning of a new project?（新项目开始时，你如何设定成功标准？）",
+    "questionIntent": "面试官希望通过这个问题了解你如何定义和衡量项目成功，以及你如何将这种标准应用到团队中。他们想考察你的目标设定能力、团队协作意识以及对项目管理的整体理解。",
+    "answerStrategy": "定义标准：明确你如何设定项目的成功标准，包括关键指标和预期结果。\n\n团队协作：描述你如何与团队沟通和达成共识，确保每个人都理解并认同这些标准。\n\n持续改进：说明你如何在项目过程中监控和调整标准，以确保最终成功。",
+    "notes": "✘ 避免模糊：不要只说“完成项目”或“达到目标”，要具体说明如何衡量成功。\n\n✘ 忽略团队：不要只谈个人标准，要强调团队协作和共识。\n\n✘ 缺乏灵活性：不要让人觉得你的标准一成不变，要体现对动态调整的重视。"
+  },
+  {
+    "id": "q104",
+    "num": 104,
+    "questionEn": "Could you share your salary expectations?",
+    "questionZh": "你的薪资期望是多少？",
+    "similarQuestions": "What salary range are you looking for?（你期望的薪资范围是多少？）\n\nMay I know your salary requirement?（我可以了解一下你的薪资要求吗？）",
+    "questionIntent": "面试官提出这个问题的主要目的是了解你对自身价值的认知，以及你的薪资期望是否与公司的预算和岗位的薪酬范围相匹配。同时，他们也希望通过这个问题评估你对市场的了解程度以及你对薪资的灵活性。",
+    "answerStrategy": "市场调研：先表明你对行业和岗位的薪资范围有一定了解，展示你对市场的认知。\n\n个人价值：结合你的经验、技能和成就，说明你为何值得这个薪资范围。\n\n灵活性：表达你对薪资的开放态度，愿意根据整体福利和发展机会进行调整。",
+    "notes": "✘ 避免直接给出具体数字：过早透露具体数字可能会让你失去谈判空间。\n\n✘ 不要低估自己：薪资期望过低可能会让面试官怀疑你的能力或自信。\n\n✘ 避免过于强硬：表达灵活性，展现合作态度，而不是一味坚持自己的要求。"
+  },
+  {
+    "id": "q105",
+    "num": 105,
+    "questionEn": "How soon can you start?",
+    "questionZh": "你多快能开始工作？",
+    "similarQuestions": "When would you be able to start?（你什么时候能够开始工作？）\n\nWhen are you available to begin?（你什么时候能开始工作？）",
+    "questionIntent": "面试官主要想确认两件事：一是你的入职时间是否符合公司用人节奏，二是通过你的回答判断离职状态/入职意愿强弱。他们希望找到既有能力快速融入、又具备职业素养处理好工作交接的候选人。",
+    "answerStrategy": "现状说明：清晰陈述当前任职状态（在职/离职/自由职业）\n\n时间框架：给出合理区间而非绝对日期，体现专业性\n\n灵活配合：主动表达调整意愿，展现合作态度\n\n价值预热：提前说明入职后如何创造价值，强化匹配度",
+    "notes": "✘ 不要给出具体日期承诺（如\"下周三\"），可能引发诚信风险\n\n✘ 避免说\"随时可以\"显得缺乏职业操守，或\"需要三个月\"暴露协调能力不足\n\n✘ 离职交接期建议控制在2-4周，超出需说明特殊原因\n\n✘ 切忌抱怨现雇主，保持积极中立态度"
+  },
+  {
+    "id": "q106",
+    "num": 106,
+    "questionEn": "Are you actively interviewing with other firms?",
+    "questionZh": "你正在面试其他公司吗？",
+    "similarQuestions": "Are you in the process of interviewing with other companies?（你目前还在面试其他公司吗？）\n\nAre you exploring other job opportunities currently?（你现在有在寻找其他工作机会吗？）",
+    "questionIntent": "面试官主要想了解：1. 你的求职市场竞争力 2. 岗位选择的优先级 3. 是否会用其他offer作为谈判筹码。这个问题能同时考察候选人的坦诚度和对当前机会的重视程度。",
+    "answerStrategy": "说明当前求职状态\n\n解释求职策略的逻辑\n\n强调对当前机会的重视\n\n表达加入意愿",
+    "notes": "✘ 过度透露具体公司信息✘ 负面比较其他企业（如\"你们比xx公司好\"）✘ 表现急迫感（如\"目前还没offer\"）✘ 虚假陈述（如明明有面试却说没有）"
+  },
+  {
+    "id": "q107",
+    "num": 107,
+    "questionEn": "Would you be open to relocating for this job?",
+    "questionZh": "这份工作需要你到其他地方去，你愿意吗？",
+    "similarQuestions": "Is relocating for work something you'd consider?（你会考虑因工作而搬迁吗？）\n\nWould relocating for this opportunity be a possibility for you?（为了这个工作机会，你能接受搬迁吗？）",
+    "questionIntent": "面试官主要想确认两点：一是你的灵活性和对机会的重视程度，二是评估搬迁可能带来的稳定性风险。他们需要知道你是否能快速适应新环境，以及搬迁是否会影响你的长期投入。",
+    "answerStrategy": "明确表态：直接说明意愿，避免模棱两可\n\n解释动机：结合职业发展或个人价值观，体现主动选择\n\n经验支持：用过往经历证明适应能力\n\n开放沟通：确认需求细节，展现合作态度",
+    "notes": "✘ 忌绝对化回答（如\"完全没问题\"或\"绝对不考虑\"），保留弹性\n\n✘ 忌空谈意愿不提实际考虑，需平衡热情与现实\n\n✘ 忌忽略家庭/生活因素，适当体现周全性\n\n✘ 忌被动等待安排，主动询问具体要求"
+  },
+  {
+    "id": "q108",
+    "num": 108,
+    "questionEn": "Do you have any questions for me?",
+    "questionZh": "你有什么想要问我的吗？",
+    "similarQuestions": "Is there anything you'd like to inquire about?（你有什么想问的吗？）\n\nHave you got any questions for me?（你有什么问题要问我吗？）",
+    "questionIntent": "面试官提出这个问题，主要是想了解你对公司和职位的兴趣程度，以及你是否提前做了充分的准备。同时，这也是一个考察你沟通能力、思维逻辑和职业态度的机会。通过你的提问，面试官可以判断你是否真正关心这份工作，以及你是否适合公司的文化。",
+    "answerStrategy": "Clarify（澄清）：提出一个与职位或公司相关的问题，展示你对细节的关注。\n\nConnect（连接）：提出一个与团队或公司文化相关的问题，展示你对融入团队的重视。\n\nContribute（贡献）：提出一个与未来发展或挑战相关的问题，展示你的长远思考和主动性。",
+    "notes": "✘ 避免问一些可以在官网上找到答案的问题，比如公司规模或业务范围，这会显得你没有做功课。\n\n✘ 不要问薪资、福利等过于功利的问题，除非面试官主动提及。\n\n✘ 避免提出过于宽泛或抽象的问题，比如“公司未来的战略是什么”，这会让问题显得空洞。\n\n✘ 不要问太多问题，通常2-3个问题即可，以免占用过多时间。"
+  }
+]
