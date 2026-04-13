@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
 
-    const { data: order, error: orderError } = await supabase
+    const { data: order, error: orderError } = await (supabase as any)
       .from('orders')
       .select('*')
       .eq('id', order_id)
@@ -116,31 +116,31 @@ export async function POST(request: NextRequest) {
       return new NextResponse('fail', { status: 404 })
     }
 
-    if (order.status === 'paid') {
+    if ((order as any).status === 'paid') {
       await logger.info('Order already paid, skipping (idempotent)', {
         endpoint: '/api/payment/callback',
         method: 'POST',
         ipAddress,
         userAgent,
-        requestBody: { order_id, aoid, status: order.status },
+        requestBody: { order_id, aoid, status: (order as any).status },
       })
 
       return new NextResponse('success', { status: 200 })
     }
 
-    if (order.status !== 'pending') {
+    if ((order as any).status !== 'pending') {
       await logger.warn('Invalid order status for payment', {
         endpoint: '/api/payment/callback',
         method: 'POST',
         ipAddress,
         userAgent,
-        requestBody: { order_id, aoid, status: order.status },
+        requestBody: { order_id, aoid, status: (order as any).status },
       })
 
       return new NextResponse('fail', { status: 400 })
     }
 
-    const orderPrice = Number(order.price).toFixed(2)
+    const orderPrice = Number((order as any).price).toFixed(2)
     const paidPrice = Number(pay_price).toFixed(2)
     
     if (orderPrice !== paidPrice) {
@@ -160,10 +160,10 @@ export async function POST(request: NextRequest) {
       return new NextResponse('fail', { status: 400 })
     }
 
-    const { error: updateError } = await supabase
+    const { error: updateError } = await (supabase as any)
       .from('orders')
       .update({
-        status: 'paid',
+        status: 'paid' as const,
         payment_provider: 'xorpay',
         payment_order_id: aoid,
         payment_transaction_id: aoid,
@@ -202,13 +202,13 @@ export async function POST(request: NextRequest) {
         ipAddress,
         userAgent,
         errorMessage: creditError.message,
-        requestBody: { order_id, aoid, userId: order.user_id, credits: order.credits },
+        requestBody: { order_id, aoid, userId: (order as any).user_id, credits: (order as any).credits },
       })
 
-      await supabase
+      await (supabase as any)
         .from('orders')
         .update({
-          status: 'failed',
+          status: 'failed' as const,
           error_message: '积分添加失败',
           updated_at: new Date().toISOString(),
         })
@@ -220,7 +220,7 @@ export async function POST(request: NextRequest) {
     const responseTime = Date.now() - startTime
 
     await logger.info('Payment processed successfully', {
-      userId: order.user_id,
+      userId: (order as any).user_id,
       endpoint: '/api/payment/callback',
       method: 'POST',
       ipAddress,
@@ -230,7 +230,7 @@ export async function POST(request: NextRequest) {
       requestBody: { 
         order_id, 
         aoid,
-        credits: order.credits 
+        credits: (order as any).credits 
       },
     })
 

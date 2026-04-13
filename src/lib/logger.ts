@@ -43,7 +43,7 @@ class Logger {
     
     try {
       const supabase = this.getSupabase()
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('request_logs')
         .insert({
           user_id: entry.userId,

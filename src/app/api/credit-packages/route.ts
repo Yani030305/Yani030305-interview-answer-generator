@@ -2,6 +2,18 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { Database } from '@/types/supabase'
 
+type CreditPackageRow = {
+  package_id: string
+  name: string
+  credits: number
+  price: number | string
+  original_price: number | string | null
+  bonus: number | null
+  is_popular: boolean | null
+  is_active: boolean
+  sort_order: number
+}
+
 export async function GET(request: NextRequest) {
   try {
     const supabase = createClient<Database>(
@@ -17,8 +29,8 @@ export async function GET(request: NextRequest) {
 
     if (error) {
       console.error('Error fetching credit packages:', error)
-      // 使用默认套餐数据作为 fallback
-      const defaultPackages = [
+
+      const defaultPackages: CreditPackageRow[] = [
         {
           package_id: 'basic',
           name: '基础套餐',
@@ -28,7 +40,7 @@ export async function GET(request: NextRequest) {
           bonus: 0,
           is_popular: false,
           is_active: true,
-          sort_order: 1
+          sort_order: 1,
         },
         {
           package_id: 'standard',
@@ -39,7 +51,7 @@ export async function GET(request: NextRequest) {
           bonus: 0,
           is_popular: true,
           is_active: true,
-          sort_order: 2
+          sort_order: 2,
         },
         {
           package_id: 'premium',
@@ -50,7 +62,7 @@ export async function GET(request: NextRequest) {
           bonus: 50,
           is_popular: false,
           is_active: true,
-          sort_order: 3
+          sort_order: 3,
         },
         {
           package_id: 'professional',
@@ -61,7 +73,7 @@ export async function GET(request: NextRequest) {
           bonus: 150,
           is_popular: false,
           is_active: true,
-          sort_order: 4
+          sort_order: 4,
         },
         {
           package_id: 'enterprise',
@@ -72,37 +84,39 @@ export async function GET(request: NextRequest) {
           bonus: 500,
           is_popular: false,
           is_active: true,
-          sort_order: 5
-        }
+          sort_order: 5,
+        },
       ]
-      
-      const packages = defaultPackages.map(pkg => ({
+
+      const packages = defaultPackages.map((pkg) => ({
         id: pkg.package_id,
         name: pkg.name,
         credits: pkg.credits,
         price: Number(pkg.price),
-        originalPrice: pkg.original_price ? Number(pkg.original_price) : undefined,
-        bonus: pkg.bonus || 0,
-        popular: pkg.is_popular || false,
+        originalPrice:
+          pkg.original_price !== null ? Number(pkg.original_price) : undefined,
+        bonus: pkg.bonus ?? 0,
+        popular: pkg.is_popular ?? false,
       }))
 
       return NextResponse.json({ packages })
     }
 
-    const packages = data.map(pkg => ({
+    const packages = ((data ?? []) as CreditPackageRow[]).map((pkg) => ({
       id: pkg.package_id,
       name: pkg.name,
       credits: pkg.credits,
       price: Number(pkg.price),
-      originalPrice: pkg.original_price ? Number(pkg.original_price) : undefined,
-      bonus: pkg.bonus || 0,
-      popular: pkg.is_popular || false,
+      originalPrice:
+        pkg.original_price !== null ? Number(pkg.original_price) : undefined,
+      bonus: pkg.bonus ?? 0,
+      popular: pkg.is_popular ?? false,
     }))
 
     return NextResponse.json({ packages })
   } catch (error) {
     console.error('Error in credit-packages API:', error)
-    // 异常情况下也返回默认套餐
+
     const defaultPackages = [
       {
         id: 'basic',
@@ -111,7 +125,7 @@ export async function GET(request: NextRequest) {
         price: 4.9,
         originalPrice: undefined,
         bonus: 0,
-        popular: false
+        popular: false,
       },
       {
         id: 'standard',
@@ -120,7 +134,7 @@ export async function GET(request: NextRequest) {
         price: 19.9,
         originalPrice: 24.5,
         bonus: 0,
-        popular: true
+        popular: true,
       },
       {
         id: 'premium',
@@ -129,7 +143,7 @@ export async function GET(request: NextRequest) {
         price: 34.9,
         originalPrice: 49,
         bonus: 50,
-        popular: false
+        popular: false,
       },
       {
         id: 'professional',
@@ -138,7 +152,7 @@ export async function GET(request: NextRequest) {
         price: 59.9,
         originalPrice: 98,
         bonus: 150,
-        popular: false
+        popular: false,
       },
       {
         id: 'enterprise',
@@ -147,9 +161,10 @@ export async function GET(request: NextRequest) {
         price: 149.9,
         originalPrice: 245,
         bonus: 500,
-        popular: false
-      }
+        popular: false,
+      },
     ]
+
     return NextResponse.json({ packages: defaultPackages })
   }
 }

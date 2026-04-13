@@ -186,7 +186,7 @@ export async function POST(request: NextRequest) {
       order = {
         id: orderId,
         user_id: userId,
-        package_id: pkg.id,
+        package_id: pkg.package_id,
         package_name: pkg.name,
         price: pkg.price,
         credits: totalCredits,
@@ -205,16 +205,16 @@ export async function POST(request: NextRequest) {
     } else {
       // 尝试创建订单
       try {
-        const { data: orderData, error: orderError } = await supabase
+        const { data: orderData, error: orderError } = await (supabase as any)
           .from('orders')
           .insert({
             id: orderId,
             user_id: userId,
-            package_id: pkg.id,
+            package_id: pkg.package_id,
             package_name: pkg.name,
             price: pkg.price,
             credits: totalCredits,
-            status: 'pending',
+            status: 'pending' as const,
           })
           .select()
           .single()
@@ -225,7 +225,7 @@ export async function POST(request: NextRequest) {
           order = {
             id: orderId,
             user_id: userId,
-            package_id: pkg.id,
+            package_id: pkg.package_id,
             package_name: pkg.name,
             price: pkg.price,
             credits: totalCredits,
@@ -251,7 +251,7 @@ export async function POST(request: NextRequest) {
         order = {
           id: orderId,
           user_id: userId,
-          package_id: pkg.id,
+          package_id: pkg.package_id,
           package_name: pkg.name,
           price: pkg.price,
           credits: totalCredits,
@@ -347,7 +347,7 @@ export async function POST(request: NextRequest) {
       body: formParams.toString(),
     })
 
-    const xorpayResult = await xorpayResponse.json()
+    const xorpayResult = await xorpayResponse.json() as any
 
     if (xorpayResult.status !== 'ok') {
       await logger.error('XorPay order creation failed', {
@@ -359,14 +359,17 @@ export async function POST(request: NextRequest) {
         requestBody: { orderId, xorpayResult },
       })
 
-      await supabase
-        .from('orders')
-        .update({
-          status: 'failed',
-          error_message: xorpayResult.error || '支付下单失败',
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', orderId)
+      // 只有在使用数据库订单时才更新订单状态
+      if (!isDefaultPackage) {
+        await (supabase as any)
+          .from('orders')
+          .update({
+            status: 'failed' as const,
+            error_message: xorpayResult.error || '支付下单失败',
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', orderId)
+      }
 
       return NextResponse.json(
         { error: xorpayResult.error || '支付下单失败', errorCode: 'XORPAY_ERROR' },
@@ -395,7 +398,7 @@ export async function POST(request: NextRequest) {
 
     // 只有在使用数据库订单时才更新订单状态
     if (!isDefaultPackage) {
-      const { error: updateError } = await supabase
+      const { error: updateError } = await (supabase as any)
         .from('orders')
         .update({
           payment_provider: 'xorpay',
@@ -501,7 +504,7 @@ export async function GET(request: NextRequest) {
     )
 
     if (orderId) {
-      const { data: order, error } = await supabase
+      const { data: order, error } = await (supabase as any)
         .from('orders')
         .select('*')
         .eq('id', orderId)
@@ -539,19 +542,19 @@ export async function GET(request: NextRequest) {
 
       return NextResponse.json({
         order: {
-          id: order.id,
-          packageName: order.package_name,
-          price: Number(order.price),
-          credits: order.credits,
-          status: order.status,
-          paymentProvider: order.payment_provider,
-          paymentOrderId: order.payment_order_id,
-          createdAt: order.created_at,
-          paidAt: order.paid_at,
+          id: (order as any).id,
+          packageName: (order as any).package_name,
+          price: Number((order as any).price),
+          credits: (order as any).credits,
+          status: (order as any).status,
+          paymentProvider: (order as any).payment_provider,
+          paymentOrderId: (order as any).payment_order_id,
+          createdAt: (order as any).created_at,
+          paidAt: (order as any).paid_at,
         },
       })
     } else {
-      const { data: orders, error } = await supabase
+      const { data: orders, error } = await (supabase as any)
         .from('orders')
         .select('*')
         .eq('user_id', userId)
@@ -588,7 +591,7 @@ export async function GET(request: NextRequest) {
       })
 
       return NextResponse.json({
-        orders: orders.map(order => ({
+        orders: (orders as any[]).map((order: any) => ({
           id: order.id,
           packageName: order.package_name,
           price: Number(order.price),

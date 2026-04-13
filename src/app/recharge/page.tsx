@@ -45,7 +45,7 @@ export default function RechargePage() {
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null
     
-    if (paymentInfo?.orderId && checkingPayment) {
+    if (paymentInfo?.orderId && checkingPayment && user) {
       interval = setInterval(async () => {
         try {
           const response = await fetch(`/api/orders?orderId=${paymentInfo.orderId}&userId=${user.id}`)
@@ -53,10 +53,10 @@ export default function RechargePage() {
             const data = await response.json()
             if (data.order?.status === 'paid') {
               setCheckingPayment(false)
-              const { data: profileData, error: profileError } = await supabase
+              const { data: profileData, error: profileError } = await (supabase as any)
                 .from('profiles')
                 .select('credits')
-                .eq('id', user?.id)
+                .eq('id', user.id)
                 .single()
 
               if (!profileError && profileData) {
@@ -78,7 +78,7 @@ export default function RechargePage() {
         clearInterval(interval)
       }
     }
-  }, [paymentInfo?.orderId, checkingPayment, user?.id, setCredits, router])
+  }, [paymentInfo?.orderId, checkingPayment, user, setCredits, router])
 
   const fetchPackages = async () => {
     try {
@@ -153,7 +153,7 @@ export default function RechargePage() {
   }
 
   const handleCheckPayment = async () => {
-    if (!paymentInfo?.orderId) return
+    if (!paymentInfo?.orderId || !user) return
 
     setCheckingPayment(true)
     try {
@@ -162,10 +162,10 @@ export default function RechargePage() {
         const data = await response.json()
         if (data.order?.status === 'paid') {
           setCheckingPayment(false)
-          const { data: profileData, error: profileError } = await supabase
+          const { data: profileData, error: profileError } = await (supabase as any)
             .from('profiles')
             .select('credits')
-            .eq('id', user?.id)
+            .eq('id', user.id)
             .single()
 
           if (!profileError && profileData) {
