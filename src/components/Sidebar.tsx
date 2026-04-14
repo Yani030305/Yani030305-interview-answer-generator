@@ -164,7 +164,8 @@ export function Sidebar() {
               userMode,
               jobDescription,
               userId: user!.id,
-              isBatch: index === 0, // 只在第一个请求中扣除 999 积分
+              skipCreditDeduction: index > 0, // 批量生成的后续请求跳过积分扣除
+              isBatch: index === 0, // 第一个请求标记为批量生成
             }),
           })
 

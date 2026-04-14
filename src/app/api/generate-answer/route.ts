@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
 
   let isBatch: boolean = false
   let style: 'concise' | 'professional' | 'storytelling' | 'custom' | undefined
+  let skipCreditDeduction: boolean = false
   let requiredCredits: number = 10
 
   try {
@@ -28,7 +29,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     console.log('Request body parsed successfully')
     
-    const { question, documents, userMode, style: bodyStyle, adjustments, jobDescription, userId: bodyUserId, isBatch: bodyIsBatch } = body as {
+    const { question, documents, userMode, style: bodyStyle, adjustments, jobDescription, userId: bodyUserId, isBatch: bodyIsBatch, skipCreditDeduction: bodySkipCreditDeduction } = body as {
       question: QuestionItem
       documents: UploadedDocument[]
       userMode: UserMode
@@ -37,10 +38,12 @@ export async function POST(request: NextRequest) {
       jobDescription?: UploadedDocument | null
       userId?: string
       isBatch?: boolean
+      skipCreditDeduction?: boolean
     }
 
     isBatch = bodyIsBatch || false
     style = bodyStyle
+    skipCreditDeduction = bodySkipCreditDeduction || false
     
     // 计算所需积分
     if (isBatch) {
@@ -136,9 +139,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 只有当 isBatch 为 true 或 style 存在时才扣除积分
-    // 批量生成的后续请求（isBatch 为 false）不扣除积分
-    if (isBatch || style) {
+    // 只有当 skipCreditDeduction 为 false 或不存在时才扣除积分
+    // 批量生成的后续请求会传递 skipCreditDeduction: true 来跳过积分扣除
+    if (!skipCreditDeduction) {
       const { data: deductResult, error: deductError } = await (supabase as any).rpc('deduct_credits', {
         p_user_id: userId,
         p_amount: requiredCredits,
@@ -181,8 +184,8 @@ export async function POST(request: NextRequest) {
         errorMessage: aiError instanceof Error ? aiError.message : 'Unknown error',
       })
 
-      // 只有当 isBatch 为 true 或 style 存在时才退款
-      if (isBatch || style) {
+      // 只有当扣除了积分时才退款
+      if (!skipCreditDeduction) {
         const { data: refundResult, error: refundError } = await (supabase as any).rpc('refund_credits', {
           p_user_id: userId,
           p_amount: requiredCredits,
@@ -231,8 +234,8 @@ export async function POST(request: NextRequest) {
         requestBody: { questionId: question.id },
       })
 
-      // 只有当 isBatch 为 true 或 style 存在时才退款
-      if (isBatch || style) {
+      // 只有当扣除了积分时才退款
+      if (!skipCreditDeduction) {
         const { error: refundError } = await (supabase as any).rpc('refund_credits', {
           p_user_id: userId,
           p_amount: requiredCredits,
@@ -299,8 +302,8 @@ export async function POST(request: NextRequest) {
           process.env.SUPABASE_SERVICE_ROLE_KEY!
         )
 
-        // 只有当 isBatch 为 true 或 style 存在时才退款
-        if (isBatch || style) {
+        // 只有当扣除了积分时才退款
+        if (!skipCreditDeduction) {
           const { error: refundError } = await (supabase as any).rpc('refund_credits', {
             p_user_id: userId,
             p_amount: requiredCredits,
