@@ -175,16 +175,10 @@ export default function RechargePage() {
           alert('支付成功！积分已到账')
           router.push('/')
         } else {
-          setCheckingPayment(false)
           alert('订单尚未支付，请完成支付后重试')
         }
-      } else {
-        setCheckingPayment(false)
-        const errorData = await response.json()
-        alert(`查询订单状态失败: ${errorData.error || '未知错误'}`)
       }
     } catch (err) {
-      setCheckingPayment(false)
       console.error('Failed to check payment status:', err)
       alert('查询订单状态失败，请稍后重试')
     }

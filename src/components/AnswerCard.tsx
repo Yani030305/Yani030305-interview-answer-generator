@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useCallback, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import {
   Copy,
   RefreshCw,
@@ -36,7 +35,6 @@ interface AnswerCardProps {
 }
 
 export function AnswerCard({ question }: AnswerCardProps) {
-  const router = useRouter()
   const { documents, userMode, answers, setAnswer, updateAnswer, setIsGenerating, isGenerating, currentGeneratingId, uiLanguage, jobDescription, remainingTime, setRemainingTime } =
     useAppStore()
   const { user, credits, setCredits, answerHistory, addAnswerHistory } = useAuthStore()
@@ -174,8 +172,7 @@ export function AnswerCard({ question }: AnswerCardProps) {
     }
   }, [question, documents, userMode, setAnswer, setIsGenerating, jobDescription, user, updateCredits])
 
-  const handleGenerate = useCallback(async (e: React.MouseEvent) => {
-    e.preventDefault()
+  const handleGenerate = useCallback(async () => {
     if (documents.length === 0) {
       alert(t.answerCard.uploadDocumentsFirst)
       return
@@ -191,7 +188,7 @@ export function AnswerCard({ question }: AnswerCardProps) {
     if (credits < requiredCredits) {
       if (confirm(`积分不足！需要 ${requiredCredits} 积分，当前 ${credits} 积分。是否前往充值？`)) {
         // 跳转到充值页面
-        router.push('/recharge')
+        window.location.href = '/recharge'
       }
       return
     }
@@ -206,8 +203,7 @@ export function AnswerCard({ question }: AnswerCardProps) {
   }, [documents, user, credits, needsJDConfirmation, executeGenerate, t])
 
   const handleRegenerate = useCallback(
-    async (e: React.MouseEvent | undefined, adjustments?: string) => {
-      if (e) e.preventDefault()
+    async (adjustments?: string) => {
       if (documents.length === 0) return
       if (!user) {
         alert('请先登录')
@@ -219,7 +215,7 @@ export function AnswerCard({ question }: AnswerCardProps) {
       if (credits < requiredCredits) {
         if (confirm(`积分不足！需要 ${requiredCredits} 积分，当前 ${credits} 积分。是否前往充值？`)) {
           // 跳转到充值页面
-          router.push('/recharge')
+          window.location.href = '/recharge'
         }
         return
       }
@@ -642,7 +638,7 @@ export function AnswerCard({ question }: AnswerCardProps) {
                       </Button>
                       <Button
                         className="flex-1"
-                        onClick={(e) => handleRegenerate(e, regenerateInput)}
+                        onClick={() => handleRegenerate(regenerateInput)}
                         disabled={isCurrentlyGenerating}
                       >
                         {isCurrentlyGenerating ? (

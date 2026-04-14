@@ -2,7 +2,6 @@
 
 import { Download, FileText, Loader2, Sparkles, Trash2, CheckCircle, X } from 'lucide-react'
 import { useState, useCallback, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
@@ -33,7 +32,6 @@ export function Sidebar() {
     setRemainingTime,
   } = useAppStore()
   const { user, credits, setCredits } = useAuthStore()
-  const router = useRouter()
 
   const t = translations[uiLanguage]
   const [isExporting, setIsExporting] = useState(false)
@@ -210,8 +208,7 @@ export function Sidebar() {
     }
   }, [applicableQuestions, answers, documents, setAnswer, setIsGenerating, setStopGeneration, userMode, jobDescription, user, credits, updateCredits])
 
-  const handleGenerateAll = useCallback(async (e: React.MouseEvent) => {
-    e.preventDefault()
+  const handleGenerateAll = useCallback(async () => {
     if (documents.length === 0) {
       alert(t.answerCard.uploadDocumentsFirst)
       return
@@ -227,7 +224,7 @@ export function Sidebar() {
     if (credits < requiredCredits) {
       if (confirm(`积分不足！需要 ${requiredCredits} 积分，当前 ${credits} 积分。是否前往充值？`)) {
         // 跳转到充值页面
-        router.push('/recharge')
+        window.location.href = '/recharge'
       }
       return
     }
