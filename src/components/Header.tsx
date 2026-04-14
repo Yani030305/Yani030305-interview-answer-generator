@@ -56,15 +56,14 @@ export function Header() {
 
         if (!profileError && profileData) {
           setCredits((profileData as any).credits ?? 0)
-        } else {
-          setCredits(0)
         }
+        // 注意：查询失败时不再重置积分，保持当前值
 
         // 然后获取历史记录
         await fetchAnswerHistory(userId)
       } catch (e) {
         console.error('Failed to load user data:', e)
-        setCredits(0)
+        // 发生错误时不再重置积分，保持当前值
         setAnswerHistory([])
       }
     },
@@ -208,14 +207,7 @@ export function Header() {
             </span>
           </div>
 
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setUILanguage(uiLanguage === 'zh' ? 'en' : 'zh')}
-          >
-            <Languages className="h-4 w-4 mr-1" />
-            {uiLanguage === 'zh' ? t.common.en : t.common.zh}
-          </Button>
+
 
           <Button
             variant="ghost"

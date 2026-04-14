@@ -22,6 +22,8 @@ interface AppStore extends AppState {
   setAnswerStatus: (questionId: string, status: AnswerStatus) => void
   setIsGenerating: (isGenerating: boolean, questionId?: string | null) => void
   setStopGeneration: (stop: boolean) => void
+  setEstimatedTime: (time: number) => void
+  setRemainingTime: (time: number) => void
   setShowFilteredQuestions: (show: boolean) => void
   setSelectedTags: (tags: QuestionTag[]) => void
   toggleTag: (tag: QuestionTag) => void
@@ -49,6 +51,8 @@ export const useAppStore = create<AppStore>()((set, get) => ({
   isGenerating: false,
   currentGeneratingId: null,
   stopGeneration: false,
+  estimatedTime: 0, // 预计生成时间（秒）
+  remainingTime: 0, // 剩余时间（秒）
   showFilteredQuestions: false,
   selectedTags: [],
   searchQuery: '',
@@ -115,9 +119,16 @@ export const useAppStore = create<AppStore>()((set, get) => ({
       isGenerating,
       currentGeneratingId: questionId,
       stopGeneration: false,
+      // 开始生成时设置预计时间，结束生成时重置时间
+      estimatedTime: isGenerating ? 30 : 0, // 默认预计30秒
+      remainingTime: isGenerating ? 30 : 0,
     }),
 
   setStopGeneration: (stop) => set({ stopGeneration: stop }),
+
+  setEstimatedTime: (time) => set({ estimatedTime: time }),
+
+  setRemainingTime: (time) => set({ remainingTime: Math.max(0, time) }),
 
   setShowFilteredQuestions: (show) =>
     set({ showFilteredQuestions: show }),

@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { User } from '@supabase/supabase-js'
 import { AnswerHistoryItem } from '@/types'
+import { supabase } from '@/lib/supabase'
 
 interface AuthState {
   user: User | null
@@ -17,6 +18,7 @@ interface AuthState {
   removeAnswerHistory: (id: string) => void
   clearAnswerHistory: () => void
   fetchAnswerHistory: (userId?: string) => Promise<void>
+  refreshCredits: (userId?: string) => Promise<void>
 }
 
 export const useAuthStore = create<AuthState>()((set, get) => ({
@@ -90,6 +92,35 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       set({ answerHistory: [] })
     } finally {
       set({ historyLoading: false })
+    }
+  },
+
+  refreshCredits: async (userId?: string) => {
+    const targetUserId = userId || get().user?.id
+    if (!targetUserId) return
+
+    try {
+      // 添加超时处理
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000) // 10秒超时
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('credits')
+        .eq('id', targetUserId)
+        .single()
+
+      clearTimeout(timeoutId)
+
+      if (!error && data) {
+        set({ credits: (data as any).credits ?? 0 })
+      }
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        console.error('Refresh credits timeout')
+      } else {
+        console.error('Error refreshing credits:', error)
+      }
     }
   },
 }))

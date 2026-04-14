@@ -7,12 +7,17 @@ import { logger, getIpAddress, getUserAgent } from '@/lib/logger'
 import { checkRateLimit, createRateLimitResponse } from '@/lib/rate-limit'
 
 const CREDITS_PER_GENERATION = 10
+const CREDITS_FOR_BATCH_GENERATION = 999
 
 export async function POST(request: NextRequest) {
   const startTime = Date.now()
   let userId: string | undefined
   let ipAddress: string | undefined
   let userAgent: string | undefined
+
+  let isBatch: boolean = false
+  let style: 'concise' | 'professional' | 'storytelling' | 'custom' | undefined
+  let requiredCredits: number = 10
 
   try {
     console.log('=== generate-answer API called ===')
@@ -23,7 +28,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     console.log('Request body parsed successfully')
     
-    const { question, documents, userMode, style, adjustments, jobDescription, userId: bodyUserId } = body as {
+    const { question, documents, userMode, style: bodyStyle, adjustments, jobDescription, userId: bodyUserId, isBatch: bodyIsBatch } = body as {
       question: QuestionItem
       documents: UploadedDocument[]
       userMode: UserMode
@@ -31,6 +36,22 @@ export async function POST(request: NextRequest) {
       adjustments?: string
       jobDescription?: UploadedDocument | null
       userId?: string
+      isBatch?: boolean
+    }
+
+    isBatch = bodyIsBatch || false
+    style = bodyStyle
+    
+    // 计算所需积分
+    if (isBatch) {
+      // 批量生成的第一个请求，扣除 999 积分
+      requiredCredits = CREDITS_FOR_BATCH_GENERATION
+    } else if (style) {
+      // 重新生成，扣除 10 积分
+      requiredCredits = CREDITS_PER_GENERATION
+    } else {
+      // 单个生成，扣除 10 积分
+      requiredCredits = CREDITS_PER_GENERATION
     }
     
     userId = bodyUserId
@@ -94,49 +115,53 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (!profile || (profile as any).credits < CREDITS_PER_GENERATION) {
+    if (!profile || (profile as any).credits < requiredCredits) {
       await logger.warn('Insufficient credits', {
         userId,
         endpoint: '/api/generate-answer',
         method: 'POST',
         ipAddress,
         userAgent,
-        requestBody: { requiredCredits: CREDITS_PER_GENERATION, currentCredits: (profile as any)?.credits || 0 },
+        requestBody: { requiredCredits, currentCredits: (profile as any)?.credits || 0, isBatch, style },
       })
 
       return NextResponse.json(
         { 
-          error: `积分不足！需要 ${CREDITS_PER_GENERATION} 积分，当前 ${(profile as any)?.credits || 0} 积分`,
+          error: `积分不足！需要 ${requiredCredits} 积分，当前 ${(profile as any)?.credits || 0} 积分`,
           errorCode: 'INSUFFICIENT_CREDITS',
-          requiredCredits: CREDITS_PER_GENERATION,
+          requiredCredits,
           currentCredits: (profile as any)?.credits || 0,
         },
         { status: 402 }
       )
     }
 
-    const { data: deductResult, error: deductError } = await (supabase as any).rpc('deduct_credits', {
-      p_user_id: userId,
-      p_amount: CREDITS_PER_GENERATION,
-      p_description: style ? '重新生成回答' : '生成回答',
-      p_ip_address: ipAddress,
-      p_user_agent: userAgent,
-    })
-
-    if (deductError || !deductResult) {
-      await logger.error('Failed to deduct credits', {
-        userId,
-        endpoint: '/api/generate-answer',
-        method: 'POST',
-        ipAddress,
-        userAgent,
-        errorMessage: deductError?.message,
+    // 只有当 isBatch 为 true 或 style 存在时才扣除积分
+    // 批量生成的后续请求（isBatch 为 false）不扣除积分
+    if (isBatch || style) {
+      const { data: deductResult, error: deductError } = await (supabase as any).rpc('deduct_credits', {
+        p_user_id: userId,
+        p_amount: requiredCredits,
+        p_description: isBatch ? '一键生成全部回答' : style ? '重新生成回答' : '生成回答',
+        p_ip_address: ipAddress,
+        p_user_agent: userAgent,
       })
 
-      return NextResponse.json(
-        { error: '扣除积分失败，请重试', errorCode: 'DEDUCT_CREDITS_ERROR' },
-        { status: 500 }
-      )
+      if (deductError || !deductResult) {
+        await logger.error('Failed to deduct credits', {
+          userId,
+          endpoint: '/api/generate-answer',
+          method: 'POST',
+          ipAddress,
+          userAgent,
+          errorMessage: deductError?.message,
+        })
+
+        return NextResponse.json(
+          { error: '扣除积分失败，请重试', errorCode: 'DEDUCT_CREDITS_ERROR' },
+          { status: 500 }
+        )
+      }
     }
 
     let result
@@ -156,21 +181,24 @@ export async function POST(request: NextRequest) {
         errorMessage: aiError instanceof Error ? aiError.message : 'Unknown error',
       })
 
-      const { data: refundResult, error: refundError } = await (supabase as any).rpc('refund_credits', {
-        p_user_id: userId,
-        p_amount: CREDITS_PER_GENERATION,
-        p_description: 'AI 生成失败，退还积分',
-      })
-
-      if (refundError) {
-        await logger.error('Failed to refund credits after AI error', {
-          userId,
-          endpoint: '/api/generate-answer',
-          method: 'POST',
-          ipAddress,
-          userAgent,
-          errorMessage: refundError.message,
+      // 只有当 isBatch 为 true 或 style 存在时才退款
+      if (isBatch || style) {
+        const { data: refundResult, error: refundError } = await (supabase as any).rpc('refund_credits', {
+          p_user_id: userId,
+          p_amount: requiredCredits,
+          p_description: 'AI 生成失败，退还积分',
         })
+
+        if (refundError) {
+          await logger.error('Failed to refund credits after AI error', {
+            userId,
+            endpoint: '/api/generate-answer',
+            method: 'POST',
+            ipAddress,
+            userAgent,
+            errorMessage: refundError.message,
+          })
+        }
       }
 
       return NextResponse.json(
@@ -203,21 +231,24 @@ export async function POST(request: NextRequest) {
         requestBody: { questionId: question.id },
       })
 
-      const { error: refundError } = await (supabase as any).rpc('refund_credits', {
-        p_user_id: userId,
-        p_amount: CREDITS_PER_GENERATION,
-        p_description: '保存历史记录失败，退还积分',
-      })
-
-      if (refundError) {
-        await logger.error('Failed to refund credits after history error', {
-          userId,
-          endpoint: '/api/generate-answer',
-          method: 'POST',
-          ipAddress,
-          userAgent,
-          errorMessage: refundError.message,
+      // 只有当 isBatch 为 true 或 style 存在时才退款
+      if (isBatch || style) {
+        const { error: refundError } = await (supabase as any).rpc('refund_credits', {
+          p_user_id: userId,
+          p_amount: requiredCredits,
+          p_description: '保存历史记录失败，退还积分',
         })
+
+        if (refundError) {
+          await logger.error('Failed to refund credits after history error', {
+            userId,
+            endpoint: '/api/generate-answer',
+            method: 'POST',
+            ipAddress,
+            userAgent,
+            errorMessage: refundError.message,
+          })
+        }
       }
 
       return NextResponse.json(
@@ -268,29 +299,32 @@ export async function POST(request: NextRequest) {
           process.env.SUPABASE_SERVICE_ROLE_KEY!
         )
 
-        const { error: refundError } = await (supabase as any).rpc('refund_credits', {
-          p_user_id: userId,
-          p_amount: CREDITS_PER_GENERATION,
-          p_description: '系统错误，退还积分',
-        })
+        // 只有当 isBatch 为 true 或 style 存在时才退款
+        if (isBatch || style) {
+          const { error: refundError } = await (supabase as any).rpc('refund_credits', {
+            p_user_id: userId,
+            p_amount: requiredCredits,
+            p_description: '系统错误，退还积分',
+          })
 
-        if (refundError) {
-          await logger.error('Failed to refund credits after unexpected error', {
-            userId,
-            endpoint: '/api/generate-answer',
-            method: 'POST',
-            ipAddress,
-            userAgent,
-            errorMessage: refundError.message,
-          })
-        } else {
-          await logger.info('Credits refunded after unexpected error', {
-            userId,
-            endpoint: '/api/generate-answer',
-            method: 'POST',
-            ipAddress,
-            userAgent,
-          })
+          if (refundError) {
+            await logger.error('Failed to refund credits after unexpected error', {
+              userId,
+              endpoint: '/api/generate-answer',
+              method: 'POST',
+              ipAddress,
+              userAgent,
+              errorMessage: refundError.message,
+            })
+          } else {
+            await logger.info('Credits refunded after unexpected error', {
+              userId,
+              endpoint: '/api/generate-answer',
+              method: 'POST',
+              ipAddress,
+              userAgent,
+            })
+          }
         }
       } catch (refundException) {
         await logger.error('Exception during refund process', {

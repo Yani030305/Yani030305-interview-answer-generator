@@ -35,7 +35,7 @@ interface AnswerCardProps {
 }
 
 export function AnswerCard({ question }: AnswerCardProps) {
-  const { documents, userMode, answers, setAnswer, updateAnswer, setIsGenerating, isGenerating, currentGeneratingId, uiLanguage, jobDescription } =
+  const { documents, userMode, answers, setAnswer, updateAnswer, setIsGenerating, isGenerating, currentGeneratingId, uiLanguage, jobDescription, remainingTime, setRemainingTime } =
     useAppStore()
   const { user, credits, setCredits, answerHistory, addAnswerHistory } = useAuthStore()
   const t = translations[uiLanguage]
@@ -86,6 +86,21 @@ export function AnswerCard({ question }: AnswerCardProps) {
 
   const status: AnswerStatus = answer?.status || 'idle'
   const isCurrentlyGenerating = isGenerating && currentGeneratingId === question.id
+
+  // 倒计时逻辑
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null
+    
+    if (isCurrentlyGenerating && remainingTime > 0) {
+      interval = setInterval(() => {
+        setRemainingTime(remainingTime - 1)
+      }, 1000)
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval)
+    }
+  }, [isCurrentlyGenerating, remainingTime, setRemainingTime])
 
   const updateCredits = useCallback(async () => {
     if (!user) return
@@ -157,7 +172,8 @@ export function AnswerCard({ question }: AnswerCardProps) {
     }
   }, [question, documents, userMode, setAnswer, setIsGenerating, jobDescription, user, updateCredits])
 
-  const handleGenerate = useCallback(async () => {
+  const handleGenerate = useCallback(async (e: React.MouseEvent) => {
+    e.preventDefault()
     if (documents.length === 0) {
       alert(t.answerCard.uploadDocumentsFirst)
       return
@@ -168,6 +184,16 @@ export function AnswerCard({ question }: AnswerCardProps) {
       return
     }
 
+    // 检查积分是否足够
+    const requiredCredits = 10
+    if (credits < requiredCredits) {
+      if (confirm(`积分不足！需要 ${requiredCredits} 积分，当前 ${credits} 积分。是否前往充值？`)) {
+        // 跳转到充值页面
+        window.location.href = '/recharge'
+      }
+      return
+    }
+
     if (needsJDConfirmation) {
       setPendingGenerate(() => executeGenerate)
       setShowJDConfirmDialog(true)
@@ -175,13 +201,24 @@ export function AnswerCard({ question }: AnswerCardProps) {
     }
 
     await executeGenerate()
-  }, [documents, user, needsJDConfirmation, executeGenerate, t])
+  }, [documents, user, credits, needsJDConfirmation, executeGenerate, t])
 
   const handleRegenerate = useCallback(
-    async (adjustments?: string) => {
+    async (e: React.MouseEvent | undefined, adjustments?: string) => {
+      if (e) e.preventDefault()
       if (documents.length === 0) return
       if (!user) {
         alert('请先登录')
+        return
+      }
+
+      // 检查积分是否足够
+      const requiredCredits = 10
+      if (credits < requiredCredits) {
+        if (confirm(`积分不足！需要 ${requiredCredits} 积分，当前 ${credits} 积分。是否前往充值？`)) {
+          // 跳转到充值页面
+          window.location.href = '/recharge'
+        }
         return
       }
 
@@ -285,7 +322,7 @@ export function AnswerCard({ question }: AnswerCardProps) {
         setRegenerateInput('')
       }
     },
-    [question, documents, userMode, setAnswer, updateAnswer, setIsGenerating, jobDescription, user, updateCredits, needsJDConfirmation]
+    [question, documents, userMode, setAnswer, updateAnswer, setIsGenerating, jobDescription, user, credits, updateCredits, needsJDConfirmation]
   )
 
   const handleCopy = useCallback(async () => {
@@ -440,7 +477,12 @@ export function AnswerCard({ question }: AnswerCardProps) {
         {status === 'generating' && (
           <div className="flex flex-col items-center justify-center py-8">
             <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
-            <p className="text-muted-foreground">{t.answerCard.generating}</p>
+            <p className="text-muted-foreground mb-2">{t.answerCard.generating}</p>
+            {remainingTime > 0 && (
+              <p className="text-sm text-muted-foreground">
+                预计还需 {remainingTime} 秒
+              </p>
+            )}
           </div>
         )}
 
@@ -598,7 +640,7 @@ export function AnswerCard({ question }: AnswerCardProps) {
                       </Button>
                       <Button
                         className="flex-1"
-                        onClick={() => handleRegenerate(regenerateInput)}
+                        onClick={(e) => handleRegenerate(e, regenerateInput)}
                         disabled={isCurrentlyGenerating}
                       >
                         {isCurrentlyGenerating ? (

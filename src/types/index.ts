@@ -86,6 +86,8 @@ export interface AppState {
   isGenerating: boolean
   currentGeneratingId: string | null
   stopGeneration: boolean
+  estimatedTime: number
+  remainingTime: number
   showFilteredQuestions: boolean
   selectedTags: QuestionTag[]
   searchQuery: string

@@ -1,7 +1,7 @@
 'use client'
 
 import { Download, FileText, Loader2, Sparkles, Trash2, CheckCircle, X } from 'lucide-react'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
@@ -10,7 +10,8 @@ import { useAuthStore } from '@/store/auth-store'
 import { getAllQuestions, filterQuestionsByMode } from '@/data/questions'
 import { translations } from '@/lib/translations'
 import { JobDescriptionUploader } from '@/components/JobDescriptionUploader'
-import { supabase } from '@/lib/supabase'
+import { supabase, createClient } from '@/lib/supabase'
+import { Database } from '@/types/supabase'
 
 export function Sidebar() {
   const {
@@ -27,8 +28,10 @@ export function Sidebar() {
     showFilteredQuestions,
     getGeneratedCount,
     clearAllAnswers,
+    remainingTime,
+    setRemainingTime,
   } = useAppStore()
-  const { user, setCredits } = useAuthStore()
+  const { user, credits, setCredits } = useAuthStore()
 
   const t = translations[uiLanguage]
   const [isExporting, setIsExporting] = useState(false)
@@ -76,6 +79,28 @@ export function Sidebar() {
   )
   const needsJDConfirmation = !jobDescription && hasJDRequiredQuestions
 
+  // 倒计时逻辑
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null
+    
+    if (isGenerating && remainingTime > 0) {
+      interval = setInterval(() => {
+        setRemainingTime(remainingTime - 1)
+      }, 1000)
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval)
+    }
+  }, [isGenerating, remainingTime, setRemainingTime])
+
+  // 监听生成状态变化，重置进度
+  useEffect(() => {
+    if (!isGenerating) {
+      setBatchProgress(0)
+    }
+  }, [isGenerating])
+
   const updateCredits = useCallback(async () => {
     if (!user) return
     try {
@@ -109,7 +134,8 @@ export function Sidebar() {
     let completed = 0
 
     try {
-      for (const question of questionsToGenerate) {
+      // 批量生成所有回答
+      for (const [index, question] of questionsToGenerate.entries()) {
         if (useAppStore.getState().stopGeneration) {
           setAnswer(question.id, {
             questionId: question.id,
@@ -138,6 +164,7 @@ export function Sidebar() {
               userMode,
               jobDescription,
               userId: user!.id,
+              isBatch: index === 0, // 只在第一个请求中扣除 999 积分
             }),
           })
 
@@ -156,7 +183,9 @@ export function Sidebar() {
             updatedAt: new Date().toISOString(),
           })
           
-          await updateCredits()
+          if (index === 0) {
+            await updateCredits() // 只在第一个请求后更新积分显示
+          }
         } catch (error) {
           setAnswer(question.id, {
             questionId: question.id,
@@ -170,14 +199,17 @@ export function Sidebar() {
         completed++
         setBatchProgress((completed / questionsToGenerate.length) * 100)
       }
+    } catch (error) {
+      alert(error instanceof Error ? error.message : '生成失败，请重试')
     } finally {
       setStopGeneration(false)
       setIsGenerating(false)
       setBatchProgress(0)
     }
-  }, [applicableQuestions, answers, documents, setAnswer, setIsGenerating, setStopGeneration, userMode, jobDescription, user, updateCredits])
+  }, [applicableQuestions, answers, documents, setAnswer, setIsGenerating, setStopGeneration, userMode, jobDescription, user, credits, updateCredits])
 
-  const handleGenerateAll = useCallback(async () => {
+  const handleGenerateAll = useCallback(async (e: React.MouseEvent) => {
+    e.preventDefault()
     if (documents.length === 0) {
       alert(t.answerCard.uploadDocumentsFirst)
       return
@@ -188,6 +220,16 @@ export function Sidebar() {
       return
     }
 
+    // 检查积分是否足够
+    const requiredCredits = 999
+    if (credits < requiredCredits) {
+      if (confirm(`积分不足！需要 ${requiredCredits} 积分，当前 ${credits} 积分。是否前往充值？`)) {
+        // 跳转到充值页面
+        window.location.href = '/recharge'
+      }
+      return
+    }
+
     if (needsJDConfirmation) {
       setPendingGenerate(() => executeGenerateAll)
       setShowJDConfirmDialog(true)
@@ -195,7 +237,7 @@ export function Sidebar() {
     }
 
     await executeGenerateAll()
-  }, [documents, user, needsJDConfirmation, executeGenerateAll, t])
+  }, [documents, user, credits, needsJDConfirmation, executeGenerateAll, t])
 
   const handleExport = useCallback(
     async (format: 'docx' | 'markdown') => {
@@ -270,11 +312,16 @@ export function Sidebar() {
             <>
               <Loader2 className="h-4 w-4 mr-2 animate-spin" />
               {t.answerCard.generating} {Math.round(batchProgress)}%
+              {remainingTime > 0 && (
+                <span className="ml-2 text-xs">
+                  ({remainingTime}s)
+                </span>
+              )}
             </>
           ) : (
-            <>
+            <>            
               <Sparkles className="h-4 w-4 mr-2" />
-              {t.answerCard.generateAnswer} (10积分)
+              一键生成全部回答 (999积分)
             </>
           )}
         </Button>

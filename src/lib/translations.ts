@@ -85,6 +85,10 @@ export const translations = {
       pleaseLogin: '请先登录',
       exportFailed: '导出失败，请重试',
     },
+    answerHistory: {
+      title: '历史生成记录',
+      noHistory: '暂无历史生成记录',
+    },
   },
   en: {
     header: {
@@ -171,6 +175,10 @@ export const translations = {
       failedToExport: 'Failed to export',
       pleaseLogin: 'Please login first',
       exportFailed: 'Export failed, please retry',
+    },
+    answerHistory: {
+      title: 'Generation History',
+      noHistory: 'No generation history yet',
     },
   },
 }
