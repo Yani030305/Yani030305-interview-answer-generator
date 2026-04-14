@@ -140,11 +140,22 @@ export function Header() {
   }
 
   const handleLogout = async () => {
-    await supabase.auth.signOut()
-    setUser(null)
-    setCredits(0)
-    setAnswerHistory([])
-    router.push('/auth')
+    try {
+      await supabase.auth.signOut()
+      // 清除本地状态
+      setUser(null)
+      setCredits(0)
+      setAnswerHistory([])
+      // 跳转到登录页面
+      router.push('/auth')
+    } catch (error) {
+      console.error('Logout failed:', error)
+      // 即使出错也要清除本地状态并跳转
+      setUser(null)
+      setCredits(0)
+      setAnswerHistory([])
+      router.push('/auth')
+    }
   }
 
   return (

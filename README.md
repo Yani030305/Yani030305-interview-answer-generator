@@ -17,11 +17,14 @@ NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 
-# XorPay 支付配置
-XORPAY_AID=your_xorpay_aid
-XORPAY_APP_SECRET=your_xorpay_app_secret
-XORPAY_NOTIFY_URL=https://yourdomain.com/api/payment/callback
+# ZPAY 支付配置
+ZPAY_PID=your_zpay_pid
+ZPAY_KEY=your_zpay_key
+ZPAY_GATEWAY=your_zpay_gateway
+ZPAY_NOTIFY_URL=https://yourdomain.com/api/payment/callback
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+# 可选
+# ZPAY_CID=your_zpay_cid
 ```
 
 ## 安装与运行
