@@ -231,10 +231,10 @@ export default function RechargePage() {
                 </p>
                 
                 <div className="mb-4">
-                  <p className="text-sm text-blue-700 mb-2">请使用微信或支付宝扫描二维码完成支付：</p>
+                  <p className="text-sm text-blue-700 mb-2">请使用支付宝扫描二维码完成支付：</p>
                   <div className="bg-white p-4 rounded-lg inline-block">
                     <img 
-                      src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(paymentInfo.qrUrl)}`}
+                      src={paymentInfo.qrUrl}
                       alt="支付二维码"
                       className="w-48 h-48"
                     />
@@ -352,6 +352,20 @@ export default function RechargePage() {
             <li>• 充值后积分立即到账</li>
             <li>• 如有问题请联系客服</li>
           </ul>
+        </div>
+
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-6">
+          <div className="flex items-start gap-3">
+            <AlertCircle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <h4 className="font-semibold text-amber-900 mb-1">重要提示</h4>
+              <ul className="text-sm text-amber-800 space-y-1">
+                <li>• 本产品为虚拟商品，一经充值成功，概不退款</li>
+                <li>• 请在充值前确认您的需求，谨慎购买</li>
+                <li>• 如有任何疑问，请联系客服咨询</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ interface AnswerCardProps {
 export function AnswerCard({ question }: AnswerCardProps) {
   const { documents, userMode, answers, setAnswer, updateAnswer, setIsGenerating, isGenerating, currentGeneratingId, uiLanguage, jobDescription } =
     useAppStore()
-  const { user, credits, setCredits } = useAuthStore()
+  const { user, credits, setCredits, answerHistory, addAnswerHistory } = useAuthStore()
   const t = translations[uiLanguage]
 
   const answer = answers[question.id]
@@ -344,17 +344,22 @@ export function AnswerCard({ question }: AnswerCardProps) {
                 answerEn: answer.answerEn || '',
               }),
             })
-            if (!response.ok) {
-              console.error('Error saving history on unmount:', await response.json())
+            if (response.ok) {
+              const data = await response.json()
+              if (data.history) {
+                addAnswerHistory(data.history)
+              }
+            } else {
+              console.error('保存历史记录失败:', await response.json())
             }
           } catch (error) {
-            console.error('Error saving history on unmount:', error)
+            console.error('保存历史记录失败:', error)
           }
         }
         saveToHistory()
       }
     }
-  }, [status, user, question.id, answer])
+  }, [status, user, question.id, answer, addAnswerHistory])
 
   const currentText = displayLang === 'zh'
     ? (answer?.editedZh || answer?.answerZh || '').replace(/\\n/g, '\n')
@@ -618,6 +623,7 @@ export function AnswerCard({ question }: AnswerCardProps) {
             questionId={question.id}
             userId={user.id}
             onReplace={handleHistoryReplace}
+            allHistory={answerHistory}
           />
         )}
 

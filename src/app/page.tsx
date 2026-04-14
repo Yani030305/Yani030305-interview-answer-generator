@@ -6,10 +6,11 @@ import { FileUploader } from '@/components/FileUploader'
 import { QuestionNav } from '@/components/QuestionNav'
 import { AnswerCard } from '@/components/AnswerCard'
 import { Sidebar } from '@/components/Sidebar'
+import { JobDescriptionUploader } from '@/components/JobDescriptionUploader'
 import { useAppStore } from '@/store'
 import { questionCategories, getAllQuestions, filterQuestionsByMode, filterQuestionsByTags, searchQuestions } from '@/data/questions'
 import { QuestionItem } from '@/types'
-import { FileUp, MessageSquare } from 'lucide-react'
+import { FileUp, MessageSquare, Briefcase } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useTranslation } from '@/lib/translations'
 
@@ -54,6 +55,14 @@ export default function Home() {
                   {t.sidebar.documents}
                 </h2>
                 <FileUploader />
+              </div>
+
+              <div className="mb-4">
+                <h2 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                  <Briefcase className="h-5 w-5" />
+                  {t.sidebar.jobDescription}
+                </h2>
+                <JobDescriptionUploader />
               </div>
 
               <div>

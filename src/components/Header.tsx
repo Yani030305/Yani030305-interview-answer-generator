@@ -1,12 +1,27 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { GraduationCap, Briefcase, Languages, Moon, Sun, User, LogOut, Coins, Plus } from 'lucide-react'
+import {
+  GraduationCap,
+  Briefcase,
+  Languages,
+  Moon,
+  Sun,
+  User,
+  LogOut,
+  Coins,
+  Plus,
+} from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { useAppStore } from '@/store'
 import { useAuthStore } from '@/store/auth-store'
 import { translations } from '@/lib/translations'
@@ -15,14 +30,110 @@ import { supabase } from '@/lib/supabase'
 export function Header() {
   const router = useRouter()
   const { userMode, setUserMode, uiLanguage, setUILanguage } = useAppStore()
-  const { user, setUser, credits, setCredits } = useAuthStore()
+  const {
+    user,
+    setUser,
+    credits,
+    setCredits,
+    setAnswerHistory,
+    setHistoryLoading,
+    setLoading,
+    fetchAnswerHistory,
+  } = useAuthStore()
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const t = translations[uiLanguage]
 
+  const loadUserData = useCallback(
+    async (userId: string) => {
+      try {
+        // 先获取用户积分
+        const { data: profileData, error: profileError } = await supabase
+          .from('profiles')
+          .select('credits')
+          .eq('id', userId)
+          .single()
+
+        if (!profileError && profileData) {
+          setCredits((profileData as any).credits ?? 0)
+        } else {
+          setCredits(0)
+        }
+
+        // 然后获取历史记录
+        await fetchAnswerHistory(userId)
+      } catch (e) {
+        console.error('Failed to load user data:', e)
+        setCredits(0)
+        setAnswerHistory([])
+      }
+    },
+    [fetchAnswerHistory, setCredits, setAnswerHistory]
+  )
+
   useEffect(() => {
+    let alive = true
     setMounted(true)
-  }, [])
+
+    const initAuth = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession()
+
+        if (!alive) return
+
+        if (session?.user) {
+          setUser(session.user)
+          // 异步加载用户数据，不阻塞页面渲染
+          loadUserData(session.user.id).catch(err => {
+            console.error('Failed to load user data:', err)
+          })
+        } else {
+          // 只有当没有会话时才设置默认状态
+          setUser(null)
+          setCredits(0)
+          setAnswerHistory([])
+        }
+      } catch (e) {
+        console.error('Failed to initialize auth:', e)
+        // 发生错误时设置默认状态
+        setUser(null)
+        setCredits(0)
+        setAnswerHistory([])
+      }
+    }
+
+    // 异步执行认证初始化，不阻塞页面渲染
+    initAuth()
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (!alive) return
+
+      try {
+        if (session?.user) {
+          setUser(session.user)
+          // 异步加载用户数据，不阻塞页面渲染
+          loadUserData(session.user.id).catch(err => {
+            console.error('Failed to load user data:', err)
+          })
+        } else {
+          setUser(null)
+          setCredits(0)
+          setAnswerHistory([])
+        }
+      } catch (e) {
+        console.error('Failed during auth state change:', e)
+      }
+    })
+
+    return () => {
+      alive = false
+      subscription.unsubscribe()
+    }
+  }, [setUser, setCredits, setAnswerHistory, loadUserData])
 
   if (!mounted) {
     return null
@@ -32,6 +143,7 @@ export function Header() {
     await supabase.auth.signOut()
     setUser(null)
     setCredits(0)
+    setAnswerHistory([])
     router.push('/auth')
   }
 
@@ -40,9 +152,7 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-4">
           <div>
-            <h1 className="text-xl font-bold tracking-tight">
-              {t.header.title}
-            </h1>
+            <h1 className="text-xl font-bold tracking-tight">{t.header.title}</h1>
             <p className="text-sm text-muted-foreground hidden sm:block">
               {t.header.subtitle}
             </p>
@@ -55,7 +165,9 @@ export function Header() {
               <div className="flex items-center gap-2 px-3 py-1.5 bg-muted rounded-lg">
                 <Coins className="h-4 w-4 text-yellow-500" />
                 <span className="font-semibold">{credits}</span>
-                <span className="text-sm text-muted-foreground">{t.header.credits}</span>
+                <span className="text-sm text-muted-foreground">
+                  {t.header.credits}
+                </span>
               </div>
               <Button
                 variant="outline"
@@ -71,7 +183,9 @@ export function Header() {
 
           <div className="flex items-center gap-2 border-r pr-4">
             <GraduationCap
-              className={`h-4 w-4 ${userMode === 'campus' ? 'text-primary' : 'text-muted-foreground'}`}
+              className={`h-4 w-4 ${
+                userMode === 'campus' ? 'text-primary' : 'text-muted-foreground'
+              }`}
             />
             <Switch
               checked={userMode === 'experienced'}
@@ -81,10 +195,16 @@ export function Header() {
               aria-label="Toggle user mode"
             />
             <Briefcase
-              className={`h-4 w-4 ${userMode === 'experienced' ? 'text-primary' : 'text-muted-foreground'}`}
+              className={`h-4 w-4 ${
+                userMode === 'experienced'
+                  ? 'text-primary'
+                  : 'text-muted-foreground'
+              }`}
             />
             <span className="text-xs text-muted-foreground ml-1 hidden md:inline">
-              {userMode === 'campus' ? t.header.campus : t.header.experienced}
+              {userMode === 'campus'
+                ? t.header.campus
+                : t.header.experienced}
             </span>
           </div>
 

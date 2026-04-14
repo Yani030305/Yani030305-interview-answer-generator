@@ -1,48 +1,28 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import { Clock, Copy, Trash2, Check, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { AnswerHistoryItem } from '@/types'
 import { copyToClipboard } from '@/lib/utils'
-import { supabase } from '@/lib/supabase'
+import { useAuthStore } from '@/store/auth-store'
 
 interface AnswerHistoryProps {
   questionId: string
   userId: string
   onReplace: (answerZh: string, answerEn: string) => void
+  allHistory: AnswerHistoryItem[]
 }
 
-export function AnswerHistory({ questionId, userId, onReplace }: AnswerHistoryProps) {
-  const [history, setHistory] = useState<AnswerHistoryItem[]>([])
-  const [loading, setLoading] = useState(true)
+export function AnswerHistory({ questionId, userId, onReplace, allHistory }: AnswerHistoryProps) {
+  const { removeAnswerHistory } = useAuthStore()
   const [copiedId, setCopiedId] = useState<string | null>(null)
   const [expandedId, setExpandedId] = useState<string | null>(null)
 
-  useEffect(() => {
-    fetchHistory()
-  }, [questionId, userId])
-
-  const fetchHistory = async () => {
-    try {
-      console.log('Fetching history for userId:', userId, 'questionId:', questionId)
-      const response = await fetch(
-        `/api/answer-history?userId=${encodeURIComponent(userId)}&questionId=${encodeURIComponent(questionId)}`
-      )
-      console.log('Response status:', response.status)
-      const data = await response.json()
-      console.log('Response data:', data)
-      if (response.ok) {
-        setHistory(data.history || [])
-      } else {
-        console.error('Error response:', data)
-      }
-    } catch (error) {
-      console.error('Error fetching history:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
+  // 从所有历史记录中筛选当前问题的记录
+  const history = useMemo(() => {
+    return allHistory.filter(item => item.questionId === questionId)
+  }, [allHistory, questionId])
 
   const handleCopy = async (item: AnswerHistoryItem) => {
     await copyToClipboard(item.answerZh)
@@ -59,10 +39,12 @@ export function AnswerHistory({ questionId, userId, onReplace }: AnswerHistoryPr
       })
 
       if (response.ok) {
-        setHistory(history.filter((h) => h.id !== id))
+        removeAnswerHistory(id)
+      } else {
+        throw new Error('删除失败')
       }
     } catch (error) {
-      console.error('Error deleting history:', error)
+      console.error('删除历史记录失败:', error)
     }
   }
 
@@ -79,10 +61,6 @@ export function AnswerHistory({ questionId, userId, onReplace }: AnswerHistoryPr
       hour: '2-digit',
       minute: '2-digit',
     })
-  }
-
-  if (loading) {
-    return <div className="text-sm text-muted-foreground">加载历史记录...</div>
   }
 
   if (history.length === 0) {

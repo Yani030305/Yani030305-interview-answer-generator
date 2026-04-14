@@ -101,77 +101,80 @@ export function Sidebar() {
 
     if (questionsToGenerate.length === 0) {
       alert(t.sidebar.allAnswersGenerated)
+      setIsGenerating(false)
       return
     }
 
     setIsGenerating(true)
     let completed = 0
 
-    for (const question of questionsToGenerate) {
-      if (useAppStore.getState().stopGeneration) {
-        setAnswer(question.id, {
-          questionId: question.id,
-          answerZh: '',
-          answerEn: '',
-          status: 'cancelled',
-          error: '生成已取消',
-        })
-        break
-      }
-
-      setAnswer(question.id, {
-        questionId: question.id,
-        answerZh: '',
-        answerEn: '',
-        status: 'generating',
-      })
-
-      try {
-        const response = await fetch('/api/generate-answer', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            question,
-            documents,
-            userMode,
-            jobDescription,
-            userId: user!.id,
-          }),
-        })
-
-        if (!response.ok) {
-          const errorData = await response.json()
-          throw new Error(errorData.error || t.common.failedToGenerate)
+    try {
+      for (const question of questionsToGenerate) {
+        if (useAppStore.getState().stopGeneration) {
+          setAnswer(question.id, {
+            questionId: question.id,
+            answerZh: '',
+            answerEn: '',
+            status: 'cancelled',
+            error: '生成已取消',
+          })
+          break
         }
 
-        const result = await response.json()
-        setAnswer(question.id, {
-          questionId: question.id,
-          answerZh: result.answerZh,
-          answerEn: result.answerEn,
-          sourceHighlights: result.highlights,
-          status: 'done',
-          updatedAt: new Date().toISOString(),
-        })
-        
-        await updateCredits()
-      } catch (error) {
         setAnswer(question.id, {
           questionId: question.id,
           answerZh: '',
           answerEn: '',
-          status: 'error',
-          error: error instanceof Error ? error.message : t.common.failedToGenerate,
+          status: 'generating',
         })
+
+        try {
+          const response = await fetch('/api/generate-answer', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              question,
+              documents,
+              userMode,
+              jobDescription,
+              userId: user!.id,
+            }),
+          })
+
+          if (!response.ok) {
+            const errorData = await response.json()
+            throw new Error(errorData.error || t.common.failedToGenerate)
+          }
+
+          const result = await response.json()
+          setAnswer(question.id, {
+            questionId: question.id,
+            answerZh: result.answerZh,
+            answerEn: result.answerEn,
+            sourceHighlights: result.highlights,
+            status: 'done',
+            updatedAt: new Date().toISOString(),
+          })
+          
+          await updateCredits()
+        } catch (error) {
+          setAnswer(question.id, {
+            questionId: question.id,
+            answerZh: '',
+            answerEn: '',
+            status: 'error',
+            error: error instanceof Error ? error.message : t.common.failedToGenerate,
+          })
+        }
+
+        completed++
+        setBatchProgress((completed / questionsToGenerate.length) * 100)
       }
-
-      completed++
-      setBatchProgress((completed / questionsToGenerate.length) * 100)
+    } finally {
+      setStopGeneration(false)
+      setIsGenerating(false)
+      setBatchProgress(0)
     }
-
-    setStopGeneration(false)
-    setIsGenerating(false)
-    setBatchProgress(0)
   }, [applicableQuestions, answers, documents, setAnswer, setIsGenerating, setStopGeneration, userMode, jobDescription, user, updateCredits])
 
   const handleGenerateAll = useCallback(async () => {
@@ -353,10 +356,7 @@ export function Sidebar() {
         )}
       </div>
 
-      <div className="pt-4 border-t space-y-2">
-        <h4 className="text-sm font-medium">{t.sidebar.jobDescription}</h4>
-        <JobDescriptionUploader />
-      </div>
+
 
       {showJDConfirmDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">

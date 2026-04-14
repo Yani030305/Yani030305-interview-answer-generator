@@ -2,91 +2,83 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { Database } from '@/types/supabase'
 import { logger, getIpAddress, getUserAgent } from '@/lib/logger'
-import crypto from 'crypto'
+import { createZPay, ZPayCallbackParams } from '@/lib/zpay'
 
-function verifyXorPaySign(
-  aoid: string,
-  order_id: string,
-  pay_price: string,
-  pay_time: string,
-  sign: string,
-  appSecret: string
-): boolean {
-  const signStr = aoid + order_id + pay_price + pay_time + appSecret
-  const calculatedSign = crypto.createHash('md5').update(signStr).digest('hex')
-  return calculatedSign === sign
-}
-
-export async function POST(request: NextRequest) {
+// 处理回调参数的通用函数
+async function handleCallback(request: NextRequest, method: 'POST' | 'GET') {
   const startTime = Date.now()
   const ipAddress = getIpAddress(request)
   const userAgent = getUserAgent(request)
 
   try {
-    const contentType = request.headers.get('content-type') || ''
-    
-    let aoid: string = ''
-    let order_id: string = ''
-    let pay_price: string = ''
-    let pay_time: string = ''
-    let sign: string = ''
-    
-    if (contentType.includes('application/x-www-form-urlencoded')) {
-      const formData = await request.formData()
-      aoid = (formData.get('aoid') as string) || ''
-      order_id = (formData.get('order_id') as string) || ''
-      pay_price = (formData.get('pay_price') as string) || ''
-      pay_time = (formData.get('pay_time') as string) || ''
-      sign = (formData.get('sign') as string) || ''
+    let callbackParams: ZPayCallbackParams
+
+    if (method === 'POST') {
+      const contentType = request.headers.get('content-type') || ''
+
+      if (contentType.includes('application/x-www-form-urlencoded')) {
+        const formData = await request.formData()
+        callbackParams = Object.fromEntries(formData.entries()) as ZPayCallbackParams
+      } else {
+        const body = await request.json()
+        callbackParams = body as ZPayCallbackParams
+      }
     } else {
-      const body = await request.json()
-      aoid = body.aoid || ''
-      order_id = body.order_id || ''
-      pay_price = body.pay_price || ''
-      pay_time = body.pay_time || ''
-      sign = body.sign || ''
+      const { searchParams } = new URL(request.url)
+      callbackParams = Object.fromEntries(searchParams.entries()) as ZPayCallbackParams
     }
 
-    if (!aoid || !order_id || !pay_price || !sign) {
-      await logger.warn('Missing XorPay callback parameters', {
+    const { out_trade_no, money, trade_no, trade_status, sign } = callbackParams
+
+    if (!out_trade_no || !money || !trade_no || !trade_status || !sign) {
+      await logger.warn('Missing ZPAY callback parameters', {
         endpoint: '/api/payment/callback',
-        method: 'POST',
+        method,
         ipAddress,
         userAgent,
-        requestBody: { aoid, order_id, pay_price, pay_time },
+        requestBody: callbackParams,
       })
 
       return new NextResponse('fail', { status: 400 })
     }
 
-    const xorpayAppSecret = process.env.XORPAY_APP_SECRET
-    if (!xorpayAppSecret) {
-      await logger.error('XorPay app secret not configured', {
+    let zpay
+    try {
+      zpay = createZPay()
+    } catch (error) {
+      await logger.error('ZPAY configuration error', {
         endpoint: '/api/payment/callback',
-        method: 'POST',
+        method,
         ipAddress,
         userAgent,
+        errorMessage: error instanceof Error ? error.message : 'Unknown error',
       })
 
       return new NextResponse('fail', { status: 500 })
     }
 
-    const isValidSign = verifyXorPaySign(
-      aoid,
-      order_id,
-      pay_price,
-      pay_time,
-      sign,
-      xorpayAppSecret
-    )
-    
+    // 验签
+    const isValidSign = zpay.verifySign(callbackParams)
     if (!isValidSign) {
-      await logger.error('XorPay signature verification failed', {
+      await logger.error('ZPAY signature verification failed', {
         endpoint: '/api/payment/callback',
-        method: 'POST',
+        method,
         ipAddress,
         userAgent,
-        requestBody: { aoid, order_id, pay_price, pay_time },
+        requestBody: callbackParams,
+      })
+
+      return new NextResponse('fail', { status: 400 })
+    }
+
+    // 支付状态校验
+    if (trade_status !== 'TRADE_SUCCESS') {
+      await logger.warn('ZPAY trade status is not success', {
+        endpoint: '/api/payment/callback',
+        method,
+        ipAddress,
+        userAgent,
+        requestBody: callbackParams,
       })
 
       return new NextResponse('fail', { status: 400 })
@@ -100,29 +92,30 @@ export async function POST(request: NextRequest) {
     const { data: order, error: orderError } = await (supabase as any)
       .from('orders')
       .select('*')
-      .eq('id', order_id)
+      .eq('id', out_trade_no)
       .single()
 
     if (orderError || !order) {
-      await logger.error('Order not found in XorPay callback', {
+      await logger.error('Order not found in ZPAY callback', {
         endpoint: '/api/payment/callback',
-        method: 'POST',
+        method,
         ipAddress,
         userAgent,
         errorMessage: orderError?.message,
-        requestBody: { order_id, aoid },
+        requestBody: { out_trade_no, trade_no },
       })
 
       return new NextResponse('fail', { status: 404 })
     }
 
+    // 幂等处理：已支付直接返回 success
     if ((order as any).status === 'paid') {
       await logger.info('Order already paid, skipping (idempotent)', {
         endpoint: '/api/payment/callback',
-        method: 'POST',
+        method,
         ipAddress,
         userAgent,
-        requestBody: { order_id, aoid, status: (order as any).status },
+        requestBody: { out_trade_no, trade_no, status: (order as any).status },
       })
 
       return new NextResponse('success', { status: 200 })
@@ -131,29 +124,29 @@ export async function POST(request: NextRequest) {
     if ((order as any).status !== 'pending') {
       await logger.warn('Invalid order status for payment', {
         endpoint: '/api/payment/callback',
-        method: 'POST',
+        method,
         ipAddress,
         userAgent,
-        requestBody: { order_id, aoid, status: (order as any).status },
+        requestBody: { out_trade_no, trade_no, status: (order as any).status },
       })
 
       return new NextResponse('fail', { status: 400 })
     }
 
     const orderPrice = Number((order as any).price).toFixed(2)
-    const paidPrice = Number(pay_price).toFixed(2)
-    
+    const paidPrice = Number(money).toFixed(2)
+
     if (orderPrice !== paidPrice) {
       await logger.error('Payment amount mismatch', {
         endpoint: '/api/payment/callback',
-        method: 'POST',
+        method,
         ipAddress,
         userAgent,
-        requestBody: { 
-          order_id, 
-          aoid,
-          expectedAmount: orderPrice, 
-          actualAmount: paidPrice 
+        requestBody: {
+          out_trade_no,
+          trade_no,
+          expectedAmount: orderPrice,
+          actualAmount: paidPrice,
         },
       })
 
@@ -164,33 +157,33 @@ export async function POST(request: NextRequest) {
       .from('orders')
       .update({
         status: 'paid' as const,
-        payment_provider: 'xorpay',
-        payment_order_id: aoid,
-        payment_transaction_id: aoid,
-        paid_at: pay_time || new Date().toISOString(),
+        payment_provider: 'zpay',
+        payment_order_id: trade_no,
+        payment_transaction_id: trade_no,
+        paid_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       })
-      .eq('id', order_id)
+      .eq('id', out_trade_no)
 
     if (updateError) {
       await logger.error('Failed to update order status', {
         endpoint: '/api/payment/callback',
-        method: 'POST',
+        method,
         ipAddress,
         userAgent,
         errorMessage: updateError.message,
-        requestBody: { order_id, aoid },
+        requestBody: { out_trade_no, trade_no },
       })
 
       return new NextResponse('fail', { status: 500 })
     }
 
     const { error: creditError } = await (supabase as any).rpc('add_credits', {
-      p_user_id: order.user_id,
-      p_amount: order.credits,
+      p_user_id: (order as any).user_id,
+      p_amount: (order as any).credits,
       p_type: 'purchase',
-      p_description: `购买 ${order.package_name}`,
-      p_order_id: order_id,
+      p_description: `购买 ${(order as any).package_name}`,
+      p_order_id: out_trade_no,
       p_ip_address: ipAddress,
       p_user_agent: userAgent,
     })
@@ -198,11 +191,16 @@ export async function POST(request: NextRequest) {
     if (creditError) {
       await logger.error('Failed to add credits after payment', {
         endpoint: '/api/payment/callback',
-        method: 'POST',
+        method,
         ipAddress,
         userAgent,
         errorMessage: creditError.message,
-        requestBody: { order_id, aoid, userId: (order as any).user_id, credits: (order as any).credits },
+        requestBody: {
+          out_trade_no,
+          trade_no,
+          userId: (order as any).user_id,
+          credits: (order as any).credits,
+        },
       })
 
       await (supabase as any)
@@ -212,7 +210,7 @@ export async function POST(request: NextRequest) {
           error_message: '积分添加失败',
           updated_at: new Date().toISOString(),
         })
-        .eq('id', order_id)
+        .eq('id', out_trade_no)
 
       return new NextResponse('fail', { status: 500 })
     }
@@ -222,15 +220,15 @@ export async function POST(request: NextRequest) {
     await logger.info('Payment processed successfully', {
       userId: (order as any).user_id,
       endpoint: '/api/payment/callback',
-      method: 'POST',
+      method,
       ipAddress,
       userAgent,
       responseStatus: 200,
       responseTimeMs: responseTime,
-      requestBody: { 
-        order_id, 
-        aoid,
-        credits: (order as any).credits 
+      requestBody: {
+        out_trade_no,
+        trade_no,
+        credits: (order as any).credits,
       },
     })
 
@@ -238,9 +236,9 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     const responseTime = Date.now() - startTime
 
-    await logger.error('Unexpected error in XorPay callback', {
+    await logger.error('Unexpected error in ZPAY callback', {
       endpoint: '/api/payment/callback',
-      method: 'POST',
+      method,
       ipAddress,
       userAgent,
       responseStatus: 500,
@@ -250,4 +248,12 @@ export async function POST(request: NextRequest) {
 
     return new NextResponse('fail', { status: 500 })
   }
+}
+
+export async function POST(request: NextRequest) {
+  return handleCallback(request, 'POST')
+}
+
+export async function GET(request: NextRequest) {
+  return handleCallback(request, 'GET')
 }

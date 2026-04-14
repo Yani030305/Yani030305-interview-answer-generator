@@ -193,7 +193,7 @@ export async function POST(request: NextRequest) {
       })
 
     if (historyError) {
-      await logger.error('Failed to save answer history', {
+      await logger.error('Failed to save answer history, refunding credits', {
         userId,
         endpoint: '/api/generate-answer',
         method: 'POST',
@@ -202,6 +202,31 @@ export async function POST(request: NextRequest) {
         errorMessage: historyError.message,
         requestBody: { questionId: question.id },
       })
+
+      const { error: refundError } = await (supabase as any).rpc('refund_credits', {
+        p_user_id: userId,
+        p_amount: CREDITS_PER_GENERATION,
+        p_description: '保存历史记录失败，退还积分',
+      })
+
+      if (refundError) {
+        await logger.error('Failed to refund credits after history error', {
+          userId,
+          endpoint: '/api/generate-answer',
+          method: 'POST',
+          ipAddress,
+          userAgent,
+          errorMessage: refundError.message,
+        })
+      }
+
+      return NextResponse.json(
+        { 
+          error: '保存历史记录失败，积分已退还', 
+          errorCode: 'HISTORY_SAVE_ERROR',
+        },
+        { status: 500 }
+      )
     }
 
     const responseTime = Date.now() - startTime
@@ -236,9 +261,52 @@ export async function POST(request: NextRequest) {
       },
     })
 
+    if (userId) {
+      try {
+        const supabase = createClient<Database>(
+          process.env.NEXT_PUBLIC_SUPABASE_URL!,
+          process.env.SUPABASE_SERVICE_ROLE_KEY!
+        )
+
+        const { error: refundError } = await (supabase as any).rpc('refund_credits', {
+          p_user_id: userId,
+          p_amount: CREDITS_PER_GENERATION,
+          p_description: '系统错误，退还积分',
+        })
+
+        if (refundError) {
+          await logger.error('Failed to refund credits after unexpected error', {
+            userId,
+            endpoint: '/api/generate-answer',
+            method: 'POST',
+            ipAddress,
+            userAgent,
+            errorMessage: refundError.message,
+          })
+        } else {
+          await logger.info('Credits refunded after unexpected error', {
+            userId,
+            endpoint: '/api/generate-answer',
+            method: 'POST',
+            ipAddress,
+            userAgent,
+          })
+        }
+      } catch (refundException) {
+        await logger.error('Exception during refund process', {
+          userId,
+          endpoint: '/api/generate-answer',
+          method: 'POST',
+          ipAddress,
+          userAgent,
+          errorMessage: refundException instanceof Error ? refundException.message : 'Unknown refund error',
+        })
+      }
+    }
+
     return NextResponse.json(
       { 
-        error: '服务器内部错误', 
+        error: '服务器内部错误，积分已退还', 
         errorCode: 'INTERNAL_ERROR',
         details: error instanceof Error ? error.message : 'Unknown error',
       },
