@@ -164,6 +164,54 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
-  return NextResponse.json({ ok: true })
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const orderId = searchParams.get('orderId')
+    const userId = searchParams.get('userId')
+
+    if (!orderId || !userId) {
+      return NextResponse.json({ error: '缺少订单ID或用户ID' }, { status: 400 })
+    }
+
+    const supabase = createClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+
+    const { data: order, error: orderError } = await (supabase as any)
+      .from('orders')
+      .select('*')
+      .eq('id', orderId)
+      .eq('user_id', userId)
+      .single()
+
+    if (orderError || !order) {
+      console.error('Get order error:', orderError)
+      return NextResponse.json({ error: '订单不存在' }, { status: 404 })
+    }
+
+    return NextResponse.json(
+      {
+        order: {
+          id: order.id,
+          package_name: order.package_name,
+          price: Number(order.price),
+          credits: order.credits,
+          status: order.status,
+          created_at: order.created_at,
+          paid_at: order.paid_at,
+        },
+      },
+      { status: 200 }
+    )
+  } catch (error) {
+    console.error('Unexpected error in get order:', error)
+    return NextResponse.json(
+      {
+        error: error instanceof Error ? error.message : '服务器内部错误',
+      },
+      { status: 500 }
+    )
+  }
 }

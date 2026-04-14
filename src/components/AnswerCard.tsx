@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   Copy,
   RefreshCw,
@@ -35,6 +36,7 @@ interface AnswerCardProps {
 }
 
 export function AnswerCard({ question }: AnswerCardProps) {
+  const router = useRouter()
   const { documents, userMode, answers, setAnswer, updateAnswer, setIsGenerating, isGenerating, currentGeneratingId, uiLanguage, jobDescription, remainingTime, setRemainingTime } =
     useAppStore()
   const { user, credits, setCredits, answerHistory, addAnswerHistory } = useAuthStore()
@@ -189,7 +191,7 @@ export function AnswerCard({ question }: AnswerCardProps) {
     if (credits < requiredCredits) {
       if (confirm(`积分不足！需要 ${requiredCredits} 积分，当前 ${credits} 积分。是否前往充值？`)) {
         // 跳转到充值页面
-        window.location.href = '/recharge'
+        router.push('/recharge')
       }
       return
     }
@@ -217,7 +219,7 @@ export function AnswerCard({ question }: AnswerCardProps) {
       if (credits < requiredCredits) {
         if (confirm(`积分不足！需要 ${requiredCredits} 积分，当前 ${credits} 积分。是否前往充值？`)) {
           // 跳转到充值页面
-          window.location.href = '/recharge'
+          router.push('/recharge')
         }
         return
       }

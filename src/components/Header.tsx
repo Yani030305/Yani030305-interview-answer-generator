@@ -12,6 +12,7 @@ import {
   LogOut,
   Coins,
   Plus,
+  Clock,
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
@@ -96,10 +97,9 @@ export function Header() {
         }
       } catch (e) {
         console.error('Failed to initialize auth:', e)
-        // 发生错误时设置默认状态
+        // 发生错误时只设置用户为 null，不重置积分和历史记录
+        // 这样可以保持用户的积分显示，避免刷新后积分变成 0
         setUser(null)
-        setCredits(0)
-        setAnswerHistory([])
       }
     }
 
@@ -125,6 +125,7 @@ export function Header() {
         }
       } catch (e) {
         console.error('Failed during auth state change:', e)
+        // 发生错误时只设置用户为 null，不重置积分和历史记录
       }
     })
 
@@ -176,6 +177,15 @@ export function Header() {
               >
                 <Plus className="h-3 w-3 mr-1" />
                 {t.header.recharge}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => router.push('/payment-history')}
+                className="h-8"
+              >
+                <Clock className="h-3 w-3 mr-1" />
+                支付记录
               </Button>
             </div>
           )}
