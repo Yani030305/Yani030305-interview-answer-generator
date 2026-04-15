@@ -4,7 +4,8 @@ DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 -- Create profiles table if not exists
 CREATE TABLE IF NOT EXISTS public.profiles (
   id UUID REFERENCES auth.users NOT NULL PRIMARY KEY,
-  email TEXT,
+  email TEXT UNIQUE,
+  phone_number TEXT UNIQUE,
   full_name TEXT,
   session_id TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
@@ -30,8 +31,8 @@ CREATE POLICY "Users can update own profile"
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO public.profiles (id, email, session_id)
-  VALUES (new.id, new.email, NULL);
+  INSERT INTO public.profiles (id, email, phone_number, session_id)
+  VALUES (new.id, new.email, new.raw_user_meta_data->>'phone_number', NULL);
   RETURN new;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;

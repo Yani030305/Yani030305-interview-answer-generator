@@ -132,6 +132,13 @@ ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS last_credit_check TIMESTAMP
 -- 添加 signup_bonus_given 字段，确保注册赠送只触发一次
 ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS signup_bonus_given BOOLEAN DEFAULT FALSE;
 
+-- 添加 phone_number 字段，用于手机号验证
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS phone_number TEXT;
+
+-- 添加唯一约束
+ALTER TABLE public.profiles ADD CONSTRAINT profiles_email_key UNIQUE (email);
+ALTER TABLE public.profiles ADD CONSTRAINT profiles_phone_number_key UNIQUE (phone_number);
+
 -- 创建索引
 CREATE INDEX IF NOT EXISTS idx_profiles_signup_bonus_given ON public.profiles(signup_bonus_given);
 
@@ -145,8 +152,8 @@ RETURNS TRIGGER AS $$
 BEGIN
   -- 创建用户配置，初始积分设为 0
   -- 注册赠送将通过单独的逻辑处理，确保幂等性
-  INSERT INTO public.profiles (id, email, credits, signup_bonus_given)
-  VALUES (new.id, new.email, 0, FALSE);
+  INSERT INTO public.profiles (id, email, phone_number, credits, signup_bonus_given)
+  VALUES (new.id, new.email, new.raw_user_meta_data->>'phone_number', 0, FALSE);
   
   RETURN new;
 END;
@@ -310,7 +317,7 @@ BEGIN
     description,
     order_id,
     ip_address,
-    p_user_agent
+    user_agent
   )
   VALUES (
     p_user_id, 

@@ -16,6 +16,8 @@ export default function AuthPage() {
   const [mode, setMode] = useState<AuthMode>('login')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null)
 
@@ -38,36 +40,56 @@ export default function AuthPage() {
         setUser(data.user)
         router.push('/')
       } else if (mode === 'signup') {
-        const { data: existingUser, error: checkError } = await supabase
-          .from('profiles')
-          .select('id')
-          .ilike('email', email)
-          .maybeSingle()
-
-        if (checkError && checkError.code !== 'PGRST116') {
-          throw checkError
-        }
-
-        if (existingUser) {
+        // Validate confirm password
+        if (password !== confirmPassword) {
           setMessage({
-            text: '该邮箱已被注册，请直接登录',
+            text: '两次输入的密码不一致',
             type: 'error',
           })
           return
         }
 
-        const { data, error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/`,
+        // Validate phone number
+        if (!phoneNumber || !/^1[3-9]\d{9}$/.test(phoneNumber)) {
+          setMessage({
+            text: '请输入有效的手机号码',
+            type: 'error',
+          })
+          return
+        }
+
+        // Call backend register API
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
+          body: JSON.stringify({
+            email,
+            password,
+            phoneNumber,
+          }),
         })
-        if (error) throw error
+
+        const result = await response.json()
+
+        if (!response.ok) {
+          setMessage({
+            text: result.error || '注册失败，请稍后重试',
+            type: 'error',
+          })
+          return
+        }
+
         setMessage({
-          text: '注册成功！请检查您的邮箱确认注册。',
+          text: result.message || '注册成功！',
           type: 'success',
         })
+        
+        // 3秒后跳转到首页
+        setTimeout(() => {
+          router.push('/')
+        }, 3000)
       } else if (mode === 'forgot') {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: `${window.location.origin}/`,
@@ -79,8 +101,15 @@ export default function AuthPage() {
         })
       }
     } catch (error) {
+      let errorMessage = error instanceof Error ? error.message : '发生错误'
+      
+      // 处理密码验证错误，改为中文提示
+      if (error instanceof Error && error.message.includes('Password should contain at least one character of each')) {
+        errorMessage = '密码必须包含大小写字母和数字'
+      }
+      
       setMessage({
-        text: error instanceof Error ? error.message : '发生错误',
+        text: errorMessage,
         type: 'error',
       })
     } finally {
@@ -159,20 +188,60 @@ export default function AuthPage() {
             </div>
 
             {mode !== 'forgot' && (
-              <div className="space-y-2">
-                <label className="text-sm font-medium">密码</label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    type="password"
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10"
-                    required
-                    minLength={6}
-                  />
+              <div className="space-y-4">
+                {mode === 'signup' && (
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">手机号码</label>
+                    <div className="relative">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      <Input
+                        type="tel"
+                        placeholder="13812345678"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        className="pl-10"
+                        required
+                        pattern="^1[3-9]\d{9}$"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">密码</label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      type="password"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="pl-10"
+                      required
+                      minLength={6}
+                    />
+                  </div>
                 </div>
+
+                {mode === 'signup' && (
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">确认密码</label>
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        type="password"
+                        placeholder="••••••••"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="pl-10"
+                        required
+                        minLength={6}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 

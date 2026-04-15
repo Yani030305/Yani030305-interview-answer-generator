@@ -13,6 +13,7 @@ export interface Database {
         Row: {
           id: string
           email: string | null
+          phone_number: string | null
           created_at: string
           updated_at: string | null
           full_name: string | null
@@ -23,6 +24,7 @@ export interface Database {
         Insert: {
           id: string
           email?: string | null
+          phone_number?: string | null
           created_at?: string
           updated_at?: string | null
           full_name?: string | null
@@ -33,6 +35,7 @@ export interface Database {
         Update: {
           id?: string
           email?: string | null
+          phone_number?: string | null
           created_at?: string
           updated_at?: string | null
           full_name?: string | null
