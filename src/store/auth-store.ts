@@ -77,7 +77,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
 
       if (!response.ok) {
         console.error('Failed to fetch answer history:', response.status)
-        set({ answerHistory: [] })
+        // 不重置历史记录，保持当前值
         return
       }
 
@@ -89,7 +89,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       } else {
         console.error('Error fetching answer history:', error)
       }
-      set({ answerHistory: [] })
+      // 不重置历史记录，保持当前值
     } finally {
       set({ historyLoading: false })
     }
@@ -121,6 +121,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       } else {
         console.error('Error refreshing credits:', error)
       }
+      // 不重置积分，保持当前值
     }
   },
 }))

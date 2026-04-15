@@ -63,48 +63,72 @@ export function Header() {
         await fetchAnswerHistory(userId)
       } catch (e) {
         console.error('Failed to load user data:', e)
-        // 发生错误时不再重置积分，保持当前值
-        setAnswerHistory([])
+        // 发生错误时不再重置积分和历史记录，保持当前值
       }
     },
-    [fetchAnswerHistory, setCredits, setAnswerHistory]
+    [fetchAnswerHistory, setCredits]
   )
+
+  const refreshAuthState = useCallback(async () => {
+    try {
+      // 尝试获取会话
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession()
+      
+      if (sessionData?.session?.user) {
+        // 会话存在，设置用户状态并加载数据
+        setUser(sessionData.session.user)
+        loadUserData(sessionData.session.user.id).catch(err => {
+          console.error('Failed to load user data:', err)
+        })
+      } else {
+        // 会话不存在，尝试直接获取用户信息
+        const { data: userData, error: userError } = await supabase.auth.getUser()
+        
+        if (userData?.user) {
+          // 用户存在，设置用户状态并加载数据
+          setUser(userData.user)
+          loadUserData(userData.user.id).catch(err => {
+            console.error('Failed to load user data:', err)
+          })
+        } else {
+          // 确实没有用户登录，设置默认状态
+          setUser(null)
+          setCredits(0)
+          setAnswerHistory([])
+        }
+      }
+    } catch (e) {
+      console.error('Failed to refresh auth state:', e)
+      // 发生错误时，尝试直接获取用户信息
+      try {
+        const { data: userData, error: userError } = await supabase.auth.getUser()
+        
+        if (userData?.user) {
+          // 用户存在，设置用户状态并加载数据
+          setUser(userData.user)
+          loadUserData(userData.user.id).catch(err => {
+            console.error('Failed to load user data:', err)
+          })
+        } else {
+          // 确实没有用户登录，设置默认状态
+          setUser(null)
+          setCredits(0)
+          setAnswerHistory([])
+        }
+      } catch (getUserError) {
+        console.error('Failed to get user:', getUserError)
+        // 完全失败，保持当前状态，不重置为 0
+        // 这样至少能保持用户界面的一致性
+      }
+    }
+  }, [loadUserData, setUser, setCredits, setAnswerHistory])
 
   useEffect(() => {
     let alive = true
     setMounted(true)
 
-    const initAuth = async () => {
-      try {
-        const {
-          data: { session },
-        } = await supabase.auth.getSession()
-
-        if (!alive) return
-
-        if (session?.user) {
-          setUser(session.user)
-          // 异步加载用户数据，不阻塞页面渲染
-          loadUserData(session.user.id).catch(err => {
-            console.error('Failed to load user data:', err)
-          })
-        } else {
-          // 只有当没有会话时才设置默认状态
-          setUser(null)
-          setCredits(0)
-          setAnswerHistory([])
-        }
-      } catch (e) {
-        console.error('Failed to initialize auth:', e)
-        // 发生错误时设置默认状态
-        setUser(null)
-        setCredits(0)
-        setAnswerHistory([])
-      }
-    }
-
     // 异步执行认证初始化，不阻塞页面渲染
-    initAuth()
+    refreshAuthState()
 
     const {
       data: { subscription },
@@ -132,18 +156,27 @@ export function Header() {
       alive = false
       subscription.unsubscribe()
     }
-  }, [setUser, setCredits, setAnswerHistory, loadUserData])
+  }, [setUser, setCredits, setAnswerHistory, loadUserData, refreshAuthState])
 
   if (!mounted) {
     return null
   }
 
   const handleLogout = async () => {
-    await supabase.auth.signOut()
-    setUser(null)
-    setCredits(0)
-    setAnswerHistory([])
-    router.push('/auth')
+    try {
+      // 直接调用 signOut，不依赖 user 状态
+      await supabase.auth.signOut()
+    } catch (error) {
+      console.error('Logout failed:', error)
+      // 即使 signOut 失败，也要清除本地状态
+    } finally {
+      // 清除本地状态
+      setUser(null)
+      setCredits(0)
+      setAnswerHistory([])
+      // 跳转到登录页面
+      router.push('/auth')
+    }
   }
 
   return (

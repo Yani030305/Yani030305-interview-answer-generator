@@ -62,7 +62,11 @@ export async function GET(request: NextRequest) {
 function removeDuplicates(records: any[]): any[] {
   const seen = new Set<string>()
   return records.filter((record) => {
-    const key = `${record.question_id}-${record.answer_zh}-${record.answer_en}`
+    // 确保处理 null 或 undefined 的情况
+    const questionId = record.question_id || ''
+    const answerZh = record.answer_zh || ''
+    const answerEn = record.answer_en || ''
+    const key = `${questionId}-${answerZh}-${answerEn}`
     if (seen.has(key)) {
       return false
     }

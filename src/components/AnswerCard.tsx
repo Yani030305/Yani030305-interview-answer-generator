@@ -361,40 +361,40 @@ export function AnswerCard({ question }: AnswerCardProps) {
     })
   }, [question.id, setAnswer])
 
-  // Save answer to history when component unmounts (page refresh)
+  // Only save to history on page unload, not on component unmount (which happens when switching questions)
   useEffect(() => {
-    return () => {
+    const handleBeforeUnload = async () => {
       if (status === 'done' && user && answer) {
-        const saveToHistory = async () => {
-          try {
-            const response = await fetch('/api/answer-history', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                userId: user.id,
-                questionId: question.id,
-                answerZh: answer.answerZh || '',
-                answerEn: answer.answerEn || '',
-              }),
-            })
-            if (response.ok) {
-              const data = await response.json()
-              if (data.history) {
-                addAnswerHistory(data.history)
-              }
-            } else {
-              console.error('保存历史记录失败:', await response.json())
-            }
-          } catch (error) {
-            console.error('保存历史记录失败:', error)
+        try {
+          const response = await fetch('/api/answer-history', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              userId: user.id,
+              questionId: question.id,
+              answerZh: answer.answerZh || '',
+              answerEn: answer.answerEn || '',
+            }),
+          })
+          if (!response.ok) {
+            console.error('保存历史记录失败:', await response.json())
           }
+        } catch (error) {
+          console.error('保存历史记录失败:', error)
         }
-        saveToHistory()
       }
     }
-  }, [status, user, question.id, answer, addAnswerHistory])
+
+    // Add beforeunload event listener to save history when page is refreshed or closed
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      // Remove event listener when component unmounts
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [status, user, question.id, answer])
 
   const currentText = displayLang === 'zh'
     ? (answer?.editedZh || answer?.answerZh || '').replace(/\\n/g, '\n')
