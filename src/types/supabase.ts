@@ -225,6 +225,32 @@ export interface Database {
           created_at?: string
         }
       }
+      feedback: {
+        Row: {
+          id: string
+          user_id: string | null
+          user_email: string | null
+          type: string
+          content: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          user_email?: string | null
+          type: string
+          content: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          user_email?: string | null
+          type?: string
+          content?: string
+          created_at?: string
+        }
+      }
       request_logs: {
         Row: {
           id: string

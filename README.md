@@ -17,11 +17,14 @@ NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 
-# XorPay 支付配置
-XORPAY_AID=your_xorpay_aid
-XORPAY_APP_SECRET=your_xorpay_app_secret
-XORPAY_NOTIFY_URL=https://yourdomain.com/api/payment/callback
+# ZPAY 支付配置
+ZPAY_PID=your_zpay_pid
+ZPAY_KEY=your_zpay_key
+ZPAY_GATEWAY=your_zpay_gateway
+ZPAY_NOTIFY_URL=https://yourdomain.com/api/payment/callback
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+# 可选
+# ZPAY_CID=your_zpay_cid
 ```
 
 ## 安装与运行
@@ -51,15 +54,17 @@ npm start
 7. **状态标识**: 显示问题的生成状态（未生成、历史生成、当前生成、生成中、生成失败、排队中）
 8. **智能排队**: 当多个问题同时生成时，自动排队处理
 9. **积分系统**: 生成回答和导出文档需要消耗积分
-10. **支付充值**: 支持 XorPay 支付，扫码充值积分
+10. **支付充值**: 支持 ZPAY 支付，扫码充值积分
 11. **单设备登录**: 一个账号同时只能在一个设备上登录
+12. **一键生成全部回答**: 一次性生成所有问题的回答，享受优惠价格（999积分）
+13. **问题反馈**: 提交功能建议、Bug 报告或其他问题
 
 ## 技术栈
 
 - **前端**: Next.js 14, React, TypeScript, Tailwind CSS
 - **后端**: Supabase (数据库、认证、边缘函数)
 - **AI 服务**: DeepSeek API
-- **支付服务**: XorPay
+- **支付服务**: ZPAY
 - **工具库**: lucide-react, @radix-ui, docx.js
 
 ## 项目结构
@@ -77,6 +82,7 @@ npm start
       /orders       # 订单接口
       /payment      # 支付接口
       /export       # 导出接口
+      /feedback     # 问题反馈接口
     /recharge       # 充值页面
     /auth           # 认证页面
   /components       # 组件
@@ -93,9 +99,11 @@ npm start
 - **AnswerHistory**: 历史记录组件，实现查看、复制、删除、替代功能
 - **QuestionNav**: 问题导航组件，显示问题列表和状态标识
 - **FileUploader**: 文件上传组件，支持多种文件格式
+- **Sidebar**: 侧边栏组件，包含批量生成和问题反馈功能
+- **FeedbackForm**: 问题反馈表单组件，提交用户反馈
 - **AI Service**: AI 服务集成，使用 DeepSeek API 生成回答
 - **Supabase Integration**: 数据库操作和用户认证
-- **Payment Integration**: XorPay 支付集成，订单管理
+- **Payment Integration**: ZPAY 支付集成，订单管理
 
 ## 数据库表结构
 
@@ -106,6 +114,7 @@ npm start
 - **credit_packages**: 积分套餐表，定义充值套餐
 - **orders**: 订单表，存储支付订单信息
 - **request_logs**: 请求日志表，记录API请求日志
+- **feedback**: 反馈表，存储用户提交的问题反馈
 
 ## 使用说明
 
@@ -117,6 +126,8 @@ npm start
 6. 查看历史生成记录，管理和使用历史回答
 7. 导出所有问答为文档
 8. 当积分不足时，充值购买积分
+9. 使用一键生成全部回答功能，一次性生成所有问题的回答
+10. 通过问题反馈功能提交建议或报告问题
 
 ## 支付流程
 
@@ -131,7 +142,7 @@ npm start
 - **单设备登录**: 通过 session_id 实现单设备登录限制
 - **服务端鉴权**: 所有API接口从服务端session获取用户身份
 - **积分并发控制**: 使用数据库事务和行级锁确保积分扣除的原子性
-- **支付签名验证**: 验证XorPay回调签名，确保支付安全
+- **支付签名验证**: 验证ZPAY回调签名，确保支付安全
 - **频率限制**: 防止API接口被恶意调用
 
 ## 注意事项
@@ -142,6 +153,7 @@ npm start
 - 建议上传岗位描述（JD）以获得更精准的回答
 - 一个账号同时只能在一个设备上登录
 - 支付成功后积分会自动到账
+- 一键生成全部回答享受优惠价格，只需999积分
 
 ## 开发环境
 
@@ -155,7 +167,7 @@ npm start
 2. 启动生产服务器：`npm start`
 3. 配置环境变量
 4. 配置域名和SSL证书
-5. 配置XorPay回调URL
+5. 配置ZPAY回调URL
 
 ## 许可证
 

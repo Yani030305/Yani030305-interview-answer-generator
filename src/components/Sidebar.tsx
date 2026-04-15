@@ -403,7 +403,11 @@ export function Sidebar() {
         )}
       </div>
 
-
+      {/* 问题反馈 */}
+      <div className="pt-4 border-t space-y-2">
+        <h4 className="text-sm font-medium">问题反馈</h4>
+        <FeedbackForm />
+      </div>
 
       {showJDConfirmDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
@@ -450,5 +454,91 @@ export function Sidebar() {
         </div>
       )}
     </Card>
+  )
+}
+
+// 问题反馈表单组件
+function FeedbackForm() {
+  const { user } = useAuthStore()
+  const [feedbackType, setFeedbackType] = useState('suggestion')
+  const [feedbackContent, setFeedbackContent] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    if (!feedbackContent.trim()) {
+      alert('请输入反馈内容')
+      return
+    }
+
+    setIsSubmitting(true)
+    try {
+      const response = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: feedbackType,
+          content: feedbackContent.trim(),
+          userId: user?.id,
+          userEmail: user?.email
+        })
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || '提交失败，请重试')
+      }
+
+      setSubmitSuccess(true)
+      setFeedbackContent('')
+      setTimeout(() => setSubmitSuccess(false), 3000)
+    } catch (error) {
+      console.error('Error submitting feedback:', error)
+      alert('提交失败，请重试')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  return (
+    <div className="space-y-2">
+      {submitSuccess ? (
+        <div className="text-xs text-green-500 flex items-center gap-1">
+          <CheckCircle className="h-3 w-3" />
+          反馈提交成功，感谢您的反馈！
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-2">
+          <select
+            value={feedbackType}
+            onChange={(e) => setFeedbackType(e.target.value)}
+            className="w-full text-xs p-2 border rounded-md"
+          >
+            <option value="suggestion">功能建议</option>
+            <option value="bug">Bug 报告</option>
+            <option value="other">其他问题</option>
+          </select>
+          <textarea
+            value={feedbackContent}
+            onChange={(e) => setFeedbackContent(e.target.value)}
+            placeholder="请描述您遇到的问题或建议..."
+            className="w-full text-xs p-2 border rounded-md min-h-[80px]"
+            maxLength={500}
+          />
+          <div className="flex justify-end text-xs text-muted-foreground">
+            {feedbackContent.length}/500
+          </div>
+          <Button
+            type="submit"
+            className="w-full text-xs"
+            disabled={isSubmitting || !feedbackContent.trim()}
+          >
+            {isSubmitting ? '提交中...' : '提交反馈'}
+          </Button>
+        </form>
+      )}
+    </div>
   )
 }
