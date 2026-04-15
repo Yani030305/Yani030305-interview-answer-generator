@@ -164,6 +164,55 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
-  return NextResponse.json({ ok: true })
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const userId = searchParams.get('userId')
+    const orderId = searchParams.get('orderId')
+
+    const supabase = createClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+
+    // 如果提供了 orderId，查询单个订单
+    if (orderId) {
+      const { data: order, error } = await (supabase as any)
+        .from('orders')
+        .select('*')
+        .eq('id', orderId)
+        .single()
+
+      if (error) {
+        console.error('Failed to fetch order:', error)
+        return NextResponse.json({ error: '获取订单失败' }, { status: 500 })
+      }
+
+      return NextResponse.json({ order })
+    }
+
+    // 如果提供了 userId，查询用户的所有订单
+    if (userId) {
+      const { data: orders, error } = await (supabase as any)
+        .from('orders')
+        .select('*')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false })
+
+      if (error) {
+        console.error('Failed to fetch orders:', error)
+        return NextResponse.json({ error: '获取订单列表失败' }, { status: 500 })
+      }
+
+      return NextResponse.json({ orders })
+    }
+
+    return NextResponse.json({ ok: true })
+  } catch (error) {
+    console.error('Unexpected error in GET orders:', error)
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : '服务器内部错误' },
+      { status: 500 }
+    )
+  }
 }

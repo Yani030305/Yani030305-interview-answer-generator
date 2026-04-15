@@ -145,7 +145,7 @@ export async function POST(request: NextRequest) {
       const { data: deductResult, error: deductError } = await (supabase as any).rpc('deduct_credits', {
         p_user_id: userId,
         p_amount: requiredCredits,
-        p_description: isBatch ? '一键生成全部回答' : style ? '重新生成回答' : '生成回答',
+        p_description: isBatch ? '一键生成全部回答' : style ? `重新生成回答：${question.questionZh.substring(0, 50)}${question.questionZh.length > 50 ? '...' : ''}` : `生成回答：${question.questionZh.substring(0, 50)}${question.questionZh.length > 50 ? '...' : ''}`,
         p_ip_address: ipAddress,
         p_user_agent: userAgent,
       })

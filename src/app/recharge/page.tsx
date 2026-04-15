@@ -242,23 +242,17 @@ export default function RechargePage() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <Button
-                    variant="outline"
-                    onClick={handleCheckPayment}
-                    disabled={checkingPayment}
-                  >
-                    {checkingPayment ? (
-                      <>
+                  <div className="flex-1">
+                    {checkingPayment && (
+                      <div className="flex items-center text-sm text-blue-700">
                         <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                        检查中...
-                      </>
-                    ) : (
-                      '我已完成支付'
+                        正在检查支付状态...
+                      </div>
                     )}
-                  </Button>
-                  <p className="text-xs text-blue-600">
-                    支付完成后请点击"我已完成支付"按钮
-                  </p>
+                    <p className="text-xs text-blue-600 mt-2">
+                      系统正在自动检查支付状态，检查时间可能会比较久，请稍等...
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

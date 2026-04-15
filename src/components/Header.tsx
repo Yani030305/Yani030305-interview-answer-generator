@@ -194,10 +194,10 @@ export function Header() {
         <div className="flex items-center gap-4">
           {user && (
             <div className="flex items-center gap-2">
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-muted rounded-lg">
-                <Coins className="h-4 w-4 text-yellow-500" />
+              <div className="flex items-center gap-1 px-2 py-1 bg-muted rounded-lg whitespace-nowrap">
+                <Coins className="h-3 w-3 text-yellow-500" />
                 <span className="font-semibold">{credits}</span>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   {t.header.credits}
                 </span>
               </div>
@@ -205,7 +205,7 @@ export function Header() {
                 variant="outline"
                 size="sm"
                 onClick={() => router.push('/recharge')}
-                className="h-8"
+                className="h-8 px-2 text-xs"
               >
                 <Plus className="h-3 w-3 mr-1" />
                 {t.header.recharge}
@@ -262,6 +262,14 @@ export function Header() {
                 <div className="px-2 py-1.5 text-sm">
                   <p className="font-medium">{user.email}</p>
                 </div>
+                <DropdownMenuItem onClick={() => router.push('/payment-history')}>
+                  <Coins className="h-4 w-4 mr-2" />
+                  充值历史
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push('/credit-history')}>
+                  <Coins className="h-4 w-4 mr-2" />
+                  积分使用记录
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleLogout}>
                   <LogOut className="h-4 w-4 mr-2" />
                   {t.header.logout}

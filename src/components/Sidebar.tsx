@@ -223,10 +223,7 @@ export function Sidebar() {
     // 检查积分是否足够
     const requiredCredits = 999
     if (credits < requiredCredits) {
-      if (confirm(`积分不足！需要 ${requiredCredits} 积分，当前 ${credits} 积分。是否前往充值？`)) {
-        // 跳转到充值页面
-        window.location.href = '/recharge'
-      }
+      alert(`积分不足！需要 ${requiredCredits} 积分，当前 ${credits} 积分，请充值！`)
       return
     }
 
