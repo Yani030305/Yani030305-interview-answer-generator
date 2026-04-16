@@ -10,7 +10,7 @@ import { JobDescriptionUploader } from '@/components/JobDescriptionUploader'
 import { useAppStore } from '@/store'
 import { questionCategories, getAllQuestions, filterQuestionsByMode, filterQuestionsByTags, searchQuestions } from '@/data/questions'
 import { QuestionItem } from '@/types'
-import { FileUp, MessageSquare, Briefcase } from 'lucide-react'
+import { FileUp, MessageSquare, Briefcase, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useTranslation } from '@/lib/translations'
 
@@ -44,6 +44,17 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      
+      <div className="bg-blue-50 border-b border-blue-200">
+        <div className="container px-4 py-3">
+          <div className="flex items-center gap-3">
+            <AlertCircle className="h-4 w-4 text-blue-600 flex-shrink-0" />
+            <p className="text-sm text-blue-800">
+              页面可能偶尔会卡顿显示积分为0的情况，请尝试按“Ctrl+Shift+R”刷新，如果还有此类问题请邮件联系客服 <a href="mailto:hiremind@qq.com" className="font-medium hover:underline">hiremind@qq.com</a>，会在24小时内处理
+            </p>
+          </div>
+        </div>
+      </div>
 
       <main className="container px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

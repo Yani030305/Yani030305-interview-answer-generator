@@ -266,10 +266,6 @@ export function Header() {
                   <Coins className="h-4 w-4 mr-2" />
                   充值历史
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => router.push('/credit-history')}>
-                  <Coins className="h-4 w-4 mr-2" />
-                  积分使用记录
-                </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleLogout}>
                   <LogOut className="h-4 w-4 mr-2" />
                   {t.header.logout}

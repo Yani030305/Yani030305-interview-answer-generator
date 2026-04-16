@@ -21,9 +21,9 @@ export async function deductCredits(amount: number, description: string): Promis
   if (!user) throw new Error('Not authenticated')
 
   const { error } = await (supabase as any).rpc('deduct_credits', {
-    user_id: user.id,
-    amount,
-    description,
+    p_user_id: user.id,
+    p_amount: amount,
+    p_description: description,
   })
 
   if (error) throw error
@@ -34,10 +34,10 @@ export async function addCredits(amount: number, type: string, description: stri
   if (!user) throw new Error('Not authenticated')
 
   const { error } = await (supabase as any).rpc('add_credits', {
-    user_id: user.id,
-    amount,
-    type,
-    description,
+    p_user_id: user.id,
+    p_amount: amount,
+    p_type: type,
+    p_description: description,
   })
 
   if (error) throw error

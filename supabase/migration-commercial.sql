@@ -150,10 +150,14 @@ DROP FUNCTION IF EXISTS public.handle_new_user();
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  -- 创建用户配置，初始积分设为 0
-  -- 注册赠送将通过单独的逻辑处理，确保幂等性
+  -- 创建用户配置，直接发放 100 积分，并标记为已赠送
+  -- 这样确保新用户注册时就能获得初始积分
   INSERT INTO public.profiles (id, email, phone_number, credits, signup_bonus_given)
-  VALUES (new.id, new.email, new.raw_user_meta_data->>'phone_number', 0, FALSE);
+  VALUES (new.id, new.email, new.raw_user_meta_data->>'phone_number', 100, TRUE);
+  
+  -- 记录积分交易
+  INSERT INTO public.credit_transactions (user_id, amount, type, description)
+  VALUES (new.id, 100, 'signup_bonus', '新用户注册赠送 100 积分');
   
   RETURN new;
 END;

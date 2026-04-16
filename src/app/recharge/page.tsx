@@ -344,7 +344,7 @@ export default function RechargePage() {
             <li>• 导出全部回答需要 <span className="font-semibold text-foreground">50 积分</span></li>
             <li>• 积分永久有效，不会过期</li>
             <li>• 充值后积分立即到账</li>
-            <li>• 如有问题请联系客服</li>
+            <li>• 如有问题请联系客服 <a href="mailto:hiremind@qq.com" className="text-primary hover:underline">hiremind@qq.com</a>，会在24小时内处理</li>
           </ul>
         </div>
 

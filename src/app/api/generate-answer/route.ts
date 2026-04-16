@@ -142,6 +142,7 @@ export async function POST(request: NextRequest) {
     // 只有当 skipCreditDeduction 为 false 或不存在时才扣除积分
     // 批量生成的后续请求会传递 skipCreditDeduction: true 来跳过积分扣除
     if (!skipCreditDeduction) {
+      console.log(`Calling deduct_credits for user ${userId}, amount: ${requiredCredits}`)
       const { data: deductResult, error: deductError } = await (supabase as any).rpc('deduct_credits', {
         p_user_id: userId,
         p_amount: requiredCredits,
@@ -149,6 +150,8 @@ export async function POST(request: NextRequest) {
         p_ip_address: ipAddress,
         p_user_agent: userAgent,
       })
+
+      console.log('deduct_credits result:', { deductResult, deductError })
 
       if (deductError || !deductResult) {
         await logger.error('Failed to deduct credits', {

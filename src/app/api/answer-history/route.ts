@@ -18,25 +18,27 @@ export async function GET(request: NextRequest) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
 
-    let query = supabase
+    // 查询所有记录，然后在代码中手动过滤（避免 Supabase .eq() 查询的问题）
+    const { data: allData, error: allError } = await (supabase as any)
       .from('answer_history')
       .select('*')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false })
 
+    if (allError) {
+      console.error('Error fetching answer history:', allError)
+      return NextResponse.json({ error: allError.message }, { status: 500 })
+    }
+
+    // 手动过滤和排序
+    let filteredData = allData.filter((item: any) => item.user_id === userId)
+    
     if (questionId) {
-      query = query.eq('question_id', questionId)
+      filteredData = filteredData.filter((item: any) => item.question_id === questionId)
     }
 
-    const { data, error } = await query
-
-    if (error) {
-      console.error('Error fetching answer history:', error)
-      return NextResponse.json({ error: error.message }, { status: 500 })
-    }
+    filteredData.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 
     // Remove duplicate records based on answer content
-    const uniqueHistory = removeDuplicates(data)
+    const uniqueHistory = removeDuplicates(filteredData)
 
     const history: AnswerHistoryItem[] = uniqueHistory.map((item) => ({
       id: item.id,

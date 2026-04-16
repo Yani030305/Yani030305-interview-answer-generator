@@ -111,25 +111,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Check if user has CUHK email and give 500 credits
-    if (email.endsWith('@link.cuhk.edu.cn') && data.user?.id) {
-      const { error: addError } = await (supabase as any).rpc('add_credits', {
-        p_user_id: data.user.id,
-        p_amount: 500,
-        p_type: 'signup_bonus',
-        p_description: 'CUHK邮箱注册赠送',
-        p_ip_address: ipAddress,
-        p_user_agent: userAgent
-      })
-      
-      if (addError) {
-        console.error('Failed to give CUHK credits:', addError)
-      }
-    }
+    // Check if user has valid CUHK email (9-digit student ID)
+    // Note: handle_new_user() already gives appropriate credits based on email type
+    const emailPrefix = email.split('@')[0]
+    const isValidCUHKEmail = email.endsWith('@link.cuhk.edu.cn') && /^\d{9}$/.test(emailPrefix)
 
     return NextResponse.json({
       success: true,
-      message: email.endsWith('@link.cuhk.edu.cn') ? '注册成功！已赠送500积分。' : '注册成功！',
+      message: isValidCUHKEmail ? '注册成功！已赠送500积分。' : '注册成功！',
       user: data.user,
     })
   } catch (error) {
