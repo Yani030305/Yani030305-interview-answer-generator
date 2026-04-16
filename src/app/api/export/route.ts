@@ -8,6 +8,7 @@ const CREDITS_PER_EXPORT = 50
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('=== Export API called ===')
     const body = await request.json()
     const { userMode, documents, answers, format, userId } = body as {
       userMode: UserMode
@@ -16,6 +17,11 @@ export async function POST(request: NextRequest) {
       format: 'docx' | 'markdown'
       userId: string
     }
+
+    console.log('User ID:', userId)
+    console.log('Format:', format)
+    console.log('Documents count:', documents?.length)
+    console.log('Answers count:', Object.keys(answers || {}).length)
 
     if (!userId) {
       return NextResponse.json(
@@ -29,13 +35,19 @@ export async function POST(request: NextRequest) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
 
+    console.log('Fetching user profile...')
     const { data: profile, error: profileError } = await supabase
       .from('profiles')
       .select('credits')
       .eq('id', userId)
       .single()
 
-    if (profileError) throw profileError
+    if (profileError) {
+      console.error('Profile fetch error:', profileError)
+      throw profileError
+    }
+
+    console.log('User credits:', (profile as any)?.credits)
 
     if (!profile || (profile as any).credits < CREDITS_PER_EXPORT) {
       return NextResponse.json(
@@ -44,13 +56,19 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    console.log('Deducting credits...')
     const { error: deductError } = await (supabase as any).rpc('deduct_credits', {
-      user_id: userId,
-      amount: CREDITS_PER_EXPORT,
-      description: '导出回答文档',
+      p_user_id: userId,
+      p_amount: CREDITS_PER_EXPORT,
+      p_description: '导出回答文档',
     })
 
-    if (deductError) throw deductError
+    if (deductError) {
+      console.error('Deduct credits error:', deductError)
+      throw deductError
+    }
+
+    console.log('Generating document...')
 
     if (format === 'docx') {
       const buffer = await exportToDocx(userMode, documents, answers)
