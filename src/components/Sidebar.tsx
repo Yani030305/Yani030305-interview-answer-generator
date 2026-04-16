@@ -185,7 +185,10 @@ export function Sidebar() {
           })
           
           if (index === 0) {
-            await updateCredits() // 只在第一个请求后更新积分显示
+            // 使用 API 返回的更新后的积分值
+            if (result.updatedCredits !== undefined) {
+              setCredits(result.updatedCredits)
+            }
           }
         } catch (error) {
           setAnswer(question.id, {

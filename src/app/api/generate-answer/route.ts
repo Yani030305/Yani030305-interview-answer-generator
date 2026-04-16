@@ -279,7 +279,17 @@ export async function POST(request: NextRequest) {
       requestBody: { questionId: question.id, style },
     })
 
-    return NextResponse.json(result)
+    // 重新获取用户积分
+  const { data: updatedProfile } = await supabase
+    .from('profiles')
+    .select('credits')
+    .eq('id', userId)
+    .single()
+
+  return NextResponse.json({
+    ...result,
+    updatedCredits: (updatedProfile as any)?.credits
+  })
   } catch (error) {
     const responseTime = Date.now() - startTime
 

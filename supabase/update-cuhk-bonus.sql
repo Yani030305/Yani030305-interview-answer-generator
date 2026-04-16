@@ -17,8 +17,8 @@ BEGIN
   
   -- 创建用户资料，根据邮箱类型设置积分
   IF is_valid_cuhk THEN
-    INSERT INTO public.profiles (id, email, credits)
-    VALUES (NEW.id, NEW.email, 500);
+    INSERT INTO public.profiles (id, email, phone_number, credits)
+    VALUES (NEW.id, NEW.email, NEW.raw_user_meta_data->>'phone_number', 500);
     
     -- 记录积分交易
     INSERT INTO public.credit_transactions (user_id, amount, type, description)
@@ -27,8 +27,8 @@ BEGIN
     INSERT INTO public.credit_transactions (user_id, amount, type, description)
     VALUES (NEW.id, 400, 'signup_bonus', 'CUHK邮箱注册额外赠送');
   ELSE
-    INSERT INTO public.profiles (id, email, credits)
-    VALUES (NEW.id, NEW.email, 100);
+    INSERT INTO public.profiles (id, email, phone_number, credits)
+    VALUES (NEW.id, NEW.email, NEW.raw_user_meta_data->>'phone_number', 100);
     
     -- 记录积分交易
     INSERT INTO public.credit_transactions (user_id, amount, type, description)

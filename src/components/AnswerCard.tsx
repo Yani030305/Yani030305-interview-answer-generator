@@ -158,7 +158,10 @@ export function AnswerCard({ question }: AnswerCardProps) {
         updatedAt: new Date().toISOString(),
       })
       
-      await updateCredits()
+      // 使用 API 返回的更新后的积分值
+      if (result.updatedCredits !== undefined) {
+        setCredits(result.updatedCredits)
+      }
     } catch (error) {
       setAnswer(question.id, {
         questionId: question.id,
