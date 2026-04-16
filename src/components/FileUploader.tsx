@@ -27,7 +27,7 @@ export function FileUploader() {
     fileArray.forEach((file) => {
       if (!isValidFileType(file.name)) {
         const ext = file.name.split('.').pop()?.toUpperCase()
-        errors.push(`${file.name}: 不支持的文件格式 (${ext})。请上传 PDF、Word、TXT、Markdown 或图片 (PNG/JPG/JPEG/GIF/WebP) 格式的文件。`)
+        errors.push(`${file.name}: 不支持的文件格式 (${ext})。请上传 PDF 或 Word 格式的文件。`)
       } else if (file.size > 10 * 1024 * 1024) {
         errors.push(`${file.name}: 文件太大 (最大 10MB)`)
       } else {
@@ -103,7 +103,7 @@ export function FileUploader() {
           id="file-input"
           type="file"
           multiple
-          accept=".pdf,.docx,.txt,.md,.png,.jpg,.jpeg,.gif,.webp"
+          accept=".pdf,.docx"
           className="hidden"
           onChange={handleInputChange}
         />

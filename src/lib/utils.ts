@@ -40,7 +40,7 @@ export function getFileExtension(filename: string): string {
 }
 
 export function isValidFileType(filename: string): boolean {
-  const validExtensions = ['pdf', 'docx', 'txt', 'md', 'png', 'jpg', 'jpeg', 'gif', 'webp']
+  const validExtensions = ['pdf', 'docx']
   const ext = getFileExtension(filename)
   return validExtensions.includes(ext)
 }

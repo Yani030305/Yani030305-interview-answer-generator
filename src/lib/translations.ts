@@ -75,7 +75,7 @@ export const translations = {
       dragDrop: '拖拽文件到这里，或点击上传',
       maxFiles: '最多上传 5 个文件',
       maxFileSize: '单个文件最大 10MB',
-      supportedFormats: '支持 PDF、Word、TXT、Markdown 或图片 (PNG/JPG/JPEG/GIF/WebP) 格式',
+      supportedFormats: '支持 PDF 或 Word 格式',
     },
     common: {
       en: 'EN',
@@ -166,7 +166,7 @@ export const translations = {
       dragDrop: 'Drag & drop files here, or click to upload',
       maxFiles: 'Max 5 files',
       maxFileSize: 'Max 10MB per file',
-      supportedFormats: 'Supports PDF, Word, TXT, Markdown, or images (PNG/JPG/JPEG/GIF/WebP)',
+      supportedFormats: 'Supports PDF or Word format',
     },
     common: {
       en: 'EN',
