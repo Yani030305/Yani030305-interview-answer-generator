@@ -72,7 +72,7 @@ const JD_ANALYSIS_SYSTEM_PROMPT = `你是一个在互联网/科技行业工作�
 输出要求：
 - 必须只输出合法 JSON
 - 不要输出 markdown 代码块
-- 不要输出"好的，以下是分析"之类前缀
+- 不要输出“好的，以下是分析”之类前缀
 - 不要输出任何 JSON 以外的解释文字
 
 表达要求：
@@ -169,132 +169,38 @@ ${request.userMode === 'campus' ? '校招候选人（应届生/在校学生）' 
   }
 }
 
-如果用户没有提供足够背景材料，也要正常输出 userMatchAnalysis，但可以明确写"用户材料有限，只能做初步判断"。`
+如果用户没有提供足够背景材料，也要正常输出 userMatchAnalysis，但可以明确写“用户材料有限，只能做初步判断”。`
 }
 
 function extractJsonString(raw: string): string {
   const trimmed = raw.trim()
-  console.log('[JD Analyzer] extractJsonString - input length:', trimmed.length)
-  console.log('[JD Analyzer] extractJsonString - input preview:', trimmed.slice(0, 500))
 
-  // Case 1: Already clean JSON
   if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
-    console.log('[JD Analyzer] extractJsonString - CASE 1: clean JSON')
     return trimmed
   }
 
-  // Case 2: Remove markdown code blocks
-  let cleaned = trimmed
-    .replace(/```json\s*/gi, '')
-    .replace(/```\s*/g, '')
+  const withoutMarkdown = trimmed
+    .replace(/```json/gi, '')
+    .replace(/```/g, '')
     .trim()
-  
-  if (cleaned.startsWith('{') && cleaned.endsWith('}')) {
-    console.log('[JD Analyzer] extractJsonString - CASE 2: markdown removed')
-    return cleaned
+
+  if (withoutMarkdown.startsWith('{') && withoutMarkdown.endsWith('}')) {
+    return withoutMarkdown
   }
 
-  // Case 3: Remove prefix text like "好的，以下是分析结果：" or "以下是分析结果："
-  const prefixMatch = cleaned.match(/^(?:好的\s*[，,：:]\s*)?(?:以下|这是|下面是)[^\n]{0,50}[:：]?\s*/i)
-  if (prefixMatch) {
-    cleaned = cleaned.slice(prefixMatch[0].length).trim()
-    console.log('[JD Analyzer] extractJsonString - CASE 3: prefix removed')
-  }
-
-  // Case 4: Try to find the largest valid JSON object/array
-  if (cleaned.startsWith('{') || cleaned.startsWith('[')) {
-    console.log('[JD Analyzer] extractJsonString - CASE 4: trying to find matching braces')
-    const result = extractMatchingBraces(cleaned)
-    if (result) {
-      console.log('[JD Analyzer] extractJsonString - CASE 4: success, length:', result.length)
-      return result
-    }
-  }
-
-  // Case 5: Try regex to find any {...} block
-  const match = cleaned.match(/\{[\s\S]*\}/)
+  const match = withoutMarkdown.match(/\{[\s\S]*\}/)
   if (match) {
-    console.log('[JD Analyzer] extractJsonString - CASE 5: regex match found, length:', match[0].length)
     return match[0]
   }
 
-  // Case 6: Last resort - try to remove trailing non-JSON text
-  const lastValidIndex = cleaned.lastIndexOf('}')
-  if (lastValidIndex > 0) {
-    const potential = cleaned.substring(0, lastValidIndex + 1)
-    if (potential.startsWith('{')) {
-      console.log('[JD Analyzer] extractJsonString - CASE 6: trailing text removed, length:', potential.length)
-      return potential
-    }
-  }
-
-  throw new Error('extractJsonString_failed: 未找到合法 JSON')
-}
-
-function extractMatchingBraces(str: string): string | null {
-  const stack: string[] = []
-  let startIdx = -1
-
-  for (let i = 0; i < str.length; i++) {
-    const char = str[i]
-    if (char === '{' || char === '[') {
-      if (stack.length === 0) {
-        startIdx = i
-      }
-      stack.push(char)
-    } else if (char === '}' || char === ']') {
-      const expected = stack[stack.length - 1]
-      if ((char === '}' && expected === '{') || (char === ']' && expected === '[')) {
-        stack.pop()
-        if (stack.length === 0) {
-          return str.substring(startIdx, i + 1)
-        }
-      } else {
-        return null
-      }
-    }
-  }
-  return null
+  throw new Error('模型返回中未找到合法 JSON')
 }
 
 function safeParseAnalysis(raw: string): JDAnalysisResult {
-  let jsonString: string
-  
-  // Step 1: Extract JSON string
-  try {
-    jsonString = extractJsonString(raw)
-    console.log('[JD Analyzer] safeParseAnalysis - extractJsonString success, length:', jsonString.length)
-  } catch (extractError) {
-    const errorMsg = extractError instanceof Error ? extractError.message : String(extractError)
-    console.error('[JD Analyzer] safeParseAnalysis - extractJsonString FAILED:', errorMsg)
-    console.error('[JD Analyzer] Raw content length:', raw.length)
-    console.error('[JD Analyzer] Raw content preview (first 3000):', raw.slice(0, 3000))
-    throw new Error('JD_ANALYSIS_PARSE_FAILED: extractJsonString_failed')
-  }
+  const jsonString = extractJsonString(raw)
+  const parsed = JSON.parse(jsonString)
 
-  // Step 2: Parse JSON
-  try {
-    const parsed = JSON.parse(jsonString)
-    console.log('[JD Analyzer] safeParseAnalysis - JSON.parse success')
-    return parsed as JDAnalysisResult
-  } catch (parseError) {
-    const errorMsg = parseError instanceof Error ? parseError.message : String(parseError)
-    console.error('[JD Analyzer] safeParseAnalysis - JSON.parse FAILED:', errorMsg)
-    console.error('[JD Analyzer] Raw content length:', raw.length)
-    console.error('[JD Analyzer] Extracted jsonString length:', jsonString.length)
-    console.error('[JD Analyzer] Raw content preview (first 3000):', raw.slice(0, 3000))
-    console.error('[JD Analyzer] Extracted jsonString preview (first 3000):', jsonString.slice(0, 3000))
-    
-    // Try to identify the issue
-    const jsonStart = jsonString.indexOf('{')
-    const jsonEnd = jsonString.lastIndexOf('}')
-    if (jsonStart >= 0 && jsonEnd >= 0) {
-      const truncated = jsonString.substring(jsonStart, jsonEnd + 1)
-      console.error('[JD Analyzer] Extracted JSON substring:', truncated.slice(0, 3000))
-    }
-    
-    throw new Error('JD_ANALYSIS_PARSE_FAILED: JSON.parse_failed')
-  }
+  return parsed as JDAnalysisResult
 }
 
 async function fetchWithTimeout(url: string, init: RequestInit, timeoutMs = 60000) {
@@ -319,19 +225,11 @@ export async function analyzeJobDescription(
   const baseUrl = process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com/v1'
   const model = process.env.DEEPSEEK_MODEL || 'deepseek-chat'
 
-  console.log('[JD Analyzer] analyzeJobDescription - starting')
-  console.log('[JD Analyzer] Company:', request.company, 'Position:', request.position)
-  console.log('[JD Analyzer] JD Text length:', request.jdText?.length || 0)
-  console.log('[JD Analyzer] User docs count:', request.userDocuments?.length || 0)
-
   if (!apiKey) {
-    console.error('[JD Analyzer] DEEPSEEK_API_KEY is not configured')
     throw new Error('DEEPSEEK_API_KEY is not configured')
   }
 
   const userPrompt = buildJDAnalysisPrompt(request)
-
-  console.log('[JD Analyzer] Calling DeepSeek API...')
 
   const response = await fetchWithTimeout(
     `${baseUrl}/chat/completions`,
@@ -348,39 +246,33 @@ export async function analyzeJobDescription(
           { role: 'user', content: userPrompt },
         ],
         temperature: 0.3,
-        max_tokens: 4000,
+        max_tokens: 2600,
         response_format: { type: 'json_object' },
       }),
     },
     60000
   )
 
-  console.log('[JD Analyzer] API response status:', response.status)
-
   if (!response.ok) {
     const errorText = await response.text()
-    console.error('[JD Analyzer] API error:', response.status, errorText)
+    console.error('JD analysis upstream error:', response.status, errorText)
     throw new Error(`JD_ANALYSIS_API_FAILED_${response.status}`)
   }
 
   const data = await response.json()
   const content = data?.choices?.[0]?.message?.content
 
-  console.log('[JD Analyzer] API response content length:', content?.length || 0)
-
   if (!content || typeof content !== 'string') {
-    console.error('[JD Analyzer] Empty or invalid model content:', JSON.stringify(data).slice(0, 500))
-    throw new Error('JD_ANALYSIS_EMPTY_RESPONSE')
+    console.error('Empty or invalid model content:', data)
+    throw new Error('模型返回为空')
   }
 
   try {
-    const result = safeParseAnalysis(content)
-    console.log('[JD Analyzer] Analysis complete, result keys:', Object.keys(result).join(', '))
-    return result
+    return safeParseAnalysis(content)
   } catch (error) {
-    const errorMsg = error instanceof Error ? error.message : String(error)
-    console.error('[JD Analyzer] safeParseAnalysis FAILED:', errorMsg)
-    console.error('[JD Analyzer] Full raw content:', content)
+    console.error('Failed to parse JD analysis result')
+    console.error('Raw content preview:', content.slice(0, 2000))
+    console.error('Parse error:', error)
     throw new Error('JD_ANALYSIS_PARSE_FAILED')
   }
 }

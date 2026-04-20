@@ -46,6 +46,9 @@ function normalizeErrorMessage(error: unknown): string {
 }
 
 export async function POST(request: NextRequest) {
+  const requestStartTime = Date.now()
+  console.log('[API] JD analysis request received')
+
   const supabase = getServerSupabase()
   let user: { id: string; email?: string } | null = null
   let isAuthenticated = false
@@ -73,7 +76,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const authStartTime = Date.now()
     const { user: authUser, error: authError } = await verifyAuth(request)
+    console.log('[API] Auth verification duration:', Date.now() - authStartTime, 'ms')
 
     if (authError || !authUser) {
       return NextResponse.json(
@@ -88,11 +93,13 @@ export async function POST(request: NextRequest) {
     user = authUser
     isAuthenticated = true
 
+    const profileStartTime = Date.now()
     const { data: profile, error: profileError } = await supabase
       .from('profiles')
       .select('credits')
       .eq('id', user.id)
       .single()
+    console.log('[API] Get profile duration:', Date.now() - profileStartTime, 'ms')
 
     if (profileError || !profile) {
       console.error('Get profile failed:', profileError)
@@ -117,11 +124,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const creditStartTime = Date.now()
     const { error: creditError } = await (supabase as any).rpc('deduct_credits', {
       p_user_id: user.id,
       p_amount: 50,
       p_description: 'JD 分析',
     })
+    console.log('[API] Credit deduction duration:', Date.now() - creditStartTime, 'ms')
 
     if (creditError) {
       console.error('Credit deduction error:', creditError)
@@ -134,6 +143,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const analysisStartTime = Date.now()
+    console.log('[API] Starting AI analysis...')
     const analysisResult = await analyzeJobDescription({
       company: body.company.trim(),
       position: body.position.trim(),
@@ -144,7 +155,9 @@ export async function POST(request: NextRequest) {
       userDocuments: body.userDocuments || [],
       userMode: body.userMode || 'campus',
     })
+    console.log('[API] AI analysis duration:', Date.now() - analysisStartTime, 'ms')
 
+    const historyStartTime = Date.now()
     if (isAuthenticated && user) {
       const { error: historyError } = await (supabase as any)
         .from('jd_analysis_history')
@@ -167,18 +180,23 @@ export async function POST(request: NextRequest) {
         console.error('Save analysis history error:', historyError)
       }
     }
+    console.log('[API] Save history duration:', Date.now() - historyStartTime, 'ms')
+
+    const totalDuration = Date.now() - requestStartTime
+    console.log('[API] Total request duration:', totalDuration, 'ms')
 
     return NextResponse.json({
       success: true,
       data: analysisResult,
     })
   } catch (error) {
-    console.error('JD analysis route error:', error)
+    console.error('[API] JD analysis route error:', error)
+    console.error('[API] Total duration before error:', Date.now() - requestStartTime, 'ms')
 
     return NextResponse.json(
       {
         success: false,
-        error: '分析失败，请稍后重试',
+        error: normalizeErrorMessage(error),
       },
       { status: 500 }
     )

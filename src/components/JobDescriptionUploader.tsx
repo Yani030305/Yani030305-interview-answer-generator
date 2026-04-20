@@ -242,13 +242,18 @@ export function JobDescriptionUploader() {
               setError(null)
               setIsAnalyzing(true)
 
+              const controller = new AbortController()
+              const timeoutId = setTimeout(() => {
+                controller.abort()
+              }, 90000)
+
               try {
                 console.log('3. 开始请求 /api/analyze-jd')
                 const response = await fetch('/api/analyze-jd', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`,
+                    Authorization: `Bearer ${accessToken}`,
                   },
                   body: JSON.stringify({
                     company: company.trim(),
@@ -258,11 +263,37 @@ export function JobDescriptionUploader() {
                     userMode,
                     userDocuments: documents,
                   }),
+                  signal: controller.signal,
                 })
 
                 console.log('4. response status:', response.status)
-                const result: AnalyzeJDResponse = await response.json()
-                console.log('5. response result:', result)
+
+                if ([502, 503, 504].includes(response.status)) {
+                  console.error(`5. 网关/服务超时错误: ${response.status}`)
+                  setError('分析超时或服务暂时不可用，请稍后重试')
+                  return
+                }
+
+                const contentType = response.headers.get('content-type') || ''
+                console.log('5. content-type:', contentType)
+
+                if (!response.ok && !contentType.includes('application/json')) {
+                  const textResponse = await response.text()
+                  console.error('6. 非 JSON 错误响应:', textResponse.slice(0, 500))
+                  throw new Error('服务异常，请稍后重试')
+                }
+
+                let result: AnalyzeJDResponse
+
+                if (contentType.includes('application/json')) {
+                  result = await response.json()
+                } else {
+                  const textResponse = await response.text()
+                  console.error('6. 非 JSON 响应:', textResponse.slice(0, 500))
+                  throw new Error('分析失败，请稍后重试')
+                }
+
+                console.log('6. response result:', result)
 
                 if (!response.ok) {
                   throw new Error('error' in result ? result.error : '分析失败，请稍后重试')
@@ -272,17 +303,24 @@ export function JobDescriptionUploader() {
                   throw new Error(result.error || '分析失败，请稍后重试')
                 }
 
-                console.log('6. 分析成功')
+                console.log('7. 分析成功')
                 const analysisData = result.data
                 setAnalysisResult(analysisData)
+
                 setCredits(Math.max(credits - 50, 0))
                 await refreshCredits()
-                console.log('7. 刷新积分完成')
+                console.log('8. 刷新积分完成')
               } catch (err) {
-                console.error('错误:', err)
-                setError(err instanceof Error ? err.message : '分析失败，请稍后重试')
+                if (err instanceof Error && err.name === 'AbortError') {
+                  console.error('错误: 请求超时/被中止')
+                  setError('分析耗时过长，请稍后重试')
+                } else {
+                  console.error('错误:', err)
+                  setError(err instanceof Error ? err.message : '分析失败，请稍后重试')
+                }
               } finally {
-                console.log('8. 结束')
+                clearTimeout(timeoutId)
+                console.log('9. 结束')
                 setIsAnalyzing(false)
               }
             }}
