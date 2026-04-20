@@ -11,7 +11,7 @@ const publicPaths = ['/auth']
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const pathname = usePathname()
-  const { user, isLoading, setUser, setLoading, setCredits } = useAuthStore()
+  const { user, isLoading, setUser, setLoading, setCredits, setAccessToken } = useAuthStore()
 
   useEffect(() => {
     const fetchCredits = async (userId: string) => {
@@ -34,6 +34,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
       try {
         const { data: { session } } = await supabase.auth.getSession()
         setUser(session?.user ?? null)
+        setAccessToken(session?.access_token ?? null)
         
         if (session?.user) {
           await fetchCredits(session.user.id)
@@ -48,6 +49,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         setUser(session?.user ?? null)
+        setAccessToken(session?.access_token ?? null)
         
         if (session?.user) {
           await fetchCredits(session.user.id)
@@ -59,7 +61,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
     )
 
     return () => subscription.unsubscribe()
-  }, [setUser, setLoading, setCredits])
+  }, [setUser, setLoading, setCredits, setAccessToken])
 
   useEffect(() => {
     if (isLoading) return

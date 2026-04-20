@@ -24,12 +24,15 @@ export function FileUploader() {
     const validFiles: File[] = []
     const errors: string[] = []
 
+    // 文件大小限制：20MB
+    const MAX_FILE_SIZE = 20 * 1024 * 1024
+
     fileArray.forEach((file) => {
       if (!isValidFileType(file.name)) {
         const ext = file.name.split('.').pop()?.toUpperCase()
         errors.push(`${file.name}: 不支持的文件格式 (${ext})。请上传 PDF 或 Word 格式的文件。`)
-      } else if (file.size > 10 * 1024 * 1024) {
-        errors.push(`${file.name}: 文件太大 (最大 10MB)`)
+      } else if (file.size > MAX_FILE_SIZE) {
+        errors.push(`${file.name}: 文件太大 (最大 20MB)`) 
       } else {
         validFiles.push(file)
       }
@@ -47,18 +50,41 @@ export function FileUploader() {
         const response = await fetch('/api/parse-document', {
           method: 'POST',
           body: formData,
+          // 确保请求头正确，不设置 Content-Type，让浏览器自动处理
         })
 
         if (!response.ok) {
-          const errorData = await response.json()
-          throw new Error(errorData.error || 'Failed to parse document')
+          // 检查响应是否为 JSON 格式
+          const contentType = response.headers.get('content-type')
+          if (contentType && contentType.includes('application/json')) {
+            try {
+              const errorData = await response.json()
+              throw new Error(errorData.error || '上传失败，请稍后重试')
+            } catch (jsonError) {
+              // JSON 解析失败
+              throw new Error('上传失败，请稍后重试')
+            }
+          } else {
+            // 非 JSON 响应，可能是 Nginx 413 错误
+            if (response.status === 413) {
+              throw new Error('文件过大，请压缩后重新上传')
+            } else {
+              throw new Error('上传失败，请稍后重试')
+            }
+          }
+        }
+
+        // 检查响应是否为 JSON 格式
+        const contentType = response.headers.get('content-type')
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new Error('上传失败，请稍后重试')
         }
 
         const doc: UploadedDocument = await response.json()
         addDocument(doc)
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to upload file')
+      setError(err instanceof Error ? err.message : '上传失败，请稍后重试')
     } finally {
       setIsUploading(false)
     }

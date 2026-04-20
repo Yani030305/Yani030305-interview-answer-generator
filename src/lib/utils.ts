@@ -54,3 +54,14 @@ export function isImageFile(filename: string): boolean {
 export function sanitizeFilename(filename: string): string {
   return filename.replace(/[^a-zA-Z0-9\u4e00-\u9fa5._-]/g, '_')
 }
+
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString)
+  return date.toLocaleString('zh-CN', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}

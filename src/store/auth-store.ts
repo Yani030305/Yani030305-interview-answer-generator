@@ -7,11 +7,13 @@ interface AuthState {
   user: User | null
   isLoading: boolean
   credits: number
+  accessToken: string | null
   answerHistory: AnswerHistoryItem[]
   historyLoading: boolean
   setUser: (user: User | null) => void
   setLoading: (loading: boolean) => void
   setCredits: (credits: number) => void
+  setAccessToken: (token: string | null) => void
   setAnswerHistory: (history: AnswerHistoryItem[]) => void
   setHistoryLoading: (loading: boolean) => void
   addAnswerHistory: (item: AnswerHistoryItem) => void
@@ -25,6 +27,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
   user: null,
   isLoading: false,
   credits: 0,
+  accessToken: null,
   answerHistory: [],
   historyLoading: false,
 
@@ -33,6 +36,8 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
   setLoading: (loading) => set({ isLoading: loading }),
 
   setCredits: (credits) => set({ credits }),
+
+  setAccessToken: (token) => set({ accessToken: token }),
 
   setAnswerHistory: (history) => set({ answerHistory: history }),
 
@@ -60,9 +65,8 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
     set({ historyLoading: true })
 
     try {
-      // 添加超时处理
       const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 10000) // 10秒超时
+      const timeoutId = setTimeout(() => controller.abort(), 10000)
 
       const response = await fetch(
         `/api/answer-history?userId=${encodeURIComponent(targetUserId)}`,
@@ -77,7 +81,6 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
 
       if (!response.ok) {
         console.error('Failed to fetch answer history:', response.status)
-        // 不重置历史记录，保持当前值
         return
       }
 
@@ -89,7 +92,6 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       } else {
         console.error('Error fetching answer history:', error)
       }
-      // 不重置历史记录，保持当前值
     } finally {
       set({ historyLoading: false })
     }
@@ -100,9 +102,8 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
     if (!targetUserId) return
 
     try {
-      // 添加超时处理
       const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 10000) // 10秒超时
+      const timeoutId = setTimeout(() => controller.abort(), 10000)
 
       const { data, error } = await supabase
         .from('profiles')
@@ -121,7 +122,6 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       } else {
         console.error('Error refreshing credits:', error)
       }
-      // 不重置积分，保持当前值
     }
   },
 }))

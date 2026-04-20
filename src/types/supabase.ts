@@ -295,6 +295,41 @@ export interface Database {
           created_at?: string
         }
       }
+      jd_analysis_history: {
+        Row: {
+          id: string
+          user_id: string
+          company: string
+          position: string
+          city: string | null
+          jd_text: string
+          analysis_result: Json
+          created_at: string
+          metadata: Json | null
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          company: string
+          position: string
+          city?: string | null
+          jd_text: string
+          analysis_result: Json
+          created_at?: string
+          metadata?: Json | null
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          company?: string
+          position?: string
+          city?: string | null
+          jd_text?: string
+          analysis_result?: Json
+          created_at?: string
+          metadata?: Json | null
+        }
+      }
     }
     Views: {
       [_ in never]: never
