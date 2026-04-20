@@ -31,6 +31,8 @@ export default function RechargePage() {
     qrUrl: string
   } | null>(null)
   const [checkingPayment, setCheckingPayment] = useState(false)
+  const [paymentTimeout, setPaymentTimeout] = useState(false)
+  const [paymentStartTime, setPaymentStartTime] = useState<number | null>(null)
 
   useEffect(() => {
     fetchPackages()
@@ -65,6 +67,9 @@ export default function RechargePage() {
 
               alert('支付成功！积分已到账')
               router.push('/')
+            } else if (paymentStartTime && Date.now() - paymentStartTime > 1 * 60 * 1000) {
+              setCheckingPayment(false)
+              setPaymentTimeout(true)
             }
           }
         } catch (err) {
@@ -78,7 +83,7 @@ export default function RechargePage() {
         clearInterval(interval)
       }
     }
-  }, [paymentInfo?.orderId, checkingPayment, user, setCredits, router])
+  }, [paymentInfo?.orderId, checkingPayment, user, setCredits, router, paymentStartTime])
 
   const fetchPackages = async () => {
     try {
@@ -143,6 +148,8 @@ export default function RechargePage() {
       })
 
       setCheckingPayment(true)
+      setPaymentStartTime(Date.now())
+      setPaymentTimeout(false)
     } catch (err) {
       console.error('Purchase failed:', err)
       setError(err instanceof Error ? err.message : '购买失败，请重试')
@@ -243,15 +250,43 @@ export default function RechargePage() {
 
                 <div className="flex items-center gap-3">
                   <div className="flex-1">
-                    {checkingPayment && (
+                    {checkingPayment && !paymentTimeout && (
                       <div className="flex items-center text-sm text-blue-700">
                         <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                         正在检查支付状态...
                       </div>
                     )}
-                    <p className="text-xs text-blue-600 mt-2">
-                      系统正在自动检查支付状态，检查时间可能会比较久，请稍等...
-                    </p>
+                    {paymentTimeout && (
+                      <div className="space-y-2">
+                        <div className="flex items-start gap-2 text-sm text-amber-700 bg-amber-100 p-3 rounded-lg">
+                          <AlertCircle className="h-4 w-4 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <p className="font-medium">支付超时未完成</p>
+                            <p className="text-xs mt-1">如果您已经完成支付，请稍后刷新页面查看积分是否到账。</p>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button size="sm" variant="outline" onClick={handleCheckPayment}>
+                            手动检查支付状态
+                          </Button>
+                          <Button size="sm" variant="outline" onClick={() => {
+                            setPaymentInfo(null)
+                            setPaymentTimeout(false)
+                            setCheckingPayment(false)
+                          }}>
+                            返回套餐页面
+                          </Button>
+                        </div>
+                        <p className="text-xs text-blue-600">
+                          如有疑问请联系客服：<a href="mailto:hiremind@qq.com" className="underline">hiremind@qq.com</a>
+                        </p>
+                      </div>
+                    )}
+                    {!paymentTimeout && (
+                      <p className="text-xs text-blue-600 mt-2">
+                        系统正在自动检查支付状态，检查时间可能会比较久，请稍等...
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
