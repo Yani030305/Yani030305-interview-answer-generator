@@ -329,7 +329,7 @@ export function JobDescriptionUploader() {
             {isAnalyzing ? (
               <>
                 <Search className="h-4 w-4 mr-2 animate-spin" />
-                分析中...
+                分析中...（大约需要2分钟）
               </>
             ) : (
               <>
