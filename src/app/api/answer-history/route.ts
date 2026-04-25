@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const questionId = searchParams.get('questionId')
 
     if (!userId) {
-      return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+      return NextResponse.json({ error: '用户ID不能为空' }, { status: 400 })
     }
 
     const supabase = createClient<Database>(
@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
 
     if (allError) {
       console.error('Error fetching answer history:', allError)
-      return NextResponse.json({ error: allError.message }, { status: 500 })
+      return NextResponse.json({ error: '获取历史记录失败' }, { status: 500 })
     }
 
     // 手动过滤和排序
@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Error in answer history GET:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: '服务器内部错误' },
       { status: 500 }
     )
   }
@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
 
     if (!userId || !questionId) {
       return NextResponse.json(
-        { error: 'User ID and Question ID are required' },
+        { error: '用户ID和问题ID不能为空' },
         { status: 400 }
       )
     }
@@ -95,7 +95,7 @@ export async function POST(request: NextRequest) {
     )
 
     // Check if a similar record already exists
-    const { data: existingRecord, error: checkError } = await supabase
+    const { data: existingRecord, error: checkError } = await (supabase as any)
       .from('answer_history')
       .select('id')
       .eq('user_id', userId)
@@ -107,12 +107,12 @@ export async function POST(request: NextRequest) {
     if (checkError && checkError.code !== 'PGRST116') {
       // Only throw error if it's not a "not found" error
       console.error('Error checking existing record:', checkError)
-      return NextResponse.json({ error: checkError.message }, { status: 500 })
+      return NextResponse.json({ error: '检查历史记录失败' }, { status: 500 })
     }
 
     // If a similar record already exists, return it instead of creating a new one
     if (existingRecord) {
-      const { data: fullRecord, error: fetchError } = await supabase
+      const { data: fullRecord, error: fetchError } = await (supabase as any)
         .from('answer_history')
         .select('*')
         .eq('id', (existingRecord as { id: string }).id)
@@ -120,11 +120,11 @@ export async function POST(request: NextRequest) {
 
       if (fetchError) {
         console.error('Error fetching existing record:', fetchError)
-        return NextResponse.json({ error: fetchError.message }, { status: 500 })
+        return NextResponse.json({ error: '获取历史记录失败' }, { status: 500 })
       }
 
       if (!fullRecord) {
-        return NextResponse.json({ error: 'Record not found' }, { status: 404 })
+        return NextResponse.json({ error: '记录不存在' }, { status: 404 })
       }
 
       const history: AnswerHistoryItem = {
@@ -153,11 +153,11 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error('Error creating answer history:', error)
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ error: '创建历史记录失败' }, { status: 500 })
     }
 
     if (!data) {
-      return NextResponse.json({ error: 'Failed to create record' }, { status: 500 })
+      return NextResponse.json({ error: '创建记录失败' }, { status: 500 })
     }
 
     const history: AnswerHistoryItem = {
@@ -174,7 +174,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error in answer history POST:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: '服务器内部错误' },
       { status: 500 }
     )
   }
@@ -186,7 +186,7 @@ export async function DELETE(request: NextRequest) {
     const id = searchParams.get('id')
 
     if (!id) {
-      return NextResponse.json({ error: 'History ID is required' }, { status: 400 })
+      return NextResponse.json({ error: '历史记录ID不能为空' }, { status: 400 })
     }
 
     const supabase = createClient<Database>(
@@ -194,21 +194,21 @@ export async function DELETE(request: NextRequest) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
 
-    const { error } = await supabase
+    const { error } = await (supabase as any)
       .from('answer_history')
       .delete()
       .eq('id', id)
 
     if (error) {
       console.error('Error deleting answer history:', error)
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ error: '删除历史记录失败' }, { status: 500 })
     }
 
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Error in answer history DELETE:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: '服务器内部错误' },
       { status: 500 }
     )
   }

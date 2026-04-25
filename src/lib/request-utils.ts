@@ -41,7 +41,7 @@ export async function verifyAuth(request: NextRequest): Promise<{
     const { data: { user }, error } = await supabase.auth.getUser(token)
     
     if (error || !user) {
-      return { user: null, error: '认证令牌无效或已过期' }
+      return { user: null, error: '您的登录状态已过期，请刷新页面或重新登录' }
     }
 
     return { user: { id: user.id, email: user.email || '' } }

@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'HireMind AI 面试助手',
-  description: '智能面试助手，上传简历生成个性化面试回答',
+  description: 'JD拆解+AI答题，打造专属面试准备',
 }
 
 export default function RootLayout({

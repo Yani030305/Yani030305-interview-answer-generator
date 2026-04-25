@@ -2,7 +2,7 @@ export const translations = {
   zh: {
     header: {
       title: 'HireMind AI 面试助手',
-      subtitle: '上传简历，生成个性化面试回答',
+      subtitle: 'JD拆解+AI答题，打造专属面试准备',
       campus: '校园招聘',
       experienced: '社招',
       credits: '积分',
@@ -93,7 +93,7 @@ export const translations = {
   en: {
     header: {
       title: 'HireMind AI Interview Assistant',
-      subtitle: 'Upload your resume and generate personalized interview answers',
+      subtitle: 'JD Analysis + AI Answers, Your Personalized Interview Prep',
       campus: 'Campus',
       experienced: 'Experienced',
       credits: 'Credits',

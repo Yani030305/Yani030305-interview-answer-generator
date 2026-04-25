@@ -206,8 +206,22 @@ export default function AuthPage() {
     } catch (error) {
       let errorMessage = error instanceof Error ? error.message : '发生错误'
       
-      if (error instanceof Error && error.message.includes('Password should contain at least one character of each')) {
-        errorMessage = '密码必须包含大小写字母和数字'
+      if (error instanceof Error) {
+        if (error.message.includes('Password should contain at least one character of each')) {
+          errorMessage = '密码必须包含大小写字母和数字'
+        } else if (error.message.includes('Failed to fetch')) {
+          errorMessage = '网络连接失败，请检查网络后重试'
+        } else if (error.message.includes('Invalid login credentials')) {
+          errorMessage = '邮箱或密码错误，请检查后重试'
+        } else if (error.message.includes('User not found')) {
+          errorMessage = '用户不存在，请检查邮箱是否正确'
+        } else if (error.message.includes('Email rate limit exceeded')) {
+          errorMessage = '操作过于频繁，请稍后再试'
+        } else if (error.message.includes('Network error')) {
+          errorMessage = '网络连接失败，请检查网络后重试'
+        } else if (error.message.includes('Timeout')) {
+          errorMessage = '请求超时，请稍后再试'
+        }
       }
       
       setMessage({

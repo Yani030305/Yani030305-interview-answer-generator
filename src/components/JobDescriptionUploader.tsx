@@ -23,6 +23,53 @@ type AnalyzeJDResponse =
       error: string
     }
 
+function validateInputQuality(company: string, position: string, jdText: string): { valid: boolean; error?: string } {
+  const trimmedJd = jdText.trim()
+  
+  // 1. 检测重复字符（超过50%是同一个字符）
+  const charCount: Record<string, number> = {}
+  for (const char of trimmedJd) {
+    charCount[char] = (charCount[char] || 0) + 1
+  }
+  const maxCharCount = Math.max(...Object.values(charCount))
+  if (maxCharCount / trimmedJd.length > 0.5) {
+    return { valid: false, error: '岗位描述看起来内容质量较低，请提供真实的岗位描述' }
+  }
+  
+  // 2. 岗位关键词检测
+  const jdKeywords = [
+    '职责', '要求', '负责', '岗位', '职位', '工作', '经验',
+    '学历', '专业', '技能', '能力', '负责', '参与', '协助',
+    'responsibilities', 'requirements', 'experience', 'skills'
+  ]
+  const hasJdKeyword = jdKeywords.some(keyword => trimmedJd.toLowerCase().includes(keyword.toLowerCase()))
+  
+  if (!hasJdKeyword) {
+    return { valid: false, error: '请提供包含岗位信息的真实描述（如职责、要求等）' }
+  }
+  
+  // 3. 有效字符比例（至少50%是中文或英文字母）
+  const validChars = /[\u4e00-\u9fa5a-zA-Z]/g
+  const validCharCount = (trimmedJd.match(validChars) || []).length
+  if (validCharCount / trimmedJd.length < 0.5) {
+    return { valid: false, error: '岗位描述内容质量较低，请提供真实的岗位描述' }
+  }
+  
+  // 4. 检测公司名称和岗位名称是否合理（不能太短或全是数字）
+  const companyTrimmed = company.trim()
+  const positionTrimmed = position.trim()
+  
+  if (/^\d+$/.test(companyTrimmed) || companyTrimmed.length < 2) {
+    return { valid: false, error: '请输入有效的公司名称' }
+  }
+  
+  if (/^\d+$/.test(positionTrimmed) || positionTrimmed.length < 2) {
+    return { valid: false, error: '请输入有效的岗位名称' }
+  }
+  
+  return { valid: true }
+}
+
 export function JobDescriptionUploader() {
   const router = useRouter()
   const { uiLanguage, documents, userMode } = useAppStore()
@@ -219,22 +266,31 @@ export function JobDescriptionUploader() {
                 return
               }
 
+              console.log('2. 开始输入质量检测')
+              const qualityCheck = validateInputQuality(company, position, manualText)
+              if (!qualityCheck.valid) {
+                console.log('2. 输入质量检测失败:', qualityCheck.error)
+                setError(qualityCheck.error || '输入内容质量检测未通过')
+                return
+              }
+              console.log('2. 输入质量检测通过')
+
               if (!user) {
-                console.log('2. 未登录')
+                console.log('3. 未登录')
                 setError('请先登录')
                 return
               }
 
               if (credits < 50) {
-                console.log('2. 积分不足')
+                console.log('4. 积分不足')
                 setError('积分不足，需要50积分进行分析')
                 return
               }
 
-              console.log('2. accessToken:', accessToken)
+              console.log('4. accessToken:', accessToken)
 
               if (!accessToken) {
-                console.log('3. accessToken 不存在')
+                console.log('5. accessToken 不存在')
                 setError('登录状态已失效，请重新登录')
                 return
               }
@@ -248,7 +304,7 @@ export function JobDescriptionUploader() {
               }, 90000)
 
               try {
-                console.log('3. 开始请求 /api/analyze-jd')
+                console.log('5. 开始请求 /api/analyze-jd')
                 const response = await fetch('/api/analyze-jd', {
                   method: 'POST',
                   headers: {
@@ -266,20 +322,20 @@ export function JobDescriptionUploader() {
                   signal: controller.signal,
                 })
 
-                console.log('4. response status:', response.status)
+                console.log('6. response status:', response.status)
 
                 if ([502, 503, 504].includes(response.status)) {
-                  console.error(`5. 网关/服务超时错误: ${response.status}`)
+                  console.error(`7. 网关/服务超时错误: ${response.status}`)
                   setError('分析超时或服务暂时不可用，请稍后重试')
                   return
                 }
 
                 const contentType = response.headers.get('content-type') || ''
-                console.log('5. content-type:', contentType)
+                console.log('7. content-type:', contentType)
 
                 if (!response.ok && !contentType.includes('application/json')) {
                   const textResponse = await response.text()
-                  console.error('6. 非 JSON 错误响应:', textResponse.slice(0, 500))
+                  console.error('8. 非 JSON 错误响应:', textResponse.slice(0, 500))
                   throw new Error('服务异常，请稍后重试')
                 }
 
@@ -289,11 +345,11 @@ export function JobDescriptionUploader() {
                   result = await response.json()
                 } else {
                   const textResponse = await response.text()
-                  console.error('6. 非 JSON 响应:', textResponse.slice(0, 500))
+                  console.error('8. 非 JSON 响应:', textResponse.slice(0, 500))
                   throw new Error('分析失败，请稍后重试')
                 }
 
-                console.log('6. response result:', result)
+                console.log('8. response result:', result)
 
                 if (!response.ok) {
                   throw new Error('error' in result ? result.error : '分析失败，请稍后重试')

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import {
   GraduationCap,
@@ -36,113 +36,18 @@ export function Header() {
     credits,
     setCredits,
     setAnswerHistory,
-    setHistoryLoading,
-    setLoading,
-    fetchAnswerHistory,
+    refreshCredits,
   } = useAuthStore()
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const t = translations[uiLanguage]
 
-  const loadUserData = useCallback(
-    async (userId: string) => {
-      try {
-        // 先获取用户积分
-        const { data: profileData, error: profileError } = await supabase
-          .from('profiles')
-          .select('credits')
-          .eq('id', userId)
-          .single()
-
-        if (!profileError && profileData) {
-          setCredits((profileData as any).credits ?? 0)
-        }
-        // 注意：查询失败时不再重置积分，保持当前值
-
-        // 然后获取历史记录
-        await fetchAnswerHistory(userId)
-      } catch (e) {
-        console.error('Failed to load user data:', e)
-        // 发生错误时不再重置积分和历史记录，保持当前值
-      }
-    },
-    [fetchAnswerHistory, setCredits]
-  )
-
   useEffect(() => {
-    let alive = true
     setMounted(true)
-
-    // 定义内部的认证状态刷新函数
-    const internalRefreshAuthState = async () => {
-      try {
-        // 尝试获取会话
-        const { data: sessionData, error: sessionError } = await supabase.auth.getSession()
-        
-        if (sessionData?.session?.user) {
-          // 会话存在，设置用户状态并加载数据
-          setUser(sessionData.session.user)
-          loadUserData(sessionData.session.user.id).catch(err => {
-            console.error('Failed to load user data:', err)
-          })
-        } else {
-          // 会话不存在，尝试直接获取用户信息
-          try {
-            const { data: userData, error: userError } = await supabase.auth.getUser()
-            
-            if (userData?.user) {
-              // 用户存在，设置用户状态并加载数据
-              setUser(userData.user)
-              loadUserData(userData.user.id).catch(err => {
-                console.error('Failed to load user data:', err)
-              })
-            } else {
-              // 确实没有用户登录，设置默认状态
-              setUser(null)
-              setCredits(0)
-              setAnswerHistory([])
-            }
-          } catch (getUserError) {
-            console.error('Failed to get user:', getUserError)
-            // 获取用户失败，保持当前状态，不重置为 0
-          }
-        }
-      } catch (e) {
-        console.error('Failed to refresh auth state:', e)
-        // 发生错误时，保持当前状态，不重置为 0
-      }
-    }
-
-    // 异步执行认证初始化，不阻塞页面渲染
-    internalRefreshAuthState()
-
-    const { 
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (!alive) return
-
-      try {
-        if (session?.user) {
-          setUser(session.user)
-          // 异步加载用户数据，不阻塞页面渲染
-          loadUserData(session.user.id).catch(err => {
-            console.error('Failed to load user data:', err)
-          })
-        } else {
-          setUser(null)
-          setCredits(0)
-          setAnswerHistory([])
-        }
-      } catch (e) {
-        console.error('Failed during auth state change:', e)
-      }
-    })
-
-    return () => {
-      alive = false
-      subscription.unsubscribe()
-    }
-  }, [loadUserData, setUser, setCredits, setAnswerHistory]) // 包含所有必要的依赖项
+    
+    // Header 不再负责认证初始化，只在需要时刷新积分
+    // 认证初始化完全由 AuthGuard 负责
+  }, [])
 
   if (!mounted) {
     return null
@@ -150,17 +55,13 @@ export function Header() {
 
   const handleLogout = async () => {
     try {
-      // 直接调用 signOut，不依赖 user 状态
       await supabase.auth.signOut()
     } catch (error) {
-      console.error('Logout failed:', error)
-      // 即使 signOut 失败，也要清除本地状态
+      console.error('[Header] Logout failed:', error)
     } finally {
-      // 清除本地状态
       setUser(null)
       setCredits(0)
       setAnswerHistory([])
-      // 跳转到登录页面
       router.push('/auth')
     }
   }
@@ -225,8 +126,6 @@ export function Header() {
                 : t.header.experienced}
             </span>
           </div>
-
-
 
           <Button
             variant="ghost"

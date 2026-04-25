@@ -4,14 +4,16 @@ import { AnswerHistoryItem } from '@/types'
 import { supabase } from '@/lib/supabase'
 
 interface AuthState {
+  // 三态：initializing | authenticated | unauthenticated
+  authStatus: 'initializing' | 'authenticated' | 'unauthenticated'
   user: User | null
-  isLoading: boolean
   credits: number
   accessToken: string | null
   answerHistory: AnswerHistoryItem[]
   historyLoading: boolean
+  
   setUser: (user: User | null) => void
-  setLoading: (loading: boolean) => void
+  setAuthStatus: (status: 'initializing' | 'authenticated' | 'unauthenticated') => void
   setCredits: (credits: number) => void
   setAccessToken: (token: string | null) => void
   setAnswerHistory: (history: AnswerHistoryItem[]) => void
@@ -24,20 +26,32 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>()((set, get) => ({
+  authStatus: 'initializing', // 明确三态
   user: null,
-  isLoading: false,
   credits: 0,
   accessToken: null,
   answerHistory: [],
   historyLoading: false,
 
-  setUser: (user) => set({ user }),
+  setUser: (user) => {
+    console.log('[AuthStore] setUser called', user ? user.id : 'null')
+    set({ user })
+  },
 
-  setLoading: (loading) => set({ isLoading: loading }),
+  setAuthStatus: (status) => {
+    console.log('[AuthStore] setAuthStatus:', status)
+    set({ authStatus: status })
+  },
 
-  setCredits: (credits) => set({ credits }),
+  setCredits: (credits) => {
+    console.log('[AuthStore] setCredits called', credits)
+    set({ credits })
+  },
 
-  setAccessToken: (token) => set({ accessToken: token }),
+  setAccessToken: (token) => {
+    console.log('[AuthStore] setAccessToken called', token ? 'has token' : 'no token')
+    set({ accessToken: token })
+  },
 
   setAnswerHistory: (history) => set({ answerHistory: history }),
 
@@ -114,7 +128,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       clearTimeout(timeoutId)
 
       if (!error && data) {
-        set({ credits: (data as any).credits ?? 0 })
+        set({ credits: (data as any).credits || 0 })
       }
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') {

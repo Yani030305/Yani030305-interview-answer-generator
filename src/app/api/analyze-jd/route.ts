@@ -23,6 +23,53 @@ function getServerSupabase() {
   )
 }
 
+function validateInputQuality(company: string, position: string, jdText: string): { valid: boolean; error?: string } {
+  const trimmedJd = jdText.trim()
+  
+  // 1. 检测重复字符（超过50%是同一个字符）
+  const charCount: Record<string, number> = {}
+  for (const char of trimmedJd) {
+    charCount[char] = (charCount[char] || 0) + 1
+  }
+  const maxCharCount = Math.max(...Object.values(charCount))
+  if (maxCharCount / trimmedJd.length > 0.5) {
+    return { valid: false, error: '岗位描述看起来内容质量较低，请提供真实的岗位描述' }
+  }
+  
+  // 2. 岗位关键词检测
+  const jdKeywords = [
+    '职责', '要求', '负责', '岗位', '职位', '工作', '经验',
+    '学历', '专业', '技能', '能力', '负责', '参与', '协助',
+    'responsibilities', 'requirements', 'experience', 'skills'
+  ]
+  const hasJdKeyword = jdKeywords.some(keyword => trimmedJd.toLowerCase().includes(keyword.toLowerCase()))
+  
+  if (!hasJdKeyword) {
+    return { valid: false, error: '请提供包含岗位信息的真实描述（如职责、要求等）' }
+  }
+  
+  // 3. 有效字符比例（至少50%是中文或英文字母）
+  const validChars = /[\u4e00-\u9fa5a-zA-Z]/g
+  const validCharCount = (trimmedJd.match(validChars) || []).length
+  if (validCharCount / trimmedJd.length < 0.5) {
+    return { valid: false, error: '岗位描述内容质量较低，请提供真实的岗位描述' }
+  }
+  
+  // 4. 检测公司名称和岗位名称是否合理（不能太短或全是数字）
+  const companyTrimmed = company.trim()
+  const positionTrimmed = position.trim()
+  
+  if (/^\d+$/.test(companyTrimmed) || companyTrimmed.length < 2) {
+    return { valid: false, error: '请输入有效的公司名称' }
+  }
+  
+  if (/^\d+$/.test(positionTrimmed) || positionTrimmed.length < 2) {
+    return { valid: false, error: '请输入有效的岗位名称' }
+  }
+  
+  return { valid: true }
+}
+
 function normalizeErrorMessage(error: unknown): string {
   const message = error instanceof Error ? error.message : String(error)
 
@@ -75,6 +122,20 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
+
+    console.log('[API] Starting input quality validation')
+    const qualityCheck = validateInputQuality(body.company, body.position, body.jdText)
+    if (!qualityCheck.valid) {
+      console.log('[API] Input quality validation failed:', qualityCheck.error)
+      return NextResponse.json(
+        {
+          success: false,
+          error: qualityCheck.error || '输入内容质量检测未通过',
+        },
+        { status: 400 }
+      )
+    }
+    console.log('[API] Input quality validation passed')
 
     const authStartTime = Date.now()
     const { user: authUser, error: authError } = await verifyAuth(request)

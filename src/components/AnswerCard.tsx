@@ -364,9 +364,9 @@ export function AnswerCard({ question }: AnswerCardProps) {
     })
   }, [question.id, setAnswer])
 
-  // Only save to history on page unload, not on component unmount (which happens when switching questions)
+  // Save to history when answer is generated
   useEffect(() => {
-    const handleBeforeUnload = async () => {
+    const saveToHistory = async () => {
       if (status === 'done' && user && answer) {
         try {
           const response = await fetch('/api/answer-history', {
@@ -381,7 +381,12 @@ export function AnswerCard({ question }: AnswerCardProps) {
               answerEn: answer.answerEn || '',
             }),
           })
-          if (!response.ok) {
+          if (response.ok) {
+            const data = await response.json()
+            if (data.history) {
+              addAnswerHistory(data.history)
+            }
+          } else {
             console.error('保存历史记录失败:', await response.json())
           }
         } catch (error) {
@@ -390,14 +395,8 @@ export function AnswerCard({ question }: AnswerCardProps) {
       }
     }
 
-    // Add beforeunload event listener to save history when page is refreshed or closed
-    window.addEventListener('beforeunload', handleBeforeUnload)
-
-    return () => {
-      // Remove event listener when component unmounts
-      window.removeEventListener('beforeunload', handleBeforeUnload)
-    }
-  }, [status, user, question.id, answer])
+    saveToHistory()
+  }, [status, user, question.id, answer, addAnswerHistory])
 
   const currentText = displayLang === 'zh'
     ? (answer?.editedZh || answer?.answerZh || '').replace(/\\n/g, '\n')
